@@ -287,5 +287,7 @@ gradle-app.setting
 
 ### Gradle Patch ###
 **/build/
+### Astah ###
+*.asta.lock
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,windows,linux,java,intellij,eclipse,gradle
