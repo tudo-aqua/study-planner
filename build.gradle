@@ -47,7 +47,7 @@ dependencies {
     //api "org.openjfx:javafx-swing:11:mac"
     //api "org.openjfx:javafx-media:11:mac"
 
-    compile 'com.opencsv:opencsv:5.3'
+    implementation 'com.opencsv:opencsv:5.3'
 }
 
 
