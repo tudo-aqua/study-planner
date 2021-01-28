@@ -52,6 +52,60 @@ public class Module {
 	}
 
 	//Getter- und Setter-Methoden für die einzelnen Attribut-Werte und Getter-Methode für die Properties
+	//(autogeneriert mit Intellij)
+	public String getName() {
+		return name.get();
+	}
 
+	public StringProperty nameProperty() {
+		return name;
+	}
 
+	public void setName(String name) {
+		this.name.set(name);
+	}
+
+	public int getEcts() {
+		return ects.get();
+	}
+
+	public IntegerProperty ectsProperty() {
+		return ects;
+	}
+
+	public void setEcts(int ects) {
+		this.ects.set(ects);
+	}
+
+	public LocalDate getExamDate() {
+		return examDate.get();
+	}
+
+	public ObjectProperty<LocalDate> examDateProperty() {
+		return examDate;
+	}
+
+	public void setExamDate(LocalDate examDate) {
+		this.examDate.set(examDate);
+	}
+
+	public Result getResult() {
+		return result;
+	}
+
+	public void setResult(Result result) {
+		this.result = result;
+	}
+
+	public float getGrade() {
+		return grade.get();
+	}
+
+	public FloatProperty gradeProperty() {
+		return grade;
+	}
+
+	public void setGrade(float grade) {
+		this.grade.set(grade);
+	}
 }
