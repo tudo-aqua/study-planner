@@ -14,8 +14,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         try {
 
-            GridPane welcomeView = new WelcomeViewController();
-            Scene scene = new Scene(welcomeView);
+
+            Scene scene = new Scene(new WelcomeViewController(primaryStage));
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
             primaryStage.setScene(scene);
