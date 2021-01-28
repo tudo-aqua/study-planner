@@ -3,6 +3,7 @@ package model;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.StringProperty;
+import model.enums.Result;
 
 import java.time.LocalDate;
 

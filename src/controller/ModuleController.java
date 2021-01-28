@@ -1,7 +1,7 @@
 package controller;
 
 import model.Module;
-import model.Result;
+import model.enums.Result;
 
 import java.time.LocalDate;
 
