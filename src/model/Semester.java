@@ -2,9 +2,7 @@ package model;
 
 import javafx.beans.property.*;
 import javafx.collections.ObservableList;
-
 import java.time.LocalDate;
-import java.util.Collection;
 
 /**
  * Diese Klasse repräsentiert ein Semester innerhalb eines Studienganges.

@@ -2,7 +2,6 @@ package model;
 
 import javafx.beans.property.*;
 import model.enums.Result;
-
 import java.time.LocalDate;
 
 /**
