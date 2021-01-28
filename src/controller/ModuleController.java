@@ -25,7 +25,7 @@ public class ModuleController {
 
 	}
 
-	public void setResultToModule(Result result, Module module) {
+	public void setResultToModule(Result result, float grade, Module module) {
 
 	}
 
