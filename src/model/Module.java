@@ -17,7 +17,9 @@ public class Module {
 
 	private Result result;
 
-	public Module(String name, int exts) {
+	private float grade;
+
+	public Module(String name, int ects) {
 
 	}
 
