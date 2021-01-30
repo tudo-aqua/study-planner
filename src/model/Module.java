@@ -39,13 +39,14 @@ public class Module {
 	 * Konstruktor zum Anlegen eines Moduls.
 	 * @param name Der Name des Moduls.
 	 * @param ects Die zu erreichenden ECTS-Punkte des Moduls.
+	 * @param examDate Der Prüfungstermin für das Modul.
 	 */
-	public Module(String name, int ects) {
+	public Module(String name, int ects, LocalDate examDate) {
 		//Alle Attribute der Klasse werden mit den übergebenen
 		//Werten bzw. Default-Werten initialisiert.
 		this.name = new SimpleStringProperty(name);
 		this.ects = new SimpleIntegerProperty(ects);
-		this.examDate = new SimpleObjectProperty<>();
+		this.examDate = new SimpleObjectProperty<>(examDate);
 		this.result = Result.NO_RESULT;
 		this.grade = new SimpleFloatProperty(0);
 	}

@@ -32,11 +32,12 @@ public class ModuleController {
 	 * es noch kein Modul mit diesem Namen gibt.
 	 * @param name Der Name/Titel des Moduls.
 	 * @param ects Die den Modul zugeordneten ECTS-Punkte.
+	 * @param examDate Der Prüfungstermin des Moduls.
 	 * @throws DataNotValidException Wird geworfen, wenn die Daten nicht valide sind, z.B. wenn der Name leer ist
 	 * oder die ECTS-Punte negativ/gleich 0 sind.
 	 * @throws ModuleAlreadyExistsException Wird geworfen, wenn es bereits ein Modul mit dem selben Namen gibt.
 	 */
-	public void createModule(String name, int ects)throws DataNotValidException, ModuleAlreadyExistsException {
+	public void createModule(String name, int ects,LocalDate examDate)throws DataNotValidException, ModuleAlreadyExistsException {
 		//Überprüfung, ob Eingaben valide sind.
 		if (name == null || name.equals("") || ects <= 0)
 			throw new DataNotValidException();
@@ -47,7 +48,7 @@ public class ModuleController {
 				throw new ModuleAlreadyExistsException();
 		}
 		//Neues Modul mit den übergebenen Parametern erzeugen und der Liste aller Module hinzufügen.
-		Module newModule = new Module(name,ects);
+		Module newModule = new Module(name,ects, examDate);
 		allModules.add(newModule);
 
 
@@ -63,7 +64,7 @@ public class ModuleController {
 	 * oder die ECTS-Punte negativ/gleich 0 sind.
 	 * @throws ModuleAlreadyExistsException Wird geworfen, wenn es bereits ein Modul mit dem selben Namen gibt.
 	 */
-	public void modifyModule(Module moduleToModify, String name, int ects)throws DataNotValidException, ModuleAlreadyExistsException {
+	public void modifyModule(Module moduleToModify, String name, int ects, LocalDate examDate)throws DataNotValidException, ModuleAlreadyExistsException {
 		//Überprüfung, ob Eingaben valide sind.
 		if (name == null || name.equals("") || ects <= 0)
 			throw new DataNotValidException();
@@ -75,6 +76,7 @@ public class ModuleController {
 		}
 		moduleToModify.setName(name);
 		moduleToModify.setEcts(ects);
+		moduleToModify.setExamDate(examDate);
 	}
 
 	/**
@@ -89,24 +91,14 @@ public class ModuleController {
 	 * Die Methode setzt ein Ergebnis (und gegebenenfalls eine Note) zu einem Modul.
 	 * @param result Das Ergebnis für das Modul.
 	 * @param grade Die Note bei einem benoteten Modul, ansonsten 0.
-	 * @param module Das Modul, dem das Ergebnis zugewiesen werden soll.
+	 * @param moduleToModify Das Modul, dem das Ergebnis zugewiesen werden soll.
 	 * @throws DataNotValidException Wird geworfen, wenn die Note einen ungüötigen Wert hat.
 	 */
-	public void setResultToModule(Result result, float grade, Module module)throws DataNotValidException {
+	public void setResultToModule(Module moduleToModify,Result result, float grade)throws DataNotValidException {
 		if(grade < 0 || grade > 5)
 			throw new DataNotValidException();
-		module.setResult(result);
-		module.setGrade(grade);
-	}
-
-
-	/**
-	 * Die Methode setzt den Prüfungstermin für ein Modul.
-	 * @param examDate Der Prüfungstermin.
-	 * @param module Das Modul, dem der Prüfungstermin zugewiesen werden soll.
-	 */
-	public void setExamDateToModule(LocalDate examDate, Module module) {
-		module.setExamDate(examDate);
+		moduleToModify.setResult(result);
+		moduleToModify.setGrade(grade);
 	}
 
 }
