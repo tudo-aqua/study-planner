@@ -47,6 +47,10 @@ public class ModuleController {
 			if(module.getName().equals(name))
 				throw new ModuleAlreadyExistsException();
 		}
+		//Überprüung, ob Prüfungsdatum ungleich null
+		if(examDate == null){
+			throw new DataNotValidException();
+		}
 		//Neues Modul mit den übergebenen Parametern erzeugen und der Liste aller Module hinzufügen.
 		Module newModule = new Module(name,ects, examDate);
 		allModules.add(newModule);
@@ -73,6 +77,10 @@ public class ModuleController {
 		for(Module module :allModules){
 			if(module.getName().equals(name))
 				throw new ModuleAlreadyExistsException();
+		}
+		//Überprüung, ob Prüfungsdatum ungleich null
+		if(examDate == null){
+			throw new DataNotValidException();
 		}
 		moduleToModify.setName(name);
 		moduleToModify.setEcts(ects);
