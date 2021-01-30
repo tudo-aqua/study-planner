@@ -30,6 +30,11 @@ public class Semester {
 	private ListProperty<Module> modules;
 
 	/**
+	 * Anzahl aller in diesem Semester geplanten ECTS-Punkte.
+	 */
+	private IntegerProperty totalECTS;
+
+	/**
 	 * Konstruktor zum erzeugen eines Semesters.
 	 * @param name Der Name des Semesters.
 	 * @param startDate Das Startdatum des Semesters.
@@ -42,6 +47,7 @@ public class Semester {
 		this.startDate = new SimpleObjectProperty<>(startDate);
 		this.endDate = new SimpleObjectProperty<>(endDate);
 		this.modules = new SimpleListProperty<>();
+		this.totalECTS = new SimpleIntegerProperty();
 	}
 
 	/**
@@ -119,5 +125,17 @@ public class Semester {
 
 	public void setModules(ObservableList<Module> modules) {
 		this.modules.set(modules);
+	}
+
+	public int getTotalECTS() {
+		return totalECTS.get();
+	}
+
+	public IntegerProperty totalECTSProperty() {
+		return totalECTS;
+	}
+
+	public void setTotalECTS(int totalECTS) {
+		this.totalECTS.set(totalECTS);
 	}
 }

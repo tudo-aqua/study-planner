@@ -39,7 +39,7 @@ public class StatisticsController {
 	 * Die Methode berechnet die Anzahl der erreichten ECTS-Punkte aus allen bestandenen Modulen.
 	 * @return Die Anzahl der erreichten ECTS-Punkte oder 0, wenn bisher keine Erreicht wurden.
 	 */
-	public int calculateTotalEctsOfFinishedModuls() {
+	public int calculateCollectedEctsOfFinishedModuls() {
 		int totalECTS = 0;
 		for(Semester semester:studyPlannerController.getStudyPlanner().getSemesters()){
 			for(Module module: semester.getModules()){
@@ -62,7 +62,22 @@ public class StatisticsController {
 					avgGrade += module.getEcts()*module.getGrade();
 			}
 		}
-		return avgGrade/calculateTotalEctsOfFinishedModuls();
+		return avgGrade/ calculateCollectedEctsOfFinishedModuls();
+	}
+
+	/**
+	 * Die Methode berechnet alle Statistiken neu.
+	 */
+	public void updateStatistics(){
+		float avgGrade = this.calculateAverageGrade();
+		this.studyPlannerController.getStudyPlanner().setAvgGrade(avgGrade);
+		int collectedECTS = this.calculateCollectedEctsOfFinishedModuls();
+		this.studyPlannerController.getStudyPlanner().setCollectedEcts(collectedECTS);
+		for(Semester semester: this.studyPlannerController.getStudyPlanner().getSemesters()){
+			int totalEcts = this.calculateEctsForSemester(semester);
+			semester.setTotalECTS(totalEcts);
+		}
+
 	}
 
 }

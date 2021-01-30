@@ -42,6 +42,8 @@ public class SemesterController {
 		//Neues Semester mit übergebenen Daten erzeugen
 		Semester newSemester = new Semester(name,startDate,endDate);
 		this.studyPlannerController.getStudyPlanner().addSemester(newSemester);
+		//Statistiken aktualisieren
+		this.studyPlannerController.getStatisticsController().updateStatistics();
 	}
 
 	/**
@@ -61,6 +63,9 @@ public class SemesterController {
 		semesterToModify.setName(name);
 		semesterToModify.setStartDate(startDate);
 		semesterToModify.setEndDate(endDate);
+
+		//Statistiken aktualisieren
+		this.studyPlannerController.getStatisticsController().updateStatistics();
 	}
 
 	/**
@@ -77,6 +82,8 @@ public class SemesterController {
 				semester.removeModule(module);
 		}
 		targetSemester.addModule(module);
+		//Statistiken aktualisieren
+		this.studyPlannerController.getStatisticsController().updateStatistics();
 	}
 
 }
