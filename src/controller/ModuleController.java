@@ -19,7 +19,7 @@ public class ModuleController {
 	private StudyPlannerController studyPlannerController;
 
 	/**
-	 * Kontroller, der den StudyPlannerController setzt.
+	 * Konstruktor, der den StudyPlannerController setzt.
 	 * @param spc Referenzu auf den zentralen StudyPlannerController.
 	 */
 	public ModuleController(StudyPlannerController spc) {
@@ -33,13 +33,13 @@ public class ModuleController {
 	 * @param name Der Name/Titel des Moduls.
 	 * @param ects Die den Modul zugeordneten ECTS-Punkte.
 	 * @param examDate Der Prüfungstermin des Moduls.
-	 * @throws DataNotValidException Wird geworfen, wenn die Daten nicht valide sind, z.B. wenn der Name leer ist
-	 * oder die ECTS-Punte negativ/gleich 0 sind.
+	 * @throws DataNotValidException Wird geworfen, wenn die Daten nicht valide sind, z.B. wenn der Name leer ist,
+	 * die ECTS-Punte negativ/gleich 0 sind oder das Prüfungsdatum keinen gültigen Wert repräsentiert.
 	 * @throws ModuleAlreadyExistsException Wird geworfen, wenn es bereits ein Modul mit dem selben Namen gibt.
 	 */
 	public void createModule(String name, int ects,LocalDate examDate)throws DataNotValidException, ModuleAlreadyExistsException {
 		//Überprüfung, ob Eingaben valide sind.
-		if (name == null || name.equals("") || ects <= 0)
+		if (name == null || name.equals("") || ects <= 0 || examDate == null)
 			throw new DataNotValidException();
 		//Überprüfen, ob es ein Modul mit diesem Namen bereits gibt
 		List<Module> allModules = this.studyPlannerController.getStudyPlanner().getModules();
@@ -47,10 +47,7 @@ public class ModuleController {
 			if(module.getName().equals(name))
 				throw new ModuleAlreadyExistsException();
 		}
-		//Überprüung, ob Prüfungsdatum ungleich null
-		if(examDate == null){
-			throw new DataNotValidException();
-		}
+
 		//Neues Modul mit den übergebenen Parametern erzeugen und der Liste aller Module hinzufügen.
 		Module newModule = new Module(name,ects, examDate);
 		allModules.add(newModule);
@@ -64,13 +61,13 @@ public class ModuleController {
 	 * @param moduleToModify Das Modul, welches bearbeitet werden soll.
 	 * @param name Der neue Name des Moduls.
 	 * @param ects Die neue Anzahl an ECTS-Punkten.
-	 * @throws DataNotValidException Wird geworfen, wenn die Daten nicht valide sind, z.B. wenn der Name leer ist
-	 * oder die ECTS-Punte negativ/gleich 0 sind.
+	 * @throws DataNotValidException Wird geworfen, wenn die Daten nicht valide sind, z.B. wenn der Name leer ist,
+	 * die ECTS-Punte negativ/gleich 0 sind oder das Prüfungsdatum keinen gültigen Wert repräsentiert.
 	 * @throws ModuleAlreadyExistsException Wird geworfen, wenn es bereits ein Modul mit dem selben Namen gibt.
 	 */
 	public void modifyModule(Module moduleToModify, String name, int ects, LocalDate examDate)throws DataNotValidException, ModuleAlreadyExistsException {
 		//Überprüfung, ob Eingaben valide sind.
-		if (name == null || name.equals("") || ects <= 0)
+		if (name == null || name.equals("") || ects <= 0 || examDate == null)
 			throw new DataNotValidException();
 		//Überprüfen, ob es ein Modul mit diesem Namen bereits gibt
 		List<Module> allModules = this.studyPlannerController.getStudyPlanner().getModules();
@@ -78,10 +75,7 @@ public class ModuleController {
 			if(module.getName().equals(name))
 				throw new ModuleAlreadyExistsException();
 		}
-		//Überprüung, ob Prüfungsdatum ungleich null
-		if(examDate == null){
-			throw new DataNotValidException();
-		}
+		//Setze neue Werte
 		moduleToModify.setName(name);
 		moduleToModify.setEcts(ects);
 		moduleToModify.setExamDate(examDate);
