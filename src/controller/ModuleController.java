@@ -3,7 +3,7 @@ package controller;
 import exceptions.DataNotValidException;
 import exceptions.ModuleAlreadyExistsException;
 import model.Module;
-import model.enums.Result;
+import model.enums.State;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -99,15 +99,15 @@ public class ModuleController {
 
 	/**
 	 * Die Methode setzt ein Ergebnis (und gegebenenfalls eine Note) zu einem Modul.
-	 * @param result Das Ergebnis für das Modul.
+	 * @param state Das Ergebnis für das Modul.
 	 * @param grade Die Note bei einem benoteten Modul, ansonsten 0.
 	 * @param moduleToModify Das Modul, dem das Ergebnis zugewiesen werden soll.
 	 * @throws DataNotValidException Wird geworfen, wenn die Note einen ungüötigen Wert hat.
 	 */
-	public void setResultToModule(Module moduleToModify,Result result, float grade)throws DataNotValidException {
+	public void setStateToModule(Module moduleToModify, State state, float grade)throws DataNotValidException {
 		if(grade < 0 || grade > 5)
 			throw new DataNotValidException();
-		moduleToModify.setResult(result);
+		moduleToModify.setState(state);
 		moduleToModify.setGrade(grade);
 		//Statistiken aktualisieren
 		this.studyPlannerController.getStatisticsController().updateStatistics();

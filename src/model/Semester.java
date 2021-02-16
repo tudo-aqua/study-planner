@@ -48,6 +48,7 @@ public class Semester {
 		this.endDate = new SimpleObjectProperty<>(endDate);
 		this.modules = new SimpleListProperty<>();
 		this.totalECTS = new SimpleIntegerProperty();
+
 	}
 
 	/**

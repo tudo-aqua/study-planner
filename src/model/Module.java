@@ -1,7 +1,7 @@
 package model;
 
 import javafx.beans.property.*;
-import model.enums.Result;
+import model.enums.State;
 import java.time.LocalDate;
 
 /**
@@ -28,7 +28,7 @@ public class Module {
 	/**
 	 * Status des Moduls.
 	 */
-	private Result result;
+	private State state;
 
 	/**
 	 * Bei einem benoten Modul die erreichte Modulnote.
@@ -47,7 +47,7 @@ public class Module {
 		this.name = new SimpleStringProperty(name);
 		this.ects = new SimpleIntegerProperty(ects);
 		this.examDate = new SimpleObjectProperty<>(examDate);
-		this.result = Result.NO_RESULT;
+		this.state = State.NO_RESULT;
 		this.grade = new SimpleFloatProperty(0);
 	}
 
@@ -89,12 +89,12 @@ public class Module {
 		this.examDate.set(examDate);
 	}
 
-	public Result getResult() {
-		return result;
+	public State getState() {
+		return state;
 	}
 
-	public void setResult(Result result) {
-		this.result = result;
+	public void setState(State state) {
+		this.state = state;
 	}
 
 	public float getGrade() {

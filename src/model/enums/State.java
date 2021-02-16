@@ -4,7 +4,7 @@ package model.enums;
  * Das Enum repräsentiert den Status eines Moduls im Hinblick,
  * ob und wie es abgeschlossen wurde.
  */
-public enum Result {
+public enum State {
 
 	/**
 	 * Dieser Wert repräsentiert den erfolgreichen Abschluss eines benoteten Moduls.

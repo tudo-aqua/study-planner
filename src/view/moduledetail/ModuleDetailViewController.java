@@ -113,6 +113,7 @@ public class ModuleDetailViewController extends GridPane {
             alert.setContentText("Ein Modul mit dem von ihnen gewählen Namen existiert bereits. Bitte wählen Sie einen eindeutigen Modulnamen.");
             alert.showAndWait();
 
+
         }
 
     }

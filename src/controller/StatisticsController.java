@@ -2,7 +2,7 @@ package controller;
 
 import model.Module;
 import model.Semester;
-import model.enums.Result;
+import model.enums.State;
 
 /**
  * Die Klasse stellt Methoden für das Generieren von Statistiken bzgl. eines Studienplanes bereit.
@@ -43,7 +43,7 @@ public class StatisticsController {
 		int totalECTS = 0;
 		for(Semester semester:studyPlannerController.getStudyPlanner().getSemesters()){
 			for(Module module: semester.getModules()){
-				if(module.getResult() == Result.PASSED_WITH_GRADE || module.getResult() == Result.PASSED_WITHOUT_GRADE)
+				if(module.getState() == State.PASSED_WITH_GRADE || module.getState() == State.PASSED_WITHOUT_GRADE)
 					totalECTS += module.getEcts();
 			}
 		}
@@ -58,7 +58,7 @@ public class StatisticsController {
 		float avgGrade = 0;
 		for(Semester semester:studyPlannerController.getStudyPlanner().getSemesters()){
 			for(Module module: semester.getModules()){
-				if(module.getResult() == Result.PASSED_WITH_GRADE)
+				if(module.getState() == State.PASSED_WITH_GRADE)
 					avgGrade += module.getEcts()*module.getGrade();
 			}
 		}
