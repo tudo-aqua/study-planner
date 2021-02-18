@@ -3,6 +3,7 @@ package controller;
 import exceptions.DataNotValidException;
 import exceptions.ModuleAlreadyExistsException;
 import model.Module;
+import model.Semester;
 import model.enums.State;
 
 import java.time.LocalDate;
@@ -50,7 +51,7 @@ public class ModuleController {
 
 		//Neues Modul mit den übergebenen Parametern erzeugen und der Liste aller Module hinzufügen.
 		Module newModule = new Module(name,ects, examDate);
-		allModules.add(newModule);
+		this.studyPlannerController.getStudyPlanner().addModule(newModule);
 
 		//Statistiken aktualisieren
 		this.studyPlannerController.getStatisticsController().updateStatistics();
@@ -92,6 +93,9 @@ public class ModuleController {
 	 * @param module Das zu entfernende Modul.
 	 */
 	public void deleteModule(Module module) {
+		Semester currentSemester = this.studyPlannerController.getStudyPlanner().getCurrentSemesterOfModule(module);
+		if(currentSemester != null)
+			currentSemester.removeModule(module);
 		this.studyPlannerController.getStudyPlanner().removeModule(module);
 		//Statistiken aktualisieren
 		this.studyPlannerController.getStatisticsController().updateStatistics();
