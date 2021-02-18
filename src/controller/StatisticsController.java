@@ -1,8 +1,12 @@
 package controller;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import model.Module;
 import model.Semester;
 import model.enums.State;
+
+import java.time.LocalDate;
 
 /**
  * Die Klasse stellt Methoden für das Generieren von Statistiken bzgl. eines Studienplanes bereit.
@@ -27,7 +31,7 @@ public class StatisticsController {
 	 * @param semester Das Semester, für welches die ECTS-Punkte berechnet werden sollen.
 	 * @return Die Anzahl der ECTS-Punkte.
 	 */
-	public int calculateEctsForSemester(Semester semester) {
+	public int calculateCollectedEctsForSemester(Semester semester) {
 		int totalECTS = 0;
 		for(Module module: semester.getModules()){
 				totalECTS += module.getEcts();
@@ -47,6 +51,7 @@ public class StatisticsController {
 					totalECTS += module.getEcts();
 			}
 		}
+
 		return totalECTS;
 	}
 
@@ -74,8 +79,8 @@ public class StatisticsController {
 		int collectedECTS = this.calculateCollectedEctsOfFinishedModuls();
 		this.studyPlannerController.getStudyPlanner().setCollectedEcts(collectedECTS);
 		for(Semester semester: this.studyPlannerController.getStudyPlanner().getSemesters()){
-			int totalEcts = this.calculateEctsForSemester(semester);
-			semester.setTotalECTS(totalEcts);
+			int totalEcts = this.calculateCollectedEctsForSemester(semester);
+			semester.setCollectedECTS(totalEcts);
 		}
 
 	}
