@@ -1,6 +1,8 @@
 package controller;
 
 import exceptions.DataNotValidException;
+import javafx.beans.property.DoubleProperty;
+import javafx.scene.control.ProgressBar;
 import model.StudyPlanner;
 
 /**
@@ -49,13 +51,13 @@ public class StudyPlannerController {
 	/**
 	 * Methode zum Erzeugen eines neuen leeren Studienplans.
 	 * @param courseOfStudy Name des Studienganges für den Studienplan.
-	 * @param ects Anzahl an ECTS-Punkten, die für den Studiengang erreicht werden müssen.
+	 * @param ectsOfCourseOfStudy Anzahl an ECTS-Punkten, die für den Studiengang erreicht werden müssen.
 	 * @throws DataNotValidException Wird geworfen, wenn die Anzahl an ECTS-Punkten nicht valide ist (< oder = 0).
 	 */
-	public void createStudyPlanner(String courseOfStudy, int ects)throws DataNotValidException {
-		if(ects <0)
+	public void initializeStudyPlanner(String courseOfStudy, int ectsOfCourseOfStudy)throws DataNotValidException {
+		if(ectsOfCourseOfStudy <0)
 			throw new DataNotValidException();
-		this.studyPlanner = new StudyPlanner(courseOfStudy,ects);
+		this.studyPlanner = new StudyPlanner(courseOfStudy,ectsOfCourseOfStudy);
 	}
 
 	//Getter- und Setter-Methoden für den Zugriff auf das Model

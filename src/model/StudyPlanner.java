@@ -1,6 +1,7 @@
 package model;
 
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 
@@ -18,7 +19,7 @@ public class StudyPlanner {
 	/**
 	 * Anzahl an ECTS-Punkten, die in diesem Studiengang erreicht werden müssen.
 	 */
-	private IntegerProperty ects;
+	private IntegerProperty ectsOfCourseOfStudy;
 
 	/**
 	 * Liste an Semstern, die in diesem Studienplan verwaltet werden.
@@ -31,15 +32,27 @@ public class StudyPlanner {
 	private ListProperty<Module> modules;
 
 	/**
+	 * Durchschnitssnote aller bestandenen Module.
+	 */
+	private FloatProperty avgGrade;
+
+	/**
+	 * Anzahl aller erreichten ECTS-Punkte.
+	 */
+	private IntegerProperty collectedEcts;
+
+	/**
 	 * Konstruktor zum erzeugen eines neuen Studienplanes.
 	 * @param courseOfStudy Name des Studienganges.
-	 * @param ects Anzahl der zu erreichenden ECTS-Punkte.
+	 * @param ectsOfCourseOfStudy Anzahl der zu erreichenden ECTS-Punkte.
 	 */
-	public StudyPlanner(String courseOfStudy, int ects) {
+	public StudyPlanner(String courseOfStudy, int ectsOfCourseOfStudy) {
 		this.courseOfStudy = new SimpleStringProperty(courseOfStudy);
-		this.ects = new SimpleIntegerProperty(ects);
-		this.semesters = new SimpleListProperty<>();
-		this.modules = new SimpleListProperty<>();
+		this.ectsOfCourseOfStudy = new SimpleIntegerProperty(ectsOfCourseOfStudy);
+		this.semesters = new SimpleListProperty<>(FXCollections.observableArrayList());
+		this.modules = new SimpleListProperty<>(FXCollections.observableArrayList());
+		this.avgGrade = new SimpleFloatProperty();
+		this.collectedEcts = new SimpleIntegerProperty();
 	}
 
 	/**
@@ -73,7 +86,7 @@ public class StudyPlanner {
 	 * @return Referenz auf das Semester, in dem das Modul ist, oder null, wenn das Modul
 	 * keinem Semester zugeordnet ist.
 	 */
-	public Semester currentSemesterOfModule(Module module) {
+	public Semester getCurrentSemesterOfModule(Module module) {
 		for(Semester semester : this.semesters){
 			if(semester.getModules().contains(module)){
 				return semester;
@@ -96,16 +109,16 @@ public class StudyPlanner {
 		this.courseOfStudy.set(courseOfStudy);
 	}
 
-	public int getEcts() {
-		return ects.get();
+	public int getEctsOfCourseOfStudy() {
+		return ectsOfCourseOfStudy.get();
 	}
 
-	public IntegerProperty ectsProperty() {
-		return ects;
+	public IntegerProperty ectsOfCourseOfStudyProperty() {
+		return ectsOfCourseOfStudy;
 	}
 
-	public void setEcts(int ects) {
-		this.ects.set(ects);
+	public void setEctsOfCourseOfStudy(int ectsOfCourseOfStudy) {
+		this.ectsOfCourseOfStudy.set(ectsOfCourseOfStudy);
 	}
 
 	public ObservableList<Semester> getSemesters() {
@@ -130,5 +143,29 @@ public class StudyPlanner {
 
 	public void setModules(ObservableList<Module> modules) {
 		this.modules.set(modules);
+	}
+
+	public float getAvgGrade() {
+		return avgGrade.get();
+	}
+
+	public FloatProperty avgGradeProperty() {
+		return avgGrade;
+	}
+
+	public void setAvgGrade(float avgGrade) {
+		this.avgGrade.set(avgGrade);
+	}
+
+	public int getCollectedEcts() {
+		return collectedEcts.get();
+	}
+
+	public IntegerProperty collectedEctsProperty() {
+		return collectedEcts;
+	}
+
+	public void setCollectedEcts(int collectedEcts) {
+		this.collectedEcts.set(collectedEcts);
 	}
 }
