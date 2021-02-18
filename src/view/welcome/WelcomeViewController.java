@@ -1,5 +1,7 @@
 package view.welcome;
 
+import controller.StudyPlannerController;
+import exceptions.DataNotValidException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,8 +45,17 @@ public class WelcomeViewController extends GridPane {
 
     @FXML
     void createNewStudyPlan(ActionEvent event) {
-        Scene studyPlanScene = new Scene(new StudyPlanViewController(primaryStage));
-        this.primaryStage.setScene(studyPlanScene);
+        StudyPlannerController studyPlannerController = new StudyPlannerController();
+        String inputCourseOfStudy = textFieldCourseOfStudy.getText();
+        int ects = Integer.parseInt(textFieldECTS.getText());
+        try {
+            studyPlannerController.initializeStudyPlanner(inputCourseOfStudy,ects);
+            Scene studyPlanScene = new Scene(new StudyPlanViewController(primaryStage,studyPlannerController));
+            this.primaryStage.setScene(studyPlanScene);
+        } catch (DataNotValidException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @FXML
