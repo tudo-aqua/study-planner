@@ -1,6 +1,7 @@
 package model;
 
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.time.LocalDate;
 
@@ -30,9 +31,9 @@ public class Semester {
 	private ListProperty<Module> modules;
 
 	/**
-	 * Anzahl aller in diesem Semester geplanten ECTS-Punkte.
+	 * Anzahl aller in diesem Semester gesammelten ECTS-Punkte.
 	 */
-	private IntegerProperty totalECTS;
+	private IntegerProperty collectedECTS;
 
 	/**
 	 * Konstruktor zum erzeugen eines Semesters.
@@ -46,8 +47,8 @@ public class Semester {
 		this.name = new SimpleStringProperty(name);
 		this.startDate = new SimpleObjectProperty<>(startDate);
 		this.endDate = new SimpleObjectProperty<>(endDate);
-		this.modules = new SimpleListProperty<>();
-		this.totalECTS = new SimpleIntegerProperty();
+		this.modules = new SimpleListProperty<>(FXCollections.observableArrayList());
+		this.collectedECTS = new SimpleIntegerProperty();
 
 	}
 
@@ -128,15 +129,15 @@ public class Semester {
 		this.modules.set(modules);
 	}
 
-	public int getTotalECTS() {
-		return totalECTS.get();
+	public int getCollectedECTS() {
+		return collectedECTS.get();
 	}
 
-	public IntegerProperty totalECTSProperty() {
-		return totalECTS;
+	public IntegerProperty collectedECTSProperty() {
+		return collectedECTS;
 	}
 
-	public void setTotalECTS(int totalECTS) {
-		this.totalECTS.set(totalECTS);
+	public void setCollectedECTS(int collectedECTS) {
+		this.collectedECTS.set(collectedECTS);
 	}
 }

@@ -1,12 +1,10 @@
 package controller;
 
 import exceptions.DataNotValidException;
-import exceptions.ModuleAlreadyExistsException;
 import model.Semester;
 import model.Module;
 
 import java.time.LocalDate;
-import java.util.List;
 
 /**
  * Die Klasse stellt Methoden für die Verwaltung von Semestern zur Verfügung.
@@ -76,11 +74,9 @@ public class SemesterController {
 	 */
 	public void moveModuleToSemester(Module module, Semester targetSemester) {
 		//Überprüfe, ob Modul bereits einem anderen Semester zugeordnet ist und entferne es gegebenenfalls
-		List<Semester> allSemester = this.studyPlannerController.getStudyPlanner().getSemesters();
-		for(Semester semester :allSemester){
-			if(semester.isModuleInSemester(module))
-				semester.removeModule(module);
-		}
+		Semester currentSemesterOfModule = this.studyPlannerController.getStudyPlanner().getCurrentSemesterOfModule(module);
+		if(currentSemesterOfModule != null)
+			currentSemesterOfModule.removeModule(module);
 		targetSemester.addModule(module);
 		//Statistiken aktualisieren
 		this.studyPlannerController.getStatisticsController().updateStatistics();
