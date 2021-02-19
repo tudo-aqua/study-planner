@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.util.StringConverter;
 import model.Semester;
 import view.semesterview.SemesterViewController;
 
@@ -72,6 +73,19 @@ public class SemesterDetailViewController extends GridPane {
     public void initialize() {
         choiseBoxModifySemester.setVisible(modifySemesters);
         labelModifySemester.setVisible(modifySemesters);
+        choiseBoxModifySemester.setConverter(new StringConverter<Semester>() {
+
+
+            @Override
+            public String toString(Semester semester) {
+                return semester.getName();
+            }
+
+            @Override
+            public Semester fromString(String string) {
+                return null;
+            }
+        });
         if(modifySemesters){
             choiseBoxModifySemester.setItems(spc.getStudyPlanner().getSemesters());
 
