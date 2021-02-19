@@ -78,7 +78,12 @@ public class StudyPlanViewController extends GridPane {
 
     @FXML
     void addModule(ActionEvent event) {
-
+        Stage stage = new Stage();
+        Scene newSemesterScene = new Scene(new ModuleDetailViewController(studyPlannerController));
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(primaryStage);
+        stage.setScene(newSemesterScene);
+        stage.showAndWait();
     }
 
     @FXML
