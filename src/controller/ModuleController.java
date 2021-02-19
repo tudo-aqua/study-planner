@@ -36,9 +36,10 @@ public class ModuleController {
 	 * @param examDate Der Prüfungstermin des Moduls.
 	 * @throws DataNotValidException Wird geworfen, wenn die Daten nicht valide sind, z.B. wenn der Name leer ist,
 	 * die ECTS-Punte negativ/gleich 0 sind oder das Prüfungsdatum keinen gültigen Wert repräsentiert.
+	 * @return Das neu erstelle Module-Objekt.
 	 * @throws ModuleAlreadyExistsException Wird geworfen, wenn es bereits ein Modul mit dem selben Namen gibt.
 	 */
-	public void createModule(String name, int ects,LocalDate examDate)throws DataNotValidException, ModuleAlreadyExistsException {
+	public Module createModule(String name, int ects,LocalDate examDate)throws DataNotValidException, ModuleAlreadyExistsException {
 		//Überprüfung, ob Eingaben valide sind.
 		if (name == null || name.equals("") || ects <= 0 || examDate == null)
 			throw new DataNotValidException();
@@ -56,6 +57,7 @@ public class ModuleController {
 		//Statistiken aktualisieren
 		this.studyPlannerController.getStatisticsController().updateStatistics();
 
+		return newModule;
 
 	}
 
