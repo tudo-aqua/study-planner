@@ -3,37 +3,42 @@ package model;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  * Diese Klasse repräsentiert ein Semester innerhalb eines Studienganges.
  */
-public class Semester {
+public class Semester implements Serializable {
 
 	/**
 	 * Der Name des Semesters, z.B. Wintersemester 2020/2021.
 	 */
-	private StringProperty name;
+	private transient StringProperty name;
 
 	/**
 	 * Das Datum, an dem das Semester beginnt.
 	 */
-	private ObjectProperty<LocalDate> startDate;
+	private transient ObjectProperty<LocalDate> startDate;
 
 	/**
 	 * Das Datum, an dem das Semester endet.
 	 */
-	private ObjectProperty<LocalDate> endDate;
+	private transient ObjectProperty<LocalDate> endDate;
 
 	/**
 	 * Liste aller Module, die in dem Semester belegt werden/wurden.
 	 */
-	private ListProperty<Module> modules;
+	private transient ListProperty<Module> modules;
 
 	/**
 	 * Anzahl aller in diesem Semester gesammelten ECTS-Punkte.
 	 */
-	private IntegerProperty collectedECTS;
+	private transient IntegerProperty collectedECTS;
 
 	/**
 	 * Konstruktor zum erzeugen eines Semesters.
@@ -139,5 +144,37 @@ public class Semester {
 
 	public void setCollectedECTS(int collectedECTS) {
 		this.collectedECTS.set(collectedECTS);
+	}
+
+	//Methoden zum Serialisieren des Objektes
+	private void writeObject(ObjectOutputStream s) throws IOException {
+		s.writeUTF(name.getValueSafe());
+		s.writeObject(startDate.get());
+		s.writeObject(endDate.get());
+
+		if (modules == null || modules.size() == 0) {
+			s.writeInt(0);
+		}
+		else{
+			s.writeInt(modules.size());
+		}
+		for(Module module:modules){
+			s.writeObject(module);
+		}
+		s.writeInt(collectedECTS.get());
+
+	}
+
+	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+		name = new SimpleStringProperty(s.readUTF());
+		startDate = new SimpleObjectProperty<LocalDate>((LocalDate) s.readObject());
+		endDate = new SimpleObjectProperty<LocalDate>((LocalDate)s.readObject());
+		modules = new SimpleListProperty<>(FXCollections.observableArrayList());
+		int size = s.readInt();
+		for(int i = 0;i<size;i++){
+			Module module = (Module) s.readObject();
+			modules.add(module);
+		}
+		collectedECTS = new SimpleIntegerProperty(s.readInt());
 	}
 }

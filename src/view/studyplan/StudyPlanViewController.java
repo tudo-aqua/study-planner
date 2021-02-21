@@ -73,7 +73,8 @@ public class StudyPlanViewController extends GridPane {
        labelAvgGrade.textProperty().bind(studyPlannerController.getStudyPlanner().avgGradeProperty().asString());
        labelCollectedECTS.textProperty().bind(studyPlannerController.getStudyPlanner().collectedEctsProperty().asString());
        labelTotalECTS.textProperty().bind(studyPlannerController.getStudyPlanner().ectsOfCourseOfStudyProperty().asString());
-
+       for(Semester semester: this.studyPlannerController.getStudyPlanner().getSemesters())
+           hBoxSemesterContainer.getChildren().add(new SemesterViewController(studyPlannerController,semester));
     }
 
     @FXML
@@ -116,6 +117,7 @@ public class StudyPlanViewController extends GridPane {
 
     @FXML
     void exit(ActionEvent event) {
+        this.studyPlannerController.getiOController().storeData();
         Platform.exit();
         System.exit(0);
     }

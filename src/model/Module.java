@@ -1,29 +1,32 @@
 package model;
 
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import model.enums.State;
+
+import java.io.*;
 import java.time.LocalDate;
 
 /**
  * Diese Klasse repräsentiert ein Modul eines Studienganges.
  */
-public class Module {
+public class Module implements Serializable {
 
 	/**
 	 * Der Name des Moduls.
 	 */
-	private StringProperty name;
+	private transient StringProperty name;
 
 	/**
 	 * Die Anzahl an ECTS-Punkten, die das Modul beim erfolgreichen
 	 * abschließen bringt.
 	 */
-	private IntegerProperty ects;
+	private transient IntegerProperty ects;
 
 	/**
 	 * Datum der (geplanten) Modulprüfung.
 	 */
-	private ObjectProperty<LocalDate> examDate;
+	private transient ObjectProperty<LocalDate> examDate;
 
 	/**
 	 * Status des Moduls.
@@ -33,7 +36,7 @@ public class Module {
 	/**
 	 * Bei einem benoten Modul die erreichte Modulnote.
 	 */
-	private FloatProperty grade;
+	private transient FloatProperty grade;
 
 	/**
 	 * Konstruktor zum Anlegen eines Moduls.
@@ -108,4 +111,21 @@ public class Module {
 	public void setGrade(float grade) {
 		this.grade.set(grade);
 	}
+
+	//Methoden zum Serialisieren des Objektes
+	private void writeObject(ObjectOutputStream s) throws IOException {
+		s.writeUTF(name.getValueSafe());
+		s.writeInt(ects.get());
+		s.writeObject(examDate.get());
+		s.writeFloat(grade.get());
+	}
+
+	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+		name = new SimpleStringProperty(s.readUTF());
+		ects = new SimpleIntegerProperty(s.readInt());
+		examDate = new SimpleObjectProperty<LocalDate>((LocalDate) s.readObject());
+		grade = new SimpleFloatProperty(s.readFloat());
+
+	}
+
 }

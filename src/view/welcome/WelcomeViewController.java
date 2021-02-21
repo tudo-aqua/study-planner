@@ -30,8 +30,11 @@ public class WelcomeViewController extends GridPane {
     private Button buttonExit;
 
     private Stage primaryStage;
-    public WelcomeViewController(Stage primaryStage){
 
+    private StudyPlannerController studyPlannerController;
+    public WelcomeViewController(Stage primaryStage, StudyPlannerController spc){
+
+        this.studyPlannerController = spc;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("WelcomeView.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -45,7 +48,7 @@ public class WelcomeViewController extends GridPane {
 
     @FXML
     void createNewStudyPlan(ActionEvent event) {
-        StudyPlannerController studyPlannerController = new StudyPlannerController();
+
         String inputCourseOfStudy = textFieldCourseOfStudy.getText();
         int ects = Integer.parseInt(textFieldECTS.getText());
         try {

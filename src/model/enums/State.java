@@ -1,10 +1,12 @@
 package model.enums;
 
+import java.io.Serializable;
+
 /**
  * Das Enum repräsentiert den Status eines Moduls im Hinblick,
  * ob und wie es abgeschlossen wurde.
  */
-public enum State {
+public enum State implements Serializable {
 
 	/**
 	 * Dieser Wert repräsentiert den erfolgreichen Abschluss eines benoteten Moduls.

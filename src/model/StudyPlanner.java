@@ -4,42 +4,48 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.time.LocalDate;
+
 
 /**
  * Diese Klasse repräsentiert den gesamten Studienplan eines Studienganges und dient als
  * Verbindungspunkt zur Controller-Schicht
  */
-public class StudyPlanner {
+public class StudyPlanner implements Serializable {
 
 	/**
 	 * Name des Studienganges, für den der Studienplan verwendet wird.
 	 */
-	private StringProperty courseOfStudy;
+	private transient StringProperty courseOfStudy;
 
 	/**
 	 * Anzahl an ECTS-Punkten, die in diesem Studiengang erreicht werden müssen.
 	 */
-	private IntegerProperty ectsOfCourseOfStudy;
+	private transient IntegerProperty ectsOfCourseOfStudy;
 
 	/**
 	 * Liste an Semstern, die in diesem Studienplan verwaltet werden.
 	 */
-	private ListProperty<Semester> semesters;
+	private transient ListProperty<Semester> semesters;
 
 	/**
 	 * Liste aller in diesem Studienplan verwalteten Module.
 	 */
-	private ListProperty<Module> modules;
+	private transient ListProperty<Module> modules;
 
 	/**
 	 * Durchschnitssnote aller bestandenen Module.
 	 */
-	private FloatProperty avgGrade;
+	private transient FloatProperty avgGrade;
 
 	/**
 	 * Anzahl aller erreichten ECTS-Punkte.
 	 */
-	private IntegerProperty collectedEcts;
+	private transient IntegerProperty collectedEcts;
 
 	/**
 	 * Konstruktor zum erzeugen eines neuen Studienplanes.
@@ -167,5 +173,64 @@ public class StudyPlanner {
 
 	public void setCollectedEcts(int collectedEcts) {
 		this.collectedEcts.set(collectedEcts);
+	}
+
+
+	//Methoden zum Serialisieren des Objektes
+	private void writeObject(ObjectOutputStream s) throws IOException {
+		s.writeUTF(courseOfStudy.getValueSafe());
+		s.writeInt(ectsOfCourseOfStudy.get());
+
+
+		if (semesters == null || semesters.size() == 0) {
+			s.writeInt(0);
+		}
+		else{
+			s.writeInt(semesters.size());
+		}
+		for(Semester semester:semesters){
+			s.writeObject(semester);
+		}
+
+
+		if (modules == null || modules.size() == 0) {
+			s.writeInt(0);
+		}
+		else{
+			s.writeInt(modules.size());
+		}
+		for(Module module:modules){
+			s.writeObject(module);
+		}
+
+
+		s.writeFloat(avgGrade.get());
+		s.writeInt(collectedEcts.get());
+
+	}
+
+	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+		courseOfStudy = new SimpleStringProperty(s.readUTF());
+		ectsOfCourseOfStudy = new SimpleIntegerProperty(s.readInt());
+
+		semesters = new SimpleListProperty<>(FXCollections.observableArrayList());
+		int numberOfSemester = s.readInt();
+		for(int i = 0;i<numberOfSemester;i++){
+			Semester semester = (Semester) s.readObject();
+			semesters.add(semester);
+		}
+
+		modules = new SimpleListProperty<>(FXCollections.observableArrayList());
+		int numberOfModuls = s.readInt();
+		for(int i = 0;i<numberOfModuls;i++){
+			Module module = (Module) s.readObject();
+			modules.add(module);
+		}
+
+
+		avgGrade = new SimpleFloatProperty(s.readFloat());
+		collectedEcts = new SimpleIntegerProperty(s.readInt());
+
+
 	}
 }
