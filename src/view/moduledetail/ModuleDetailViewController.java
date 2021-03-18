@@ -86,6 +86,7 @@ public class ModuleDetailViewController extends GridPane {
         this.studyPlannerController = spc;
         this.choiseBoxSemester.setItems(studyPlannerController.getStudyPlanner().getSemesters());
         this.choiseBoxSemester.setValue(studyPlannerController.getStudyPlanner().getSemesters().get(0));
+        labelGradeValue.setText("");
         choiseBoxSemester.setConverter(new StringConverter<Semester>() {
 
 
@@ -139,7 +140,9 @@ public class ModuleDetailViewController extends GridPane {
             case NOT_PASSED:radioButtonNotPassed.setSelected(true);break;
             case PASSED_WITHOUT_GRADE:radioButtonPassedWithoutGrade.setSelected(true);break;
         }
+        labelGradeValue.setText("");
         if(state == State.PASSED_WITH_GRADE){
+
             int value = gradeToSliderValueConverter(moduleToModify.getGrade());
             sliderGradeValue.setValue(value);
         }
@@ -196,6 +199,7 @@ public class ModuleDetailViewController extends GridPane {
             //Fallunterscheidung, ob ein neues Modul erstellt werden soll oder ein bestehendes bearbeitet wird
             if(this.moduleToModify == null){
                 Module newModule = moduleController.createModule(inputModuleName,inputECTS,inputExamDate);
+                moduleController.setStateToModule(newModule,getSelectedState(),sliderValueToGradeConverter((int)sliderGradeValue.getValue()));
                 Semester selectedSemester = choiseBoxSemester.getValue();
                 studyPlannerController.getSemesterController().moveModuleToSemester(newModule, selectedSemester);
             }

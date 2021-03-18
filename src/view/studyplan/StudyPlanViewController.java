@@ -75,6 +75,8 @@ public class StudyPlanViewController extends GridPane {
        labelTotalECTS.textProperty().bind(studyPlannerController.getStudyPlanner().ectsOfCourseOfStudyProperty().asString());
        for(Semester semester: this.studyPlannerController.getStudyPlanner().getSemesters())
            hBoxSemesterContainer.getChildren().add(new SemesterViewController(studyPlannerController,semester));
+
+       progressBar.progressProperty().bind(this.studyPlannerController.getStudyPlanner().collectedEctsProperty().divide((double) studyPlannerController.getStudyPlanner().getEctsOfCourseOfStudy()));
     }
 
     @FXML
@@ -99,7 +101,6 @@ public class StudyPlanViewController extends GridPane {
 
     @FXML
     void modifySemester(ActionEvent event) {
-        //Module selectedModule = tabPaneSemesters.getSelectionModel().getSelectedItem();
         Stage stage = new Stage();
         Scene modifySemesterScene = new Scene(new SemesterDetailViewController(studyPlannerController,true, null));
         stage.initModality(Modality.WINDOW_MODAL);
