@@ -80,7 +80,7 @@ public class ModuleController {
 		//Überprüfen, ob es ein Modul mit diesem Namen bereits gibt
 		List<Module> allModules = this.studyPlannerController.getStudyPlanner().getModules();
 		for(Module module :allModules){
-			if(module.getName().equals(name))
+			if(moduleToModify != module && module.getName().equals(name))
 				throw new ModuleAlreadyExistsException();
 		}
 		//Setze neue Werte

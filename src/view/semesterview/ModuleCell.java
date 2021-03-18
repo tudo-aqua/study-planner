@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.GridPane;
 import model.Module;
+import model.enums.State;
 
 public class ModuleCell extends ListCell<Module> {
 
@@ -26,8 +27,11 @@ public class ModuleCell extends ListCell<Module> {
             labelGrade.textProperty().bind(module.gradeProperty().asString());
             Label labelECTS = new Label();
             labelECTS.textProperty().bind(module.ectsProperty().asString());
-            gridPane.add(labelGrade,0,2,1,1);
-            gridPane.add(labelECTS,1,2,1,1);
+            if(module.getState()== State.PASSED_WITH_GRADE){
+                gridPane.add(labelGrade,0,2,1,1);
+                gridPane.add(new Label("    "),1,2,1,1);
+            }
+            gridPane.add(labelECTS,2,2,1,1);
             setGraphic(gridPane);
         }
     }

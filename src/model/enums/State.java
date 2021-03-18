@@ -11,22 +11,39 @@ public enum State implements Serializable {
 	/**
 	 * Dieser Wert repräsentiert den erfolgreichen Abschluss eines benoteten Moduls.
 	 */
-	PASSED_WITH_GRADE,
+	PASSED_WITH_GRADE(1),
 
 	/**
 	 * Dieser Wert repräsentiert den erfolgreichen Abschluss eines unbenoteten Moduls.
 	 */
-	PASSED_WITHOUT_GRADE,
+	PASSED_WITHOUT_GRADE(2),
 
 	/**
 	 * Dieser Wert repräsentiert den nicht erfolgreichen Abschluss eines Moduls.
 	 */
-	NOT_PASSED,
+	NOT_PASSED(3),
 
 	/**
 	 * Dieser Wert repräsentiert, dass das Modul noch nicht abgeschlossen wurde.
 	 */
-	NO_RESULT
+	NO_RESULT(4);
 
+	private int id;
+
+	private State(int id){
+		this.id = id;
+	}
+	public static State stateFromId(int id){
+		switch (id){
+			case 1: return State.PASSED_WITH_GRADE;
+			case 2: return State.PASSED_WITHOUT_GRADE;
+			case 3: return State.NOT_PASSED;
+			default:return State.NO_RESULT;
+		}
+	}
+
+	public int getId(){
+		return id;
+	}
 
 }
