@@ -40,7 +40,7 @@ public class StudyPlannerController {
 	 * Konstruktor, der die anderen Controller initialisiert.
 	 */
 	public StudyPlannerController() {
-		//Initialisierung der einzelnen Controller sowie Verknüpfung mit den StudyPlannerController
+		//Initialisierung der einzelnen Controller
 		this.iOController = new IOController(this);
 		this.moduleController = new ModuleController(this);
 		this.semesterController = new SemesterController(this);

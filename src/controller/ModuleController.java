@@ -4,6 +4,7 @@ import exceptions.DataNotValidException;
 import exceptions.ModuleAlreadyExistsException;
 import model.Module;
 import model.Semester;
+import model.StudyPlanner;
 import model.enums.State;
 
 import java.time.LocalDate;
@@ -44,7 +45,8 @@ public class ModuleController {
 		if (name == null || name.equals("") || ects <= 0 || examDate == null)
 			throw new DataNotValidException();
 		//Überprüfen, ob es ein Modul mit diesem Namen bereits gibt
-		List<Module> allModules = this.studyPlannerController.getStudyPlanner().getModules();
+		StudyPlanner studyPlanner = this.studyPlannerController.getStudyPlanner();
+		List<Module> allModules = studyPlanner.getModules();
 		for(Module module :allModules){
 			if(module.getName().equals(name))
 				throw new ModuleAlreadyExistsException();
@@ -52,7 +54,7 @@ public class ModuleController {
 
 		//Neues Modul mit den übergebenen Parametern erzeugen und der Liste aller Module hinzufügen.
 		Module newModule = new Module(name,ects, examDate);
-		this.studyPlannerController.getStudyPlanner().addModule(newModule);
+		studyPlanner.addModule(newModule);
 
 		//Statistiken aktualisieren
 		this.studyPlannerController.getStatisticsController().updateStatistics();
