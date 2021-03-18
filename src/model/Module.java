@@ -118,6 +118,7 @@ public class Module implements Serializable {
 		s.writeInt(ects.get());
 		s.writeObject(examDate.get());
 		s.writeFloat(grade.get());
+		s.writeInt(state.getId());
 	}
 
 	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
@@ -125,6 +126,7 @@ public class Module implements Serializable {
 		ects = new SimpleIntegerProperty(s.readInt());
 		examDate = new SimpleObjectProperty<LocalDate>((LocalDate) s.readObject());
 		grade = new SimpleFloatProperty(s.readFloat());
+		state = State.stateFromId(s.readInt());
 
 	}
 
