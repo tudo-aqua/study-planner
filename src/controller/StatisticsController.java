@@ -61,13 +61,18 @@ public class StatisticsController {
 	 */
 	public float calculateAverageGrade() {
 		float avgGrade = 0;
+		float totalECTSPoints = 0;
 		for(Semester semester:studyPlannerController.getStudyPlanner().getSemesters()){
 			for(Module module: semester.getModules()){
-				if(module.getState() == State.PASSED_WITH_GRADE)
+				if(module.getState() == State.PASSED_WITH_GRADE){
 					avgGrade += module.getEcts()*module.getGrade();
+					totalECTSPoints += module.getEcts();
+				}
+
 			}
 		}
-		return avgGrade/ calculateCollectedEctsOfFinishedModuls();
+		int help = (int)((avgGrade/ totalECTSPoints)*10);
+		return ((float)(help))/10f;
 	}
 
 	/**

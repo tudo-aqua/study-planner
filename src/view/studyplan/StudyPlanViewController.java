@@ -3,6 +3,7 @@ package view.studyplan;
 
 import controller.StudyPlannerController;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -70,7 +71,7 @@ public class StudyPlanViewController extends GridPane {
 
     @FXML
     public void initialize() {
-       labelAvgGrade.textProperty().bind(studyPlannerController.getStudyPlanner().avgGradeProperty().asString());
+       labelAvgGrade.textProperty().bind(studyPlannerController.getStudyPlanner().avgGradeProperty().asString("%.1f"));
        labelCollectedECTS.textProperty().bind(studyPlannerController.getStudyPlanner().collectedEctsProperty().asString());
        labelTotalECTS.textProperty().bind(studyPlannerController.getStudyPlanner().ectsOfCourseOfStudyProperty().asString());
        for(Semester semester: this.studyPlannerController.getStudyPlanner().getSemesters())
