@@ -87,6 +87,8 @@ public class ModuleDetailViewController extends GridPane {
         this.choiseBoxSemester.setItems(studyPlannerController.getStudyPlanner().getSemesters());
         this.choiseBoxSemester.setValue(studyPlannerController.getStudyPlanner().getSemesters().get(0));
         labelGradeValue.setText("");
+        buttonSave.setText("Modul erstellen");
+        buttonDelete.setVisible(false);
         choiseBoxSemester.setConverter(new StringConverter<Semester>() {
 
 
@@ -107,6 +109,7 @@ public class ModuleDetailViewController extends GridPane {
         this();
         this.studyPlannerController = spc;
         this.moduleToModify = moduleToModify;
+        this.buttonSave.setText("Modul updaten");
         this.textFieldModuleName.setText(moduleToModify.getName());
         this.textFieldECTS.setText(moduleToModify.getEcts()+"");
 

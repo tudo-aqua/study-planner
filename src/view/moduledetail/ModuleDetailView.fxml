@@ -93,7 +93,10 @@
          <children>
             <RadioButton fx:id="radioButtonPassedWithGrade" mnemonicParsing="false" text="Bestanden (benotet)" />
             <RadioButton fx:id="radioButtonPassedWithoutGrade" mnemonicParsing="false" text="Bestanden (unbenotet)" />
-            <RadioButton fx:id="radioButtonNotPassed" mnemonicParsing="false" text="Nicht bestanden" />
+            <RadioButton fx:id="radioButtonNotPassed" mnemonicParsing="false" text="Nicht bestanden">
+               <VBox.margin>
+                  <Insets right="5.0" />
+               </VBox.margin></RadioButton>
             <RadioButton fx:id="radioButtonNoResult" mnemonicParsing="false" text="Kein Ergebnis" />
          </children>
       </VBox>
@@ -104,7 +107,10 @@
       </Label>
       <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="6">
          <children>
-            <Slider fx:id="sliderGradeValue" />
+            <Slider fx:id="sliderGradeValue">
+               <padding>
+                  <Insets right="5.0" />
+               </padding></Slider>
             <Label fx:id="labelGradeValue" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Label" />
          </children>
          <GridPane.margin>
