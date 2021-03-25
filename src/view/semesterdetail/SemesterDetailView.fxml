@@ -65,8 +65,17 @@
             <Insets left="5.0" />
          </GridPane.margin>
       </Label>
-      <DatePicker fx:id="datePickerEndDate" maxWidth="1.7976931348623157E308" promptText="12.04.2021" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <Label fx:id="labelModifySemester" maxWidth="1.7976931348623157E308" text="Zu bearbeitendes Semester" GridPane.rowIndex="1" />
-      <ChoiceBox fx:id="choiseBoxModifySemester" maxWidth="1.7976931348623157E308" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <DatePicker fx:id="datePickerEndDate" maxWidth="1.7976931348623157E308" promptText="12.04.2021" GridPane.columnIndex="1" GridPane.rowIndex="4">
+         <GridPane.margin>
+            <Insets right="5.0" />
+         </GridPane.margin></DatePicker>
+      <Label fx:id="labelModifySemester" maxWidth="1.7976931348623157E308" text="Zu bearbeitendes Semester" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="5.0" />
+         </GridPane.margin></Label>
+      <ChoiceBox fx:id="choiseBoxModifySemester" maxWidth="1.7976931348623157E308" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets right="5.0" />
+         </GridPane.margin></ChoiceBox>
    </children>
 </fx:root>
