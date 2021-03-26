@@ -3,7 +3,6 @@ package view.studyplan;
 
 import controller.StudyPlannerController;
 import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +19,6 @@ import view.semesterdetail.SemesterDetailViewController;
 import view.semesterview.SemesterViewController;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 public class StudyPlanViewController extends GridPane {
 
@@ -73,11 +71,11 @@ public class StudyPlanViewController extends GridPane {
     public void initialize() {
        labelAvgGrade.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().avgGradeProperty().asString("%.1f"));
        labelCollectedECTS.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().collectedEctsProperty().asString());
-       labelTotalECTS.textProperty().bind(studyPlannerController.getStudyPlanner().ectsOfCourseOfStudyProperty().asString());
+       labelTotalECTS.textProperty().bind(studyPlannerController.getStudyPlanner().courseOfStudyEctsProperty().asString());
        for(Semester semester: this.studyPlannerController.getStudyPlanner().getSemesters())
            hBoxSemesterContainer.getChildren().add(new SemesterViewController(studyPlannerController,semester));
 
-       progressBar.progressProperty().bind(this.studyPlannerController.getStudyPlanner().getStatistics().collectedEctsProperty().divide((double) studyPlannerController.getStudyPlanner().getEctsOfCourseOfStudy()));
+       progressBar.progressProperty().bind(this.studyPlannerController.getStudyPlanner().getStatistics().collectedEctsProperty().divide((double) studyPlannerController.getStudyPlanner().getCourseOfStudyEcts()));
     }
 
     @FXML

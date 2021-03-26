@@ -19,12 +19,12 @@ public class StudyPlanner implements Serializable {
 	/**
 	 * Name des Studienganges, für den der Studienplan verwendet wird.
 	 */
-	private transient StringProperty courseOfStudy;
+	private transient StringProperty courseOfStudyName;
 
 	/**
 	 * Anzahl an ECTS-Punkten, die in diesem Studiengang erreicht werden müssen.
 	 */
-	private transient IntegerProperty ectsOfCourseOfStudy;
+	private transient IntegerProperty courseOfStudyEcts;
 
 	/**
 	 * Liste an Semstern, die in diesem Studienplan verwaltet werden.
@@ -44,12 +44,12 @@ public class StudyPlanner implements Serializable {
 
 	/**
 	 * Konstruktor zum erzeugen eines neuen Studienplanes.
-	 * @param courseOfStudy Name des Studienganges.
-	 * @param ectsOfCourseOfStudy Anzahl der zu erreichenden ECTS-Punkte.
+	 * @param courseOfStudyName Name des Studienganges.
+	 * @param courseOfStudyEcts Anzahl der zu erreichenden ECTS-Punkte.
 	 */
-	public StudyPlanner(String courseOfStudy, int ectsOfCourseOfStudy) {
-		this.courseOfStudy = new SimpleStringProperty(courseOfStudy);
-		this.ectsOfCourseOfStudy = new SimpleIntegerProperty(ectsOfCourseOfStudy);
+	public StudyPlanner(String courseOfStudyName, int courseOfStudyEcts) {
+		this.courseOfStudyName = new SimpleStringProperty(courseOfStudyName);
+		this.courseOfStudyEcts = new SimpleIntegerProperty(courseOfStudyEcts);
 		this.semesters = new SimpleListProperty<>(FXCollections.observableArrayList());
 		this.modules = new SimpleListProperty<>(FXCollections.observableArrayList());
 		this.statistics = new Statistics();
@@ -98,28 +98,28 @@ public class StudyPlanner implements Serializable {
 
 	//Getter- und Setter-Methoden für die einzelnen Attribut-Werte und Getter-Methode für die Properties
 	//(autogeneriert mit Intellij)
-	public String getCourseOfStudy() {
-		return courseOfStudy.get();
+	public String getCourseOfStudyName() {
+		return courseOfStudyName.get();
 	}
 
-	public StringProperty courseOfStudyProperty() {
-		return courseOfStudy;
+	public StringProperty courseOfStudyNameProperty() {
+		return courseOfStudyName;
 	}
 
-	public void setCourseOfStudy(String courseOfStudy) {
-		this.courseOfStudy.set(courseOfStudy);
+	public void setCourseOfStudyName(String courseOfStudyName) {
+		this.courseOfStudyName.set(courseOfStudyName);
 	}
 
-	public int getEctsOfCourseOfStudy() {
-		return ectsOfCourseOfStudy.get();
+	public int getCourseOfStudyEcts() {
+		return courseOfStudyEcts.get();
 	}
 
-	public IntegerProperty ectsOfCourseOfStudyProperty() {
-		return ectsOfCourseOfStudy;
+	public IntegerProperty courseOfStudyEctsProperty() {
+		return courseOfStudyEcts;
 	}
 
-	public void setEctsOfCourseOfStudy(int ectsOfCourseOfStudy) {
-		this.ectsOfCourseOfStudy.set(ectsOfCourseOfStudy);
+	public void setCourseOfStudyEcts(int courseOfStudyEcts) {
+		this.courseOfStudyEcts.set(courseOfStudyEcts);
 	}
 
 	public ObservableList<Semester> getSemesters() {
@@ -156,8 +156,8 @@ public class StudyPlanner implements Serializable {
 
 	//Methoden zum Serialisieren des Objektes
 	private void writeObject(ObjectOutputStream s) throws IOException {
-		s.writeUTF(courseOfStudy.getValueSafe());
-		s.writeInt(ectsOfCourseOfStudy.get());
+		s.writeUTF(courseOfStudyName.getValueSafe());
+		s.writeInt(courseOfStudyEcts.get());
 
 
 		if (semesters == null || semesters.size() == 0) {
@@ -183,8 +183,8 @@ public class StudyPlanner implements Serializable {
 	}
 
 	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
-		courseOfStudy = new SimpleStringProperty(s.readUTF());
-		ectsOfCourseOfStudy = new SimpleIntegerProperty(s.readInt());
+		courseOfStudyName = new SimpleStringProperty(s.readUTF());
+		courseOfStudyEcts = new SimpleIntegerProperty(s.readInt());
 
 		semesters = new SimpleListProperty<>(FXCollections.observableArrayList());
 		int numberOfSemester = s.readInt();

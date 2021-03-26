@@ -54,10 +54,10 @@ public class StudyPlannerController {
 	 * @param ectsOfCourseOfStudy Anzahl an ECTS-Punkten, die für den Studiengang erreicht werden müssen.
 	 * @throws DataNotValidException Wird geworfen, wenn die Anzahl an ECTS-Punkten nicht valide ist (< oder = 0).
 	 */
-	public void initializeStudyPlanner(String courseOfStudy, int ectsOfCourseOfStudy)throws DataNotValidException {
-		if(ectsOfCourseOfStudy <0)
+	public void initializeStudyPlanner(String courseOfStudyName, int courseOfStudyEcts)throws DataNotValidException {
+		if(courseOfStudyEcts <0)
 			throw new DataNotValidException();
-		this.studyPlanner = new StudyPlanner(courseOfStudy,ectsOfCourseOfStudy);
+		this.studyPlanner = new StudyPlanner(courseOfStudyName,courseOfStudyEcts);
 	}
 
 	//Getter- und Setter-Methoden für den Zugriff auf das Model
