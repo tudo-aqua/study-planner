@@ -103,13 +103,14 @@ public class ModuleDetailViewController extends GridPane {
             }
         });
         initializeToggleGroup();
+
     }
 
     public ModuleDetailViewController(StudyPlannerController spc, Module moduleToModify){
         this();
         this.studyPlannerController = spc;
         this.moduleToModify = moduleToModify;
-        this.buttonSave.setText("Modul updaten");
+        this.buttonSave.setText("Modul bearbeiten");
         this.textFieldModuleName.setText(moduleToModify.getName());
         this.textFieldECTS.setText(moduleToModify.getEcts()+"");
 
@@ -143,11 +144,12 @@ public class ModuleDetailViewController extends GridPane {
             case NOT_PASSED:radioButtonNotPassed.setSelected(true);break;
             case PASSED_WITHOUT_GRADE:radioButtonPassedWithoutGrade.setSelected(true);break;
         }
-        labelGradeValue.setText("");
+        labelGradeValue.setText("1.0");
         if(state == State.PASSED_WITH_GRADE){
 
-            int value = gradeToSliderValueConverter(moduleToModify.getGrade());
+            int value = GradeConverter.gradeToSliderValue(moduleToModify.getGrade());
             sliderGradeValue.setValue(value);
+            labelGradeValue.setText(GradeConverter.sliderValueToGrade(value)+"");
         }
 
 
@@ -172,7 +174,7 @@ public class ModuleDetailViewController extends GridPane {
      */
     @FXML
     void cancel(ActionEvent event) {
-        //Methode zum schließen des Detail-Fensters.
+        //Methode zum Schließen des Detail-Fensters.
         this.closeModuleDetailView();
     }
 
@@ -202,13 +204,13 @@ public class ModuleDetailViewController extends GridPane {
             //Fallunterscheidung, ob ein neues Modul erstellt werden soll oder ein bestehendes bearbeitet wird
             if(this.moduleToModify == null){
                 Module newModule = moduleController.createModule(inputModuleName,inputECTS,inputExamDate);
-                moduleController.setStateToModule(newModule,getSelectedState(),sliderValueToGradeConverter((int)sliderGradeValue.getValue()));
+                moduleController.setStateToModule(newModule,getSelectedState(),GradeConverter.sliderValueToGrade(sliderGradeValue.getValue()));
                 Semester selectedSemester = choiseBoxSemester.getValue();
                 studyPlannerController.getSemesterController().moveModuleToSemester(newModule, selectedSemester);
             }
             else{
                 moduleController.modifyModule(moduleToModify,inputModuleName,inputECTS,inputExamDate);
-                moduleController.setStateToModule(moduleToModify,getSelectedState(),sliderValueToGradeConverter((int)sliderGradeValue.getValue()));
+                moduleController.setStateToModule(moduleToModify,getSelectedState(),GradeConverter.sliderValueToGrade(sliderGradeValue.getValue()));
                 SemesterController semesterController = studyPlannerController.getSemesterController();
                 semesterController.moveModuleToSemester(moduleToModify,this.choiseBoxSemester.getValue());
 
@@ -250,61 +252,29 @@ public class ModuleDetailViewController extends GridPane {
         radioButtonNotPassed.setToggleGroup(toggleGroupStatus);
         radioButtonPassedWithGrade.setToggleGroup(toggleGroupStatus);
         radioButtonPassedWithoutGrade.setToggleGroup(toggleGroupStatus);
-        toggleGroupStatus.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
-            public void changed(ObservableValue<? extends Toggle> ov,
-                                Toggle old_toggle, Toggle new_toggle) {
-                if (toggleGroupStatus.getSelectedToggle() != null) {
+        toggleGroupStatus.selectedToggleProperty().addListener((ov, old_toggle, new_toggle) -> {
+            if (toggleGroupStatus.getSelectedToggle() != null) {
 
-                    labelGrade.setVisible(radioButtonPassedWithGrade.isSelected());
-                    labelGradeValue.setVisible(radioButtonPassedWithGrade.isSelected());
-                    sliderGradeValue.setVisible(radioButtonPassedWithGrade.isSelected());
+                labelGrade.setVisible(radioButtonPassedWithGrade.isSelected());
+                labelGradeValue.setVisible(radioButtonPassedWithGrade.isSelected());
+                sliderGradeValue.setVisible(radioButtonPassedWithGrade.isSelected());
 
-                }
             }
         });
-        radioButtonNotPassed.setSelected(true);
+        radioButtonNoResult.setSelected(true);
         sliderGradeValue.setMin(1);
         sliderGradeValue.setMax(10);
         sliderGradeValue.setSnapToTicks(true);
         sliderGradeValue.setMajorTickUnit(1);
         sliderGradeValue.setMinorTickCount(0);
         sliderGradeValue.setShowTickMarks(true);
-        sliderGradeValue.valueProperty().addListener((obs, oldval, newVal) ->{
-            labelGradeValue.setText(sliderValueToGradeConverter(newVal.intValue())+"");
-        });
+        sliderGradeValue.valueProperty().addListener((obs, oldval, newVal) -> labelGradeValue.setText(GradeConverter.sliderValueToGrade(newVal.intValue())+""));
+        labelGradeValue.setText("1.0");
     }
 
-    private float sliderValueToGradeConverter(int value){
-        switch (value){
-            case 1: return 1.0f;
-            case 2: return 1.3f;
-            case 3: return 1.7f;
-            case 4: return 2.0f;
-            case 5: return 2.3f;
-            case 6: return 2.7f;
-            case 7: return 3.0f;
-            case 8: return 3.3f;
-            case 9: return 3.7f;
-            case 10: return 4.0f;
-            default: return -1f;
-        }
-    }
 
-    private int gradeToSliderValueConverter(float grade){
-        float gradeAsInt = (int)(grade *10);
 
-        if(gradeAsInt == 10) return 1;
-        if(gradeAsInt == 13) return 2;
-        if(gradeAsInt == 17) return 3;
-        if(gradeAsInt == 20) return 4;
-        if(gradeAsInt == 23) return 5;
-        if(gradeAsInt == 27) return 7;
-        if(gradeAsInt == 30) return 7;
-        if(gradeAsInt == 33) return 8;
-        if(gradeAsInt == 37) return 9;
-        if(gradeAsInt == 40) return 10;
-        return -1;
-    }
+
 
     private State getSelectedState(){
         if(radioButtonNotPassed.isSelected())
