@@ -73,9 +73,8 @@ public class SemesterDetailViewController extends GridPane {
     public void initialize() {
         choiseBoxModifySemester.setVisible(modifySemesters);
         labelModifySemester.setVisible(modifySemesters);
+        buttonSave.setText("Semester erstellen");
         choiseBoxModifySemester.setConverter(new StringConverter<Semester>() {
-
-
             @Override
             public String toString(Semester semester) {
                 return semester.getName();
@@ -87,8 +86,8 @@ public class SemesterDetailViewController extends GridPane {
             }
         });
         if(modifySemesters){
+            buttonSave.setText("Semester bearbeiten");
             choiseBoxModifySemester.setItems(spc.getStudyPlanner().getSemesters());
-
             choiseBoxModifySemester.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Semester>() {
 
                 @Override
