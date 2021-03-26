@@ -15,10 +15,7 @@ import model.Module;
 import model.Semester;
 import model.Statistics;
 import view.moduledetail.ModuleDetailViewController;
-import view.semesterdetail.SemesterDetailViewController;
-
 import java.io.IOException;
-import java.time.LocalDate;
 
 public class SemesterViewController extends GridPane {
     @FXML
@@ -63,38 +60,28 @@ public class SemesterViewController extends GridPane {
     public void initialize() {
         Statistics statistics = this.studyPlannerController.getStudyPlanner().getStatistics();
         labelName.textProperty().bind(semester.nameProperty());
-        labelStartDate.textProperty().bind(semester.startDateProperty().asString());
-        labelEndDate.textProperty().bind(semester.endDateProperty().asString());
-        labelCollectedECTSInSemester.textProperty().bind(statistics.collectedEctsForSemesterProperty(semester).asString());
-        listViewModuls.setCellFactory(new Callback<ListView<Module>, ListCell<Module>>() {
-            @Override
-            public ListCell<Module> call(ListView<Module> studentListView) {
-                return new ModuleCell();
-            }
-        });
+        labelStartDate.textProperty().bindBidirectional(semester.startDateProperty(), new LocalDateConverter());
+
+
+        labelEndDate.textProperty().bindBidirectional(semester.endDateProperty(), new LocalDateConverter());
+        labelCollectedECTSInSemester.textProperty().bind(statistics.collectedEctsForSemesterProperty(semester).asString("%d ECTS"));
+        listViewModuls.setCellFactory(studentListView -> new ModuleCell());
         listViewModuls.setItems(semester.getModules());
-        listViewModuls.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        listViewModuls.setOnMouseClicked(click -> {
 
-            @Override
-            public void handle(MouseEvent click) {
-
-                if (click.getClickCount() == 2) {
-                    //Use ListView's getSelected Item
-                    Module selectedItem = listViewModuls.getSelectionModel()
-                            .getSelectedItem();
-                   if(selectedItem != null){
-                       Stage stage = new Stage();
-                       Scene modifySemesterScene = new Scene(new ModuleDetailViewController(studyPlannerController,selectedItem));
-                       stage.initModality(Modality.WINDOW_MODAL);
-                       stage.initOwner(primaryStage);
-                       stage.setScene(modifySemesterScene);
-                       stage.showAndWait();
-                   }
+            if (click.getClickCount() == 2) {
+                //Use ListView's getSelected Item
+                Module selectedItem = listViewModuls.getSelectionModel().getSelectedItem();
+                if(selectedItem != null){
+                    Stage stage = new Stage();
+                    Scene modifySemesterScene = new Scene(new ModuleDetailViewController(studyPlannerController,selectedItem));
+                    stage.initModality(Modality.WINDOW_MODAL);
+                    stage.initOwner(primaryStage);
+                    stage.setScene(modifySemesterScene);
+                    stage.showAndWait();
                 }
             }
         });
-
-
 
     }
 
