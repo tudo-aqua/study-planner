@@ -23,16 +23,13 @@ import java.io.IOException;
 public class StudyPlanViewController extends GridPane {
 
     @FXML
+    private Label labelTitel;
+
+    @FXML
     private Label labelAvgGrade;
 
     @FXML
     private Label labelCollectedECTS;
-
-    @FXML
-    private Label labelTotalECTS;
-
-    @FXML
-    private PieChart pieChartProgress;
 
     @FXML
     private MenuItem buttonAddSemester;
@@ -70,8 +67,8 @@ public class StudyPlanViewController extends GridPane {
     @FXML
     public void initialize() {
        labelAvgGrade.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().avgGradeProperty().asString("%.1f"));
-       labelCollectedECTS.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().collectedEctsProperty().asString());
-       labelTotalECTS.textProperty().bind(studyPlannerController.getStudyPlanner().courseOfStudyEctsProperty().asString());
+       labelCollectedECTS.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().collectedEctsProperty().asString("%d / "+studyPlannerController.getStudyPlanner().getCourseOfStudyEcts()+ " ECTS"));
+       labelTitel.setText("Studienverlaufsplan - " + studyPlannerController.getStudyPlanner().getCourseOfStudyName());
        for(Semester semester: this.studyPlannerController.getStudyPlanner().getSemesters())
            hBoxSemesterContainer.getChildren().add(new SemesterViewController(studyPlannerController,semester));
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -13,19 +12,16 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="642.0" prefWidth="812.0" type="GridPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" prefWidth="100.0" />
       <ColumnConstraints />
   </columnConstraints>
   <rowConstraints>
@@ -35,21 +31,20 @@
       <RowConstraints minHeight="10.0" percentHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" percentHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" percentHeight="60.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" percentHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" percentHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Studienverlausplan" GridPane.columnSpan="8" GridPane.rowIndex="1" />
-      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Statistiken" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <Label maxWidth="1.7976931348623157E308" text="Durchschnitt" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-      <Label fx:id="labelAvgGrade" maxWidth="1.7976931348623157E308" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-      <Label maxWidth="1.7976931348623157E308" text="Erreichte ECTS" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-      <Label fx:id="labelCollectedECTS" maxWidth="1.7976931348623157E308" text="Label" GridPane.columnIndex="5" GridPane.rowIndex="6" />
-      <VBox GridPane.columnIndex="5" GridPane.rowIndex="6">
-         <children>
-            <Label fx:id="labelTotalECTS" maxWidth="1.7976931348623157E308" text="Label" />
-         </children>
-      </VBox>
-      <PieChart fx:id="pieChartProgress" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+      <Label fx:id="labelTitel" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Studienverlausplan" GridPane.columnSpan="8" GridPane.rowIndex="1">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Statistiken" GridPane.columnIndex="1" GridPane.rowIndex="6" GridPane.rowSpan="2">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Durchschnittsnote" GridPane.columnIndex="2" GridPane.rowIndex="6" GridPane.rowSpan="2" />
+      <Label fx:id="labelAvgGrade" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="6" GridPane.rowSpan="2" />
       <MenuBar maxHeight="1.7976931348623157E308" GridPane.columnSpan="8">
         <menus>
           <Menu mnemonicParsing="false" text="StudyPlanner">
@@ -70,12 +65,12 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Label maxWidth="1.7976931348623157E308" text="Fortschritt" GridPane.columnIndex="6" GridPane.rowIndex="6" />
-      <ProgressBar fx:id="progressBar" maxWidth="1.7976931348623157E308" prefWidth="200.0" progress="0.0" GridPane.columnIndex="7" GridPane.rowIndex="6">
+      <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Fortschritt" GridPane.columnIndex="4" GridPane.rowIndex="6" GridPane.rowSpan="2" />
+      <ProgressBar fx:id="progressBar" maxWidth="1.7976931348623157E308" prefWidth="200.0" progress="0.0" GridPane.columnIndex="5" GridPane.rowIndex="6">
          <padding>
             <Insets right="5.0" />
          </padding></ProgressBar>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="8" GridPane.rowIndex="2" GridPane.rowSpan="4">
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER" vmax="0.0" GridPane.columnSpan="8" GridPane.rowIndex="2" GridPane.rowSpan="4">
          <content>
             <HBox fx:id="hBoxSemesterContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
          </content>
@@ -83,7 +78,7 @@
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </ScrollPane>
-      <Button fx:id="buttonAddModule" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addModule" text="+" GridPane.rowIndex="6">
+      <Button fx:id="buttonAddModule" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addModule" text="+" GridPane.rowIndex="6" GridPane.rowSpan="2">
          <font>
             <Font size="27.0" />
          </font>
@@ -91,5 +86,6 @@
             <Insets left="5.0" />
          </GridPane.margin>
       </Button>
+      <Label fx:id="labelCollectedECTS" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Label" GridPane.columnIndex="5" GridPane.rowIndex="7" />
    </children>
 </fx:root>
