@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Module;
 import model.Semester;
+import model.Statistics;
 import view.moduledetail.ModuleDetailViewController;
 import view.semesterdetail.SemesterDetailViewController;
 
@@ -60,10 +61,11 @@ public class SemesterViewController extends GridPane {
 
     @FXML
     public void initialize() {
+        Statistics statistics = this.studyPlannerController.getStudyPlanner().getStatistics();
         labelName.textProperty().bind(semester.nameProperty());
         labelStartDate.textProperty().bind(semester.startDateProperty().asString());
         labelEndDate.textProperty().bind(semester.endDateProperty().asString());
-        labelCollectedECTSInSemester.textProperty().bind(semester.collectedECTSProperty().asString());
+        labelCollectedECTSInSemester.textProperty().bind(statistics.collectedEctsForSemesterProperty(semester).asString());
         listViewModuls.setCellFactory(new Callback<ListView<Module>, ListCell<Module>>() {
             @Override
             public ListCell<Module> call(ListView<Module> studentListView) {

@@ -35,10 +35,6 @@ public class Semester implements Serializable {
 	 */
 	private transient ListProperty<Module> modules;
 
-	/**
-	 * Anzahl aller in diesem Semester gesammelten ECTS-Punkte.
-	 */
-	private transient IntegerProperty collectedECTS;
 
 	/**
 	 * Konstruktor zum erzeugen eines Semesters.
@@ -53,8 +49,6 @@ public class Semester implements Serializable {
 		this.startDate = new SimpleObjectProperty<>(startDate);
 		this.endDate = new SimpleObjectProperty<>(endDate);
 		this.modules = new SimpleListProperty<>(FXCollections.observableArrayList());
-		this.collectedECTS = new SimpleIntegerProperty();
-
 	}
 
 	/**
@@ -134,17 +128,6 @@ public class Semester implements Serializable {
 		this.modules.set(modules);
 	}
 
-	public int getCollectedECTS() {
-		return collectedECTS.get();
-	}
-
-	public IntegerProperty collectedECTSProperty() {
-		return collectedECTS;
-	}
-
-	public void setCollectedECTS(int collectedECTS) {
-		this.collectedECTS.set(collectedECTS);
-	}
 
 	//Methoden zum Serialisieren des Objektes
 	private void writeObject(ObjectOutputStream s) throws IOException {
@@ -161,7 +144,6 @@ public class Semester implements Serializable {
 		for(Module module:modules){
 			s.writeObject(module);
 		}
-		s.writeInt(collectedECTS.get());
 
 	}
 
@@ -175,6 +157,5 @@ public class Semester implements Serializable {
 			Module module = (Module) s.readObject();
 			modules.add(module);
 		}
-		collectedECTS = new SimpleIntegerProperty(s.readInt());
 	}
 }

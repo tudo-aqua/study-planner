@@ -4,6 +4,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import model.Module;
 import model.Semester;
+import model.Statistics;
 import model.enums.State;
 
 import java.time.LocalDate;
@@ -79,13 +80,15 @@ public class StatisticsController {
 	 * Die Methode berechnet alle Statistiken neu.
 	 */
 	public void updateStatistics(){
+
 		float avgGrade = this.calculateAverageGrade();
-		this.studyPlannerController.getStudyPlanner().setAvgGrade(avgGrade);
+		Statistics statistics = this.studyPlannerController.getStudyPlanner().getStatistics();
+		statistics.setAvgGrade(avgGrade);
 		int collectedECTS = this.calculateCollectedEctsOfFinishedModuls();
-		this.studyPlannerController.getStudyPlanner().setCollectedEcts(collectedECTS);
+		statistics.setCollectedEcts(collectedECTS);
 		for(Semester semester: this.studyPlannerController.getStudyPlanner().getSemesters()){
-			int totalEcts = this.calculateCollectedEctsForSemester(semester);
-			semester.setCollectedECTS(totalEcts);
+			int collectedEcts = this.calculateCollectedEctsForSemester(semester);
+			statistics.setCollectedEctsForSemester(semester,collectedEcts);
 		}
 
 	}

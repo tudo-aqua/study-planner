@@ -1,5 +1,6 @@
 package controller;
 
+import model.Statistics;
 import model.StudyPlanner;
 
 import java.io.*;
@@ -32,6 +33,7 @@ public class IOController {
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			StudyPlanner studyPlanner = (StudyPlanner) ois.readObject();
 			studyPlannerController.setStudyPlanner(studyPlanner);
+			studyPlannerController.getStatisticsController().updateStatistics();
 			ois.close();
 		}
 		catch (IOException | ClassNotFoundException e ){

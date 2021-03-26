@@ -71,13 +71,13 @@ public class StudyPlanViewController extends GridPane {
 
     @FXML
     public void initialize() {
-       labelAvgGrade.textProperty().bind(studyPlannerController.getStudyPlanner().avgGradeProperty().asString("%.1f"));
-       labelCollectedECTS.textProperty().bind(studyPlannerController.getStudyPlanner().collectedEctsProperty().asString());
+       labelAvgGrade.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().avgGradeProperty().asString("%.1f"));
+       labelCollectedECTS.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().collectedEctsProperty().asString());
        labelTotalECTS.textProperty().bind(studyPlannerController.getStudyPlanner().ectsOfCourseOfStudyProperty().asString());
        for(Semester semester: this.studyPlannerController.getStudyPlanner().getSemesters())
            hBoxSemesterContainer.getChildren().add(new SemesterViewController(studyPlannerController,semester));
 
-       progressBar.progressProperty().bind(this.studyPlannerController.getStudyPlanner().collectedEctsProperty().divide((double) studyPlannerController.getStudyPlanner().getEctsOfCourseOfStudy()));
+       progressBar.progressProperty().bind(this.studyPlannerController.getStudyPlanner().getStatistics().collectedEctsProperty().divide((double) studyPlannerController.getStudyPlanner().getEctsOfCourseOfStudy()));
     }
 
     @FXML

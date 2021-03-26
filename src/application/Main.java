@@ -29,7 +29,6 @@ public class Main extends Application {
             }
             else {
                 scene = new Scene(new WelcomeViewController(primaryStage, studyPlannerController));
-
             }
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 

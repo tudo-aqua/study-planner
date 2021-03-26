@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.time.LocalDate;
 
 
 /**
@@ -38,14 +37,10 @@ public class StudyPlanner implements Serializable {
 	private transient ListProperty<Module> modules;
 
 	/**
-	 * Durchschnitssnote aller bestandenen Module.
+	 * Referenz auf das Statistics-Objekt.
 	 */
-	private transient FloatProperty avgGrade;
+	private transient Statistics statistics;
 
-	/**
-	 * Anzahl aller erreichten ECTS-Punkte.
-	 */
-	private transient IntegerProperty collectedEcts;
 
 	/**
 	 * Konstruktor zum erzeugen eines neuen Studienplanes.
@@ -57,8 +52,8 @@ public class StudyPlanner implements Serializable {
 		this.ectsOfCourseOfStudy = new SimpleIntegerProperty(ectsOfCourseOfStudy);
 		this.semesters = new SimpleListProperty<>(FXCollections.observableArrayList());
 		this.modules = new SimpleListProperty<>(FXCollections.observableArrayList());
-		this.avgGrade = new SimpleFloatProperty();
-		this.collectedEcts = new SimpleIntegerProperty();
+		this.statistics = new Statistics();
+
 	}
 
 	/**
@@ -151,30 +146,13 @@ public class StudyPlanner implements Serializable {
 		this.modules.set(modules);
 	}
 
-	public float getAvgGrade() {
-		return avgGrade.get();
+	public Statistics getStatistics() {
+		return statistics;
 	}
 
-	public FloatProperty avgGradeProperty() {
-		return avgGrade;
+	public void setStatistics(Statistics statistics) {
+		this.statistics = statistics;
 	}
-
-	public void setAvgGrade(float avgGrade) {
-		this.avgGrade.set(avgGrade);
-	}
-
-	public int getCollectedEcts() {
-		return collectedEcts.get();
-	}
-
-	public IntegerProperty collectedEctsProperty() {
-		return collectedEcts;
-	}
-
-	public void setCollectedEcts(int collectedEcts) {
-		this.collectedEcts.set(collectedEcts);
-	}
-
 
 	//Methoden zum Serialisieren des Objektes
 	private void writeObject(ObjectOutputStream s) throws IOException {
@@ -202,11 +180,6 @@ public class StudyPlanner implements Serializable {
 		for(Module module:modules){
 			s.writeObject(module);
 		}
-
-
-		s.writeFloat(avgGrade.get());
-		s.writeInt(collectedEcts.get());
-
 	}
 
 	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
@@ -226,11 +199,6 @@ public class StudyPlanner implements Serializable {
 			Module module = (Module) s.readObject();
 			modules.add(module);
 		}
-
-
-		avgGrade = new SimpleFloatProperty(s.readFloat());
-		collectedEcts = new SimpleIntegerProperty(s.readInt());
-
-
+		this.statistics = new Statistics();
 	}
 }
