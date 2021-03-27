@@ -80,12 +80,13 @@ test {
 javadoc {
     exclude 'application/**'
     exclude 'view/**'
+    options.encoding = 'UTF-8'
 }
 
 task testJavadoc(type: Javadoc) {
     source = sourceSets.test.allJava
     classpath = sourceSets.test.compileClasspath
-
+    options.encoding = 'UTF-8'
     destinationDir = file("${buildDir}/docs/testjavadoc")
 }
 
