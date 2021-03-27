@@ -44,6 +44,9 @@ public class ModuleControllerTest {
 
     /**
      * Test der createModule-Methode mit gültigen Eingaben.
+     * @throws DataNotValidException Wird geworfen, wenn Eingaben ungültig sind
+     * @throws ModuleAlreadyExistsException Wird geworfen, wenn ein Modul mit dem Namen
+     * bereits existiert
      */
     @Test
     public void createModuleCaseOne() throws DataNotValidException, ModuleAlreadyExistsException {
@@ -66,6 +69,9 @@ public class ModuleControllerTest {
 
     /**
      * Test der createModule-Methode mit ungültigen Eingaben.
+     * @throws DataNotValidException Wird geworfen, wenn Eingaben ungültig sind
+     * @throws ModuleAlreadyExistsException Wird geworfen, wenn ein Modul mit dem Namen
+     * bereits existiert
      */
     @Test(expected = DataNotValidException.class)
     public void createModuleCaseTwo() throws DataNotValidException, ModuleAlreadyExistsException {
@@ -80,6 +86,9 @@ public class ModuleControllerTest {
     /**
      * Test der createModule-Methode mit gültigen Eingaben aber einem bereits
      * existierenden Modul mit den gewählten Namen.
+     * @throws DataNotValidException Wird geworfen, wenn Eingaben ungültig sind
+     * @throws ModuleAlreadyExistsException Wird geworfen, wenn ein Modul mit dem Namen
+     * bereits existiert
      */
     @Test(expected = ModuleAlreadyExistsException.class)
     public void createModuleCaseThree() throws DataNotValidException, ModuleAlreadyExistsException {
@@ -93,14 +102,23 @@ public class ModuleControllerTest {
         moduleController.createModule(inputName,inputECTS,inputExamDate);
     }
 
+    /**
+     * Test-JavaDoc
+     */
     @Test
     public void modifyModule() {
     }
 
+    /**
+     * Test-JavaDoc
+     */
     @Test
     public void deleteModule() {
     }
 
+    /**
+     * Test-JavaDoc
+     */
     @Test
     public void setStateToModule() {
     }
