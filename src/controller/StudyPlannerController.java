@@ -50,9 +50,9 @@ public class StudyPlannerController {
 
 	/**
 	 * Methode zum Erzeugen eines neuen leeren Studienplans.
-	 * @param courseOfStudy Name des Studienganges für den Studienplan.
-	 * @param ectsOfCourseOfStudy Anzahl an ECTS-Punkten, die für den Studiengang erreicht werden müssen.
-	 * @throws DataNotValidException Wird geworfen, wenn die Anzahl an ECTS-Punkten nicht valide ist (< oder = 0).
+	 * @param courseOfStudyName Name des Studienganges für den Studienplan.
+	 * @param courseOfStudyEcts Anzahl an ECTS-Punkten, die für den Studiengang erreicht werden müssen.
+	 * @throws DataNotValidException Wird geworfen, wenn die Anzahl an ECTS-Punkten nicht valide ist (kleiner oder gleich 0).
 	 */
 	public void initializeStudyPlanner(String courseOfStudyName, int courseOfStudyEcts)throws DataNotValidException {
 		if(courseOfStudyEcts <0)

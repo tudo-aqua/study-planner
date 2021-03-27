@@ -69,6 +69,7 @@ public class ModuleController {
 	 * @param moduleToModify Das Modul, welches bearbeitet werden soll.
 	 * @param name Der neue Name des Moduls.
 	 * @param ects Die neue Anzahl an ECTS-Punkten.
+	 * @param examDate Datum der Modulprüfung.
 	 * @throws DataNotValidException Wird geworfen, wenn die Daten nicht valide sind, z.B. wenn der Name leer ist,
 	 * die ECTS-Punte negativ/gleich 0 sind oder das Prüfungsdatum keinen gültigen Wert repräsentiert.
 	 * @throws ModuleAlreadyExistsException Wird geworfen, wenn es bereits ein Modul mit dem selben Namen gibt.
