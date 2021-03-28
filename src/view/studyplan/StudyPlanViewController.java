@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -114,7 +113,7 @@ public class StudyPlanViewController extends GridPane {
 
     @FXML
     void exit(ActionEvent event) {
-        this.studyPlannerController.getiOController().storeData();
+        this.studyPlannerController.getIoController().storeData();
         Platform.exit();
         System.exit(0);
     }

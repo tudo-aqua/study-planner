@@ -1,8 +1,6 @@
 package controller;
 
 import exceptions.DataNotValidException;
-import javafx.beans.property.DoubleProperty;
-import javafx.scene.control.ProgressBar;
 import model.StudyPlanner;
 
 /**
@@ -24,7 +22,7 @@ public class StudyPlannerController {
 	/**
 	 * Referenz auf den IOController.
 	 */
-	private IOController iOController;
+	private IOController ioController;
 
 	/**
 	 * Referenz auf den SemesterController.
@@ -41,7 +39,7 @@ public class StudyPlannerController {
 	 */
 	public StudyPlannerController() {
 		//Initialisierung der einzelnen Controller
-		this.iOController = new IOController(this);
+		this.ioController = new IOController(this);
 		this.moduleController = new ModuleController(this);
 		this.semesterController = new SemesterController(this);
 		this.statisticsController = new StatisticsController(this);
@@ -75,8 +73,8 @@ public class StudyPlannerController {
 		return moduleController;
 	}
 
-	public IOController getiOController() {
-		return iOController;
+	public IOController getIoController() {
+		return ioController;
 	}
 
 	public SemesterController getSemesterController() {

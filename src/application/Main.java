@@ -2,10 +2,7 @@ package application;
 
 import controller.StudyPlannerController;
 import javafx.application.Application;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import view.studyplan.StudyPlanViewController;
 import view.welcome.WelcomeViewController;
@@ -23,7 +20,7 @@ public class Main extends Application {
             File f = new File("data.sp");
             Scene scene;
             if(f.exists() && !f.isDirectory()) {
-               studyPlannerController.getiOController().loadData();
+               studyPlannerController.getIoController().loadData();
                scene = new Scene(new StudyPlanViewController(primaryStage,studyPlannerController));
 
             }
