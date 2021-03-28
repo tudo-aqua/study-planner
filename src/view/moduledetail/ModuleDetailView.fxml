@@ -61,6 +61,11 @@
             <Insets right="5.0" />
          </GridPane.margin>
       </TextField>
+      <TextField fx:id="textFieldECTS" alignment="CENTER" promptText="6 CP" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets right="5.0" />
+         </GridPane.margin>
+      </TextField>
       <DatePicker fx:id="datePickerExamDate" maxWidth="1.7976931348623157E308" promptText="12.04.2021" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets right="5.0" />
@@ -71,11 +76,6 @@
             <Insets left="5.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="textFieldECTS" alignment="CENTER" promptText="6 CP" GridPane.columnIndex="1" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets right="5.0" />
-         </GridPane.margin>
-      </TextField>
       <Label maxWidth="1.7976931348623157E308" text="Semester" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets left="5.0" />
