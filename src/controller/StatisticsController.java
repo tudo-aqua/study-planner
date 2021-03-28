@@ -1,13 +1,10 @@
 package controller;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
+
 import model.Module;
 import model.Semester;
 import model.Statistics;
 import model.enums.State;
-
-import java.time.LocalDate;
 
 /**
  * Die Klasse stellt Methoden für das Generieren von Statistiken bzgl. eines Studienplanes bereit.
