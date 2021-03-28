@@ -3,7 +3,6 @@ package view.semesterdetail;
 import controller.SemesterController;
 import controller.StudyPlannerController;
 import exceptions.DataNotValidException;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -88,14 +87,11 @@ public class SemesterDetailViewController extends GridPane {
         if(modifySemesters){
             buttonSave.setText("Semester bearbeiten");
             choiseBoxModifySemester.setItems(spc.getStudyPlanner().getSemesters());
-            choiseBoxModifySemester.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Semester>() {
-
-                @Override
-                public void changed(ObservableValue<? extends Semester> observable, Semester oldValue, Semester newValue) {
+            choiseBoxModifySemester.getSelectionModel().selectedItemProperty().addListener(
+                    (ObservableValue<? extends Semester> observable, Semester oldValue, Semester newValue) ->{
                     textFieldSemesterName.setText(newValue.getName());
                     datePickerStartDate.setValue(newValue.getStartDate());
                     datePickerEndDate.setValue(newValue.getEndDate());
-                }
             });
         }
     }
@@ -128,7 +124,9 @@ public class SemesterDetailViewController extends GridPane {
         else {
             try {
                 Semester selectedSemester = choiseBoxModifySemester.getValue();
-                sc.modifySemester(selectedSemester,inputSemesterName,inputStartDate,inputEndDate);
+                if(selectedSemester != null){
+                    sc.modifySemester(selectedSemester,inputSemesterName,inputStartDate,inputEndDate);
+                }
                 this.getScene().getWindow().hide();
             } catch (DataNotValidException e) {
                 e.printStackTrace();

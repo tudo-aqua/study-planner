@@ -65,23 +65,41 @@ public class StudyPlanViewController extends GridPane {
 
     @FXML
     public void initialize() {
-       labelAvgGrade.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().avgGradeProperty().asString("%.1f"));
-       labelCollectedECTS.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().collectedEctsProperty().asString("%d / "+studyPlannerController.getStudyPlanner().getCourseOfStudyEcts()+ " ECTS"));
-       labelTitel.setText("Studienverlaufsplan - " + studyPlannerController.getStudyPlanner().getCourseOfStudyName());
-       for(Semester semester: this.studyPlannerController.getStudyPlanner().getSemesters())
+        labelAvgGrade.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().avgGradeProperty().asString("%.1f"));
+        labelCollectedECTS.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().collectedEctsProperty().asString("%d / "+studyPlannerController.getStudyPlanner().getCourseOfStudyEcts()+ " ECTS"));
+        labelTitel.setText("Studienverlaufsplan - " + studyPlannerController.getStudyPlanner().getCourseOfStudyName());
+        for(Semester semester: this.studyPlannerController.getStudyPlanner().getSemesters())
            hBoxSemesterContainer.getChildren().add(new SemesterViewController(studyPlannerController,semester));
 
-       progressBar.progressProperty().bind(this.studyPlannerController.getStudyPlanner().getStatistics().collectedEctsProperty().divide((double) studyPlannerController.getStudyPlanner().getCourseOfStudyEcts()));
+        progressBar.progressProperty().bind(this.studyPlannerController.getStudyPlanner().getStatistics().collectedEctsProperty().divide((double) studyPlannerController.getStudyPlanner().getCourseOfStudyEcts()));
+        Tooltip tooltip = new Tooltip();
+        tooltip.setText(
+                "Neues Modul erstellen"
+        );
+        buttonAddModule.setTooltip(tooltip);
+
     }
 
     @FXML
     void addModule(ActionEvent event) {
-        Stage stage = new Stage();
-        Scene newSemesterScene = new Scene(new ModuleDetailViewController(studyPlannerController));
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner(primaryStage);
-        stage.setScene(newSemesterScene);
-        stage.showAndWait();
+
+        if(studyPlannerController.getStudyPlanner().getSemesters().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Hinweis");
+            alert.setHeaderText("Semester erstellen");
+            alert.setContentText("Bitte zuerst ein Semester erstellen.");
+            alert.showAndWait();
+        }
+        else{
+            Stage stage = new Stage();
+            Scene newSemesterScene = new Scene(new ModuleDetailViewController(studyPlannerController));
+            stage.setResizable(false);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(primaryStage);
+            stage.setScene(newSemesterScene);
+            stage.showAndWait();
+        }
+
     }
 
     @FXML
@@ -99,6 +117,7 @@ public class StudyPlanViewController extends GridPane {
         Stage stage = new Stage();
         Scene modifySemesterScene = new Scene(new SemesterDetailViewController(studyPlannerController,true, null));
         stage.initModality(Modality.WINDOW_MODAL);
+        stage.setResizable(false);
         stage.initOwner(primaryStage);
         stage.setScene(modifySemesterScene);
         stage.showAndWait();

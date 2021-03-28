@@ -23,25 +23,26 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         try {
 
-            //Initialisierung der Controller- und der Model-Schicht.
+            //Initialisierung der Controller- und der Model-Schicht
             StudyPlannerController studyPlannerController = new StudyPlannerController();
             File f = new File("data.sp");
             Scene scene;
-            //Prüfen, ob bereits gespeicherte Daten vorhanden sind.
+            //Prüfen, ob bereits gespeicherte Daten vorhanden sind
             if(f.exists() && !f.isDirectory()) {
-                //Daten aus Datei laden und Standard-View anzeigen.
+                //Daten aus Datei laden und Standard-View anzeigen
                 studyPlannerController.getIoController().loadData();
                 scene = new Scene(new StudyPlanViewController(primaryStage,studyPlannerController));
 
             }
             else {
-                //Wenn keine Daten vorhanden sind, Willkommens-View anzeigen.
+                //Wenn keine Daten vorhanden sind, Willkommens-View anzeigen
                 scene = new Scene(new WelcomeViewController(primaryStage, studyPlannerController));
             }
             //css-Datei für das Stylen der View laden
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
             primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
             primaryStage.show();
         } catch(Exception e) {
             e.printStackTrace();

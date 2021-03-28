@@ -1,20 +1,18 @@
 package view.semesterview;
 import controller.StudyPlannerController;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import model.Module;
 import model.Semester;
 import model.Statistics;
 import view.moduledetail.ModuleDetailViewController;
+
 import java.io.IOException;
 
 public class SemesterViewController extends GridPane {
@@ -70,12 +68,13 @@ public class SemesterViewController extends GridPane {
         listViewModuls.setOnMouseClicked(click -> {
 
             if (click.getClickCount() == 2) {
-                //Use ListView's getSelected Item
+                //Aktuell ausgewähltes Modul ermitteln
                 Module selectedItem = listViewModuls.getSelectionModel().getSelectedItem();
                 if(selectedItem != null){
                     Stage stage = new Stage();
                     Scene modifySemesterScene = new Scene(new ModuleDetailViewController(studyPlannerController,selectedItem));
-                    stage.initModality(Modality.WINDOW_MODAL);
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.setResizable(false);
                     stage.initOwner(primaryStage);
                     stage.setScene(modifySemesterScene);
                     stage.showAndWait();

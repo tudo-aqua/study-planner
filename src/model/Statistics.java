@@ -4,13 +4,6 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Die Klasse repärsentiert alle berechneten Statistiken.
  */
@@ -33,6 +26,9 @@ public class Statistics {
     private transient ObservableMap<Semester,IntegerProperty> collectedEctsForSemester;
 
 
+    /**
+     * Konstruktor zum Erzeugen eines Statistics-Objektes.
+     */
     public Statistics(){
         this.avgGrade = new SimpleFloatProperty();
         this.collectedEcts = new SimpleIntegerProperty();
