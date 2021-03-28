@@ -5,8 +5,6 @@ import controller.SemesterController;
 import controller.StudyPlannerController;
 import exceptions.DataNotValidException;
 import exceptions.ModuleAlreadyExistsException;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -144,12 +142,11 @@ public class ModuleDetailViewController extends GridPane {
             case NOT_PASSED:radioButtonNotPassed.setSelected(true);break;
             case PASSED_WITHOUT_GRADE:radioButtonPassedWithoutGrade.setSelected(true);break;
         }
-        labelGradeValue.setText("1.0");
         if(state == State.PASSED_WITH_GRADE){
 
             int value = GradeConverter.gradeToSliderValue(moduleToModify.getGrade());
             sliderGradeValue.setValue(value);
-            labelGradeValue.setText(GradeConverter.sliderValueToGrade(value)+"");
+            labelGradeValue.setText(String.format("%.1f",GradeConverter.sliderValueToGrade(value)));
         }
 
 
@@ -268,8 +265,8 @@ public class ModuleDetailViewController extends GridPane {
         sliderGradeValue.setMajorTickUnit(1);
         sliderGradeValue.setMinorTickCount(0);
         sliderGradeValue.setShowTickMarks(true);
-        sliderGradeValue.valueProperty().addListener((obs, oldval, newVal) -> labelGradeValue.setText(GradeConverter.sliderValueToGrade(newVal.intValue())+""));
-        labelGradeValue.setText("1.0");
+        sliderGradeValue.valueProperty().addListener((obs, oldval, newVal) -> labelGradeValue.setText(String.format("%.1f",GradeConverter.sliderValueToGrade(newVal.intValue()))));
+        labelGradeValue.setText("1,0");
     }
 
 
