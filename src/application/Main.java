@@ -9,8 +9,16 @@ import view.welcome.WelcomeViewController;
 
 import java.io.File;
 
-
+/**
+ * Main-Klasse des Programms mit der Startmethode.
+ */
 public class Main extends Application {
+    /**
+     * Start-Methode des JavaFX-Frameworks, in der die Programmstruktur erzeugt wird und bereits vorhandene
+     * Daten geladen werden. Sollten keine Vorhanden sein, wird die Begrüßungs-View angezeigt.
+     *
+     * @param primaryStage Die initiale Stage.
+     */
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -36,6 +44,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Standard-Java main-Methode.
+     * @param args Array an Argumenten.
+     */
     public static void main(String[] args) {
         launch(args);
     }
