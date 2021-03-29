@@ -33,7 +33,7 @@
    <children>
       <Label fx:id="labelTitle" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Modul" GridPane.columnSpan="2">
          <font>
-            <Font size="16.0" />
+            <Font size="22.0" />
          </font>
       </Label>
       <Label maxWidth="1.7976931348623157E308" text="Modulname" GridPane.rowIndex="1">
