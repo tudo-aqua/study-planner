@@ -34,7 +34,7 @@ public class SemesterController {
 	 */
 	public void createSemester(String name, LocalDate startDate, LocalDate endDate)throws DataNotValidException {
 		//Überprüfung, ob Eingaben valide sind.
-		if(name == null || name.equals("") || startDate == null || endDate == null)
+		if(name == null || name.equals("") || startDate == null || endDate == null || startDate.isAfter(endDate))
 			throw new DataNotValidException();
 
 		//Neues Semester mit übergebenen Daten erzeugen

@@ -118,7 +118,11 @@ public class SemesterDetailViewController extends GridPane {
                 hBoxSemesterContainer.getChildren().add(semesterViewController);
                 this.getScene().getWindow().hide();
             } catch (DataNotValidException e) {
-                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Eingabefehler");
+                alert.setHeaderText("Fehler bei Eingabe");
+                alert.setContentText("Bitte überprüfen Sie ihre Eingabe.");
+                alert.showAndWait();
             }
         }
         else {
@@ -129,7 +133,11 @@ public class SemesterDetailViewController extends GridPane {
                 }
                 this.getScene().getWindow().hide();
             } catch (DataNotValidException e) {
-                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Eingabefehler");
+                alert.setHeaderText("Fehler bei Eingabe");
+                alert.setContentText("Bitte überprüfen Sie ihre Eingabe.");
+                alert.showAndWait();
             }
         }
 

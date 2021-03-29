@@ -22,7 +22,7 @@ public class WelcomeViewController extends GridPane {
     private TextField textFieldCourseOfStudy;
 
     @FXML
-    private TextField textFieldECTS;
+    private TextField textFieldCreditPoints;
 
     @FXML
     private Button buttonCreateNewStudyPlan;
@@ -50,13 +50,14 @@ public class WelcomeViewController extends GridPane {
     @FXML
     void createNewStudyPlan(ActionEvent event) {
 
-        String inputCourseOfStudy = textFieldCourseOfStudy.getText();
-        int ects = Integer.parseInt(textFieldECTS.getText());
+
         try {
-            studyPlannerController.initializeStudyPlanner(inputCourseOfStudy,ects);
+            String inputCourseOfStudy = textFieldCourseOfStudy.getText();
+            int creditPoints = Integer.parseInt(textFieldCreditPoints.getText());
+            studyPlannerController.initializeStudyPlanner(inputCourseOfStudy,creditPoints);
             Scene studyPlanScene = new Scene(new StudyPlanViewController(primaryStage,studyPlannerController));
             this.primaryStage.setScene(studyPlanScene);
-        } catch (DataNotValidException e) {
+        } catch (DataNotValidException | NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Eingabefehler");
             alert.setHeaderText("Fehler bei Eingabe");

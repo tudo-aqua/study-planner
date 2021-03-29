@@ -20,7 +20,7 @@ public class SemesterViewController extends GridPane {
     private Label labelName;
 
     @FXML
-    private Label labelCollectedECTSInSemester;
+    private Label labelCreditPointsForSemester;
 
     @FXML
     private Label labelStartDate;
@@ -62,7 +62,7 @@ public class SemesterViewController extends GridPane {
 
 
         labelEndDate.textProperty().bindBidirectional(semester.endDateProperty(), new LocalDateConverter());
-        labelCollectedECTSInSemester.textProperty().bind(statistics.creditPointsForSemesterProperty(semester).asString("%d Leistungspunkte"));
+        labelCreditPointsForSemester.textProperty().bind(statistics.creditPointsForSemesterProperty(semester).asString("%d Leistungspunkte"));
         listViewModuls.setCellFactory(studentListView -> new ModuleCell());
         listViewModuls.setItems(semester.getModules());
         listViewModuls.setOnMouseClicked(click -> {

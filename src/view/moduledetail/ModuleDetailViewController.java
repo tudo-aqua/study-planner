@@ -43,7 +43,7 @@ public class ModuleDetailViewController extends GridPane {
     private TextField textFieldModuleName;
 
     @FXML
-    private TextField textFieldECTS;
+    private TextField textFieldCreditPoints;
 
     @FXML
     private DatePicker datePickerExamDate;
@@ -110,7 +110,7 @@ public class ModuleDetailViewController extends GridPane {
         this.moduleToModify = moduleToModify;
         this.buttonSave.setText("Modul bearbeiten");
         this.textFieldModuleName.setText(moduleToModify.getName());
-        this.textFieldECTS.setText(moduleToModify.getCreditPoints()+"");
+        this.textFieldCreditPoints.setText(moduleToModify.getCreditPoints()+"");
 
         this.datePickerExamDate.setValue(moduleToModify.getExamDate());
         this.choiseBoxSemester.setItems(studyPlannerController.getStudyPlanner().getSemesters());
@@ -195,18 +195,18 @@ public class ModuleDetailViewController extends GridPane {
         try{
             //Eingaben des Nutzers werden aus den Textfeldern und dem DatePicker übernommen
             String inputModuleName = textFieldModuleName.getText();
-            int inputECTS = Integer.parseInt(textFieldECTS.getText());
+            int inputCreditPoints = Integer.parseInt(textFieldCreditPoints.getText());
             LocalDate inputExamDate = datePickerExamDate.getValue();
             ModuleController moduleController = studyPlannerController.getModuleController();
             //Fallunterscheidung, ob ein neues Modul erstellt werden soll oder ein bestehendes bearbeitet wird
             if(this.moduleToModify == null){
-                Module newModule = moduleController.createModule(inputModuleName,inputECTS,inputExamDate);
+                Module newModule = moduleController.createModule(inputModuleName,inputCreditPoints,inputExamDate);
                 moduleController.setStateToModule(newModule,getSelectedState(),GradeConverter.sliderValueToGrade(sliderGradeValue.getValue()));
                 Semester selectedSemester = choiseBoxSemester.getValue();
                 studyPlannerController.getSemesterController().moveModuleToSemester(newModule, selectedSemester);
             }
             else{
-                moduleController.modifyModule(moduleToModify,inputModuleName,inputECTS,inputExamDate);
+                moduleController.modifyModule(moduleToModify,inputModuleName,inputCreditPoints,inputExamDate);
                 moduleController.setStateToModule(moduleToModify,getSelectedState(),GradeConverter.sliderValueToGrade(sliderGradeValue.getValue()));
                 SemesterController semesterController = studyPlannerController.getSemesterController();
                 semesterController.moveModuleToSemester(moduleToModify,this.choiseBoxSemester.getValue());

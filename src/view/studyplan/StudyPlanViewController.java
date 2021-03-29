@@ -33,7 +33,7 @@ public class StudyPlanViewController extends GridPane {
     private Label labelAvgGrade;
 
     @FXML
-    private Label labelCollectedECTS;
+    private Label labelCollectedCreditPoints;
 
     @FXML
     private MenuItem buttonAddSemester;
@@ -71,7 +71,7 @@ public class StudyPlanViewController extends GridPane {
     @FXML
     public void initialize() {
         labelAvgGrade.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().avgGradeProperty().asString("%.1f"));
-        labelCollectedECTS.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().collectedCreditPointsProperty().asString("%d / "+studyPlannerController.getStudyPlanner().getCourseOfStudyCreditPoints()+ " Leistungspunkte"));
+        labelCollectedCreditPoints.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().collectedCreditPointsProperty().asString("%d / "+studyPlannerController.getStudyPlanner().getCourseOfStudyCreditPoints()+ " Leistungspunkte"));
         labelTitel.setText("Studienverlaufsplan - " + studyPlannerController.getStudyPlanner().getCourseOfStudyName());
         for(Semester semester: this.studyPlannerController.getStudyPlanner().getSemesters())
            hBoxSemesterContainer.getChildren().add(new SemesterViewController(studyPlannerController,semester));

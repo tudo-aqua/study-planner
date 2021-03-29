@@ -28,10 +28,10 @@ public class ModuleCell extends ListCell<Module> {
             Label labelExamDate = new Label();
             labelExamDate.textProperty().bindBidirectional(module.examDateProperty(), new LocalDateConverter());
             vBox.getChildren().add(labelExamDate);
-            Label labelECTS = new Label();
+            Label labelCreditPoints = new Label();
 
-            vBox.getChildren().add(labelECTS);
-            labelECTS.textProperty().bind(module.creditPointsProperty().asString("%d Leistungspunkte"));
+            vBox.getChildren().add(labelCreditPoints);
+            labelCreditPoints.textProperty().bind(module.creditPointsProperty().asString("%d Leistungspunkte"));
             if(module.getState()== State.PASSED_WITH_GRADE){
                 Label labelGrade = new Label();
                 labelGrade.textProperty().bind(module.gradeProperty().asString("Note %.1f"));

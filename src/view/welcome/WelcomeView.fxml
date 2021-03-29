@@ -51,7 +51,7 @@
             <Insets right="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="textFieldECTS" alignment="CENTER" promptText="180" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <TextField fx:id="textFieldCreditPoints" alignment="CENTER" promptText="180" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets right="5.0" />
          </GridPane.margin>
