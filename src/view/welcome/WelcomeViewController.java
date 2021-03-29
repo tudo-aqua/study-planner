@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -56,7 +57,11 @@ public class WelcomeViewController extends GridPane {
             Scene studyPlanScene = new Scene(new StudyPlanViewController(primaryStage,studyPlannerController));
             this.primaryStage.setScene(studyPlanScene);
         } catch (DataNotValidException e) {
-
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Eingabefehler");
+            alert.setHeaderText("Fehler bei Eingabe");
+            alert.setContentText("Bitte überprüfen Sie ihre Eingabe.");
+            alert.showAndWait();
         }
 
     }
