@@ -56,7 +56,7 @@ public class WelcomeViewController extends GridPane {
             Scene studyPlanScene = new Scene(new StudyPlanViewController(primaryStage,studyPlannerController));
             this.primaryStage.setScene(studyPlanScene);
         } catch (DataNotValidException e) {
-            e.printStackTrace();
+
         }
 
     }

@@ -25,32 +25,32 @@ public class StatisticsController {
 	}
 
 	/**
-	 * Die Methode berechnet die in Anzahl der ECTS-Punkte für alle einem Semester zugeorndeten Module.
-	 * @param semester Das Semester, für welches die ECTS-Punkte berechnet werden sollen.
-	 * @return Die Anzahl der ECTS-Punkte.
+	 * Die Methode berechnet die in Anzahl der Leistungspunkten für alle einem Semester zugeordneten Module.
+	 * @param semester Das Semester, für welches die Leistungspunkte berechnet werden sollen.
+	 * @return Die Anzahl der Leistungspunkte.
 	 */
-	public int calculateCollectedEctsForSemester(Semester semester) {
-		int totalECTS = 0;
+	public int calculateCreditPointsForSemester(Semester semester) {
+		int creditPoints = 0;
 		for(Module module: semester.getModules()){
-				totalECTS += module.getEcts();
+				creditPoints += module.getCreditPoints();
 		}
-		return totalECTS;
+		return creditPoints;
 	}
 
 	/**
-	 * Die Methode berechnet die Anzahl der erreichten ECTS-Punkte aus allen bestandenen Modulen.
-	 * @return Die Anzahl der erreichten ECTS-Punkte oder 0, wenn bisher keine Erreicht wurden.
+	 * Die Methode berechnet die Anzahl der erreichten Leistungspunkte aus allen bestandenen Modulen.
+	 * @return Die Anzahl der erreichten Leistungspunkte oder 0, wenn bisher keine Erreicht wurden.
 	 */
-	public int calculateCollectedEctsOfFinishedModuls() {
-		int totalECTS = 0;
+	public int calculateCollectedCreditPointsOfFinishedModuls() {
+		int creditPoints = 0;
 		for(Semester semester:studyPlannerController.getStudyPlanner().getSemesters()){
 			for(Module module: semester.getModules()){
 				if(module.getState() == State.PASSED_WITH_GRADE || module.getState() == State.PASSED_WITHOUT_GRADE)
-					totalECTS += module.getEcts();
+					creditPoints += module.getCreditPoints();
 			}
 		}
 
-		return totalECTS;
+		return creditPoints;
 	}
 
 	/**
@@ -59,17 +59,17 @@ public class StatisticsController {
 	 */
 	public float calculateAverageGrade() {
 		float avgGrade = 0;
-		float totalECTSPoints = 0;
+		float creditPoints = 0;
 		for(Semester semester:studyPlannerController.getStudyPlanner().getSemesters()){
 			for(Module module: semester.getModules()){
 				if(module.getState() == State.PASSED_WITH_GRADE){
-					avgGrade += module.getEcts()*module.getGrade();
-					totalECTSPoints += module.getEcts();
+					avgGrade += module.getCreditPoints()*module.getGrade();
+					creditPoints += module.getCreditPoints();
 				}
 
 			}
 		}
-		int help = (int)((avgGrade/ totalECTSPoints)*10);
+		int help = (int)((avgGrade/ creditPoints)*10);
 		return ((float)(help))/10f;
 	}
 
@@ -81,11 +81,11 @@ public class StatisticsController {
 		float avgGrade = this.calculateAverageGrade();
 		Statistics statistics = this.studyPlannerController.getStudyPlanner().getStatistics();
 		statistics.setAvgGrade(avgGrade);
-		int collectedECTS = this.calculateCollectedEctsOfFinishedModuls();
-		statistics.setCollectedEcts(collectedECTS);
+		int creditPoints = this.calculateCollectedCreditPointsOfFinishedModuls();
+		statistics.setCollectedCreditPoints(creditPoints);
 		for(Semester semester: this.studyPlannerController.getStudyPlanner().getSemesters()){
-			int collectedEcts = this.calculateCollectedEctsForSemester(semester);
-			statistics.setCollectedEctsForSemester(semester,collectedEcts);
+			int creditPointsForSemester = this.calculateCreditPointsForSemester(semester);
+			statistics.setCreditPointsForSemester(semester,creditPointsForSemester);
 		}
 
 	}

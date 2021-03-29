@@ -1,7 +1,6 @@
 package model;
 
 import javafx.beans.property.*;
-import javafx.collections.FXCollections;
 import model.enums.State;
 
 import java.io.*;
@@ -18,10 +17,10 @@ public class Module implements Serializable {
 	private transient StringProperty name;
 
 	/**
-	 * Die Anzahl an ECTS-Punkten, die das Modul beim erfolgreichen
+	 * Die Anzahl an Leistungspunkten, die das Modul beim erfolgreichen
 	 * abschließen bringt.
 	 */
-	private transient IntegerProperty ects;
+	private transient IntegerProperty creditPoints;
 
 	/**
 	 * Datum der (geplanten) Modulprüfung.
@@ -41,14 +40,14 @@ public class Module implements Serializable {
 	/**
 	 * Konstruktor zum Anlegen eines Moduls.
 	 * @param name Der Name des Moduls.
-	 * @param ects Die zu erreichenden ECTS-Punkte des Moduls.
+	 * @param creditPoints Die Leistungspunkte des Moduls.
 	 * @param examDate Der Prüfungstermin für das Modul.
 	 */
-	public Module(String name, int ects, LocalDate examDate) {
+	public Module(String name, int creditPoints, LocalDate examDate) {
 		//Alle Attribute der Klasse werden mit den übergebenen
 		//Werten bzw. Default-Werten initialisiert.
 		this.name = new SimpleStringProperty(name);
-		this.ects = new SimpleIntegerProperty(ects);
+		this.creditPoints = new SimpleIntegerProperty(creditPoints);
 		this.examDate = new SimpleObjectProperty<>(examDate);
 		this.state = State.NO_RESULT;
 		this.grade = new SimpleFloatProperty(0);
@@ -68,16 +67,16 @@ public class Module implements Serializable {
 		this.name.set(name);
 	}
 
-	public int getEcts() {
-		return ects.get();
+	public int getCreditPoints() {
+		return creditPoints.get();
 	}
 
-	public IntegerProperty ectsProperty() {
-		return ects;
+	public IntegerProperty creditPointsProperty() {
+		return creditPoints;
 	}
 
-	public void setEcts(int ects) {
-		this.ects.set(ects);
+	public void setCreditPoints(int creditPoints) {
+		this.creditPoints.set(creditPoints);
 	}
 
 	public LocalDate getExamDate() {
@@ -115,7 +114,7 @@ public class Module implements Serializable {
 	//Methoden zum Serialisieren des Objektes
 	private void writeObject(ObjectOutputStream s) throws IOException {
 		s.writeUTF(name.getValueSafe());
-		s.writeInt(ects.get());
+		s.writeInt(creditPoints.get());
 		s.writeObject(examDate.get());
 		s.writeFloat(grade.get());
 		s.writeInt(state.getId());
@@ -123,7 +122,7 @@ public class Module implements Serializable {
 
 	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
 		name = new SimpleStringProperty(s.readUTF());
-		ects = new SimpleIntegerProperty(s.readInt());
+		creditPoints = new SimpleIntegerProperty(s.readInt());
 		examDate = new SimpleObjectProperty<LocalDate>((LocalDate) s.readObject());
 		grade = new SimpleFloatProperty(s.readFloat());
 		state = State.stateFromId(s.readInt());

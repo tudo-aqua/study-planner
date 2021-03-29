@@ -49,13 +49,13 @@ public class StudyPlannerController {
 	/**
 	 * Methode zum Erzeugen eines neuen leeren Studienplans.
 	 * @param courseOfStudyName Name des Studienganges für den Studienplan.
-	 * @param courseOfStudyEcts Anzahl an ECTS-Punkten, die für den Studiengang erreicht werden müssen.
-	 * @throws DataNotValidException Wird geworfen, wenn die Anzahl an ECTS-Punkten nicht valide ist (kleiner oder gleich 0).
+	 * @param courseOfStudyCreditPoints Anzahl an Leistungspunkten, die für den Studiengang erreicht werden müssen.
+	 * @throws DataNotValidException Wird geworfen, wenn die Anzahl an Leistungspunkten nicht valide ist (kleiner oder gleich 0).
 	 */
-	public void initializeStudyPlanner(String courseOfStudyName, int courseOfStudyEcts)throws DataNotValidException {
-		if(courseOfStudyEcts <0)
+	public void initializeStudyPlanner(String courseOfStudyName, int courseOfStudyCreditPoints)throws DataNotValidException {
+		if(courseOfStudyCreditPoints <0)
 			throw new DataNotValidException();
-		this.studyPlanner = new StudyPlanner(courseOfStudyName,courseOfStudyEcts);
+		this.studyPlanner = new StudyPlanner(courseOfStudyName,courseOfStudyCreditPoints);
 	}
 
 	//Getter- und Setter-Methoden für den Zugriff auf das Model

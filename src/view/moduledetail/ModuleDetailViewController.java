@@ -110,7 +110,7 @@ public class ModuleDetailViewController extends GridPane {
         this.moduleToModify = moduleToModify;
         this.buttonSave.setText("Modul bearbeiten");
         this.textFieldModuleName.setText(moduleToModify.getName());
-        this.textFieldECTS.setText(moduleToModify.getEcts()+"");
+        this.textFieldECTS.setText(moduleToModify.getCreditPoints()+"");
 
         this.datePickerExamDate.setValue(moduleToModify.getExamDate());
         this.choiseBoxSemester.setItems(studyPlannerController.getStudyPlanner().getSemesters());

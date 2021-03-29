@@ -16,14 +16,14 @@ public class Statistics {
     private transient FloatProperty avgGrade;
 
     /**
-     * Anzahl aller erreichten ECTS-Punkte.
+     * Anzahl aller erreichten Leistungspunkte.
      */
-    private transient IntegerProperty collectedEcts;
+    private transient IntegerProperty collectedCreditPoints;
 
     /**
-     * Abbildung eines Semesters auf die erreichten ECTS-Punkte.
+     * Abbildung eines Semesters auf die Leistungspunkte aller darin enthaltenden Module.
      */
-    private transient ObservableMap<Semester,IntegerProperty> collectedEctsForSemester;
+    private transient ObservableMap<Semester,IntegerProperty> creditPointsForSemester;
 
 
     /**
@@ -31,8 +31,8 @@ public class Statistics {
      */
     public Statistics(){
         this.avgGrade = new SimpleFloatProperty();
-        this.collectedEcts = new SimpleIntegerProperty();
-        this.collectedEctsForSemester = new SimpleMapProperty<>(FXCollections.observableHashMap());
+        this.collectedCreditPoints = new SimpleIntegerProperty();
+        this.creditPointsForSemester = new SimpleMapProperty<>(FXCollections.observableHashMap());
     }
 
 
@@ -51,34 +51,30 @@ public class Statistics {
         this.avgGrade.set(avgGrade);
     }
 
-    public int getCollectedEcts() {
-        return collectedEcts.get();
+    public int getCollectedCreditPoints() {
+        return collectedCreditPoints.get();
     }
 
-    public IntegerProperty collectedEctsProperty() {
-        return collectedEcts;
+    public IntegerProperty collectedCreditPointsProperty() {
+        return collectedCreditPoints;
     }
 
-    public void setCollectedEcts(int collectedEcts) {
-        this.collectedEcts.set(collectedEcts);
+    public void setCollectedCreditPoints(int collectedCreditPoints) {
+        this.collectedCreditPoints.set(collectedCreditPoints);
     }
 
-    public void setCollectedEctsForSemester(Semester semester, int collectedEcts){
-        if(collectedEctsForSemester.get(semester) != null){
-            collectedEctsForSemester.get(semester).set(collectedEcts);
+    public void setCreditPointsForSemester(Semester semester, int creditPoints){
+        if(creditPointsForSemester.get(semester) != null){
+            creditPointsForSemester.get(semester).set(creditPoints);
         }
         else{
-            collectedEctsForSemester.put(semester,new SimpleIntegerProperty(collectedEcts));
+            creditPointsForSemester.put(semester,new SimpleIntegerProperty(creditPoints));
         }
 
     }
 
-    public int getCollectedEctsForSemester(Semester semester){
-        return collectedEctsForSemester.get(semester).get();
-    }
-
-    public IntegerProperty collectedEctsForSemesterProperty(Semester semester){
-        return collectedEctsForSemester.get(semester);
+    public IntegerProperty creditPointsForSemesterProperty(Semester semester){
+        return creditPointsForSemester.get(semester);
 
     }
 

@@ -33,16 +33,16 @@ public class ModuleController {
 	 * Die Methode erzeugt auf basis der übergebenen Werte ein neues Modul. Dies geschieht nur, wenn
 	 * es noch kein Modul mit diesem Namen gibt.
 	 * @param name Der Name/Titel des Moduls.
-	 * @param ects Die den Modul zugeordneten ECTS-Punkte.
+	 * @param creditPoints Die den Modul zugeordneten Leistungspunkte.
 	 * @param examDate Der Prüfungstermin des Moduls.
 	 * @throws DataNotValidException Wird geworfen, wenn die Daten nicht valide sind, z.B. wenn der Name leer ist,
-	 * die ECTS-Punte negativ/gleich 0 sind oder das Prüfungsdatum keinen gültigen Wert repräsentiert.
+	 * die Leistungspunkte negativ/gleich 0 sind oder das Prüfungsdatum keinen gültigen Wert repräsentiert.
 	 * @return Das neu erstelle Module-Objekt.
 	 * @throws ModuleAlreadyExistsException Wird geworfen, wenn es bereits ein Modul mit dem selben Namen gibt.
 	 */
-	public Module createModule(String name, int ects,LocalDate examDate)throws DataNotValidException, ModuleAlreadyExistsException {
+	public Module createModule(String name, int creditPoints,LocalDate examDate)throws DataNotValidException, ModuleAlreadyExistsException {
 		//Überprüfung, ob Eingaben valide sind.
-		if (name == null || name.equals("") || ects <= 0 || examDate == null)
+		if (name == null || name.equals("") || creditPoints <= 0 || examDate == null)
 			throw new DataNotValidException();
 		//Überprüfen, ob es ein Modul mit diesem Namen bereits gibt
 		StudyPlanner studyPlanner = this.studyPlannerController.getStudyPlanner();
@@ -53,7 +53,7 @@ public class ModuleController {
 		}
 
 		//Neues Modul mit den übergebenen Parametern erzeugen und der Liste aller Module hinzufügen.
-		Module newModule = new Module(name,ects, examDate);
+		Module newModule = new Module(name,creditPoints, examDate);
 		studyPlanner.addModule(newModule);
 
 		//Statistiken aktualisieren
@@ -64,19 +64,19 @@ public class ModuleController {
 	}
 
 	/**
-	 * Die Methode bearbeitet ein bereits existierendes Modul, d.h. Name und/oder ECTS-Punkte können verändert werden.
+	 * Die Methode bearbeitet ein bereits existierendes Modul, d.h. Name, Leistungspunkte und/oder das Datum der Prüfung können verändert werden.
 	 *
 	 * @param moduleToModify Das Modul, welches bearbeitet werden soll.
 	 * @param name Der neue Name des Moduls.
-	 * @param ects Die neue Anzahl an ECTS-Punkten.
+	 * @param creditPoints Die neue Anzahl an Leistungspunkten.
 	 * @param examDate Datum der Modulprüfung.
 	 * @throws DataNotValidException Wird geworfen, wenn die Daten nicht valide sind, z.B. wenn der Name leer ist,
-	 * die ECTS-Punte negativ/gleich 0 sind oder das Prüfungsdatum keinen gültigen Wert repräsentiert.
+	 * die Leistungspunkte negativ/gleich 0 sind oder das Prüfungsdatum keinen gültigen Wert repräsentiert.
 	 * @throws ModuleAlreadyExistsException Wird geworfen, wenn es bereits ein Modul mit dem selben Namen gibt.
 	 */
-	public void modifyModule(Module moduleToModify, String name, int ects, LocalDate examDate)throws DataNotValidException, ModuleAlreadyExistsException {
+	public void modifyModule(Module moduleToModify, String name, int creditPoints, LocalDate examDate)throws DataNotValidException, ModuleAlreadyExistsException {
 		//Überprüfung, ob Eingaben valide sind.
-		if (name == null || name.equals("") || ects <= 0 || examDate == null)
+		if (name == null || name.equals("") || creditPoints <= 0 || examDate == null)
 			throw new DataNotValidException();
 		//Überprüfen, ob es ein Modul mit diesem Namen bereits gibt
 		List<Module> allModules = this.studyPlannerController.getStudyPlanner().getModules();
@@ -86,7 +86,7 @@ public class ModuleController {
 		}
 		//Setze neue Werte
 		moduleToModify.setName(name);
-		moduleToModify.setEcts(ects);
+		moduleToModify.setCreditPoints(creditPoints);
 		moduleToModify.setExamDate(examDate);
 
 		//Statistiken aktualisieren

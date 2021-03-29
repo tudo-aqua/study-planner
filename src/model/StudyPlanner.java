@@ -22,9 +22,9 @@ public class StudyPlanner implements Serializable {
 	private transient StringProperty courseOfStudyName;
 
 	/**
-	 * Anzahl an ECTS-Punkten, die in diesem Studiengang erreicht werden müssen.
+	 * Anzahl an Leistungspunkte, die in diesem Studiengang erreicht werden müssen.
 	 */
-	private transient IntegerProperty courseOfStudyEcts;
+	private transient IntegerProperty courseOfStudyCreditPoints;
 
 	/**
 	 * Liste an Semstern, die in diesem Studienplan verwaltet werden.
@@ -45,11 +45,11 @@ public class StudyPlanner implements Serializable {
 	/**
 	 * Konstruktor zum erzeugen eines neuen Studienplanes.
 	 * @param courseOfStudyName Name des Studienganges.
-	 * @param courseOfStudyEcts Anzahl der zu erreichenden ECTS-Punkte.
+	 * @param courseOfStudyCreditPoints Anzahl der zu erreichenden Leistungspunkte.
 	 */
-	public StudyPlanner(String courseOfStudyName, int courseOfStudyEcts) {
+	public StudyPlanner(String courseOfStudyName, int courseOfStudyCreditPoints) {
 		this.courseOfStudyName = new SimpleStringProperty(courseOfStudyName);
-		this.courseOfStudyEcts = new SimpleIntegerProperty(courseOfStudyEcts);
+		this.courseOfStudyCreditPoints = new SimpleIntegerProperty(courseOfStudyCreditPoints);
 		this.semesters = new SimpleListProperty<>(FXCollections.observableArrayList());
 		this.modules = new SimpleListProperty<>(FXCollections.observableArrayList());
 		this.statistics = new Statistics();
@@ -110,16 +110,16 @@ public class StudyPlanner implements Serializable {
 		this.courseOfStudyName.set(courseOfStudyName);
 	}
 
-	public int getCourseOfStudyEcts() {
-		return courseOfStudyEcts.get();
+	public int getCourseOfStudyCreditPoints() {
+		return courseOfStudyCreditPoints.get();
 	}
 
-	public IntegerProperty courseOfStudyEctsProperty() {
-		return courseOfStudyEcts;
+	public IntegerProperty courseOfStudyCreditPointsProperty() {
+		return courseOfStudyCreditPoints;
 	}
 
-	public void setCourseOfStudyEcts(int courseOfStudyEcts) {
-		this.courseOfStudyEcts.set(courseOfStudyEcts);
+	public void setCourseOfStudyCreditPoints(int courseOfStudyCreditPoints) {
+		this.courseOfStudyCreditPoints.set(courseOfStudyCreditPoints);
 	}
 
 	public ObservableList<Semester> getSemesters() {
@@ -157,7 +157,7 @@ public class StudyPlanner implements Serializable {
 	//Methoden zum Serialisieren des Objektes
 	private void writeObject(ObjectOutputStream s) throws IOException {
 		s.writeUTF(courseOfStudyName.getValueSafe());
-		s.writeInt(courseOfStudyEcts.get());
+		s.writeInt(courseOfStudyCreditPoints.get());
 
 
 		if (semesters == null || semesters.size() == 0) {
@@ -184,7 +184,7 @@ public class StudyPlanner implements Serializable {
 
 	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
 		courseOfStudyName = new SimpleStringProperty(s.readUTF());
-		courseOfStudyEcts = new SimpleIntegerProperty(s.readInt());
+		courseOfStudyCreditPoints = new SimpleIntegerProperty(s.readInt());
 
 		semesters = new SimpleListProperty<>(FXCollections.observableArrayList());
 		int numberOfSemester = s.readInt();

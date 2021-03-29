@@ -31,7 +31,7 @@ public class ModuleCell extends ListCell<Module> {
             Label labelECTS = new Label();
 
             vBox.getChildren().add(labelECTS);
-            labelECTS.textProperty().bind(module.ectsProperty().asString("%d Leistungspunkte"));
+            labelECTS.textProperty().bind(module.creditPointsProperty().asString("%d Leistungspunkte"));
             if(module.getState()== State.PASSED_WITH_GRADE){
                 Label labelGrade = new Label();
                 labelGrade.textProperty().bind(module.gradeProperty().asString("Note %.1f"));

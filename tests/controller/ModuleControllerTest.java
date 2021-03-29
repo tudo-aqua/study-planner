@@ -63,7 +63,7 @@ public class ModuleControllerTest {
         Module testModule = studyPlanner.getModules().get(0);
         //Test, ob alle Werte im neuen Modul mit den übergebenen übereinstimmen
         assertEquals(inputName,testModule.getName());
-        assertEquals(inputECTS,testModule.getEcts());
+        assertEquals(inputECTS,testModule.getCreditPoints());
         assertEquals(inputExamDate, testModule.getExamDate());
     }
 

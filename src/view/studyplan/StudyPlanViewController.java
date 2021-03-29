@@ -71,12 +71,12 @@ public class StudyPlanViewController extends GridPane {
     @FXML
     public void initialize() {
         labelAvgGrade.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().avgGradeProperty().asString("%.1f"));
-        labelCollectedECTS.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().collectedEctsProperty().asString("%d / "+studyPlannerController.getStudyPlanner().getCourseOfStudyEcts()+ " Leistungspunkte"));
+        labelCollectedECTS.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().collectedCreditPointsProperty().asString("%d / "+studyPlannerController.getStudyPlanner().getCourseOfStudyCreditPoints()+ " Leistungspunkte"));
         labelTitel.setText("Studienverlaufsplan - " + studyPlannerController.getStudyPlanner().getCourseOfStudyName());
         for(Semester semester: this.studyPlannerController.getStudyPlanner().getSemesters())
            hBoxSemesterContainer.getChildren().add(new SemesterViewController(studyPlannerController,semester));
 
-        progressBar.progressProperty().bind(this.studyPlannerController.getStudyPlanner().getStatistics().collectedEctsProperty().divide((double) studyPlannerController.getStudyPlanner().getCourseOfStudyEcts()));
+        progressBar.progressProperty().bind(this.studyPlannerController.getStudyPlanner().getStatistics().collectedCreditPointsProperty().divide((double) studyPlannerController.getStudyPlanner().getCourseOfStudyCreditPoints()));
         Tooltip tooltip = new Tooltip();
         tooltip.setText(
                 "Neues Modul erstellen"
