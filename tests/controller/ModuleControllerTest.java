@@ -1,7 +1,6 @@
 package controller;
 
 import exceptions.DataNotValidException;
-import exceptions.ModuleAlreadyExistsException;
 import model.Module;
 import model.StudyPlanner;
 import org.junit.Before;
@@ -45,11 +44,10 @@ public class ModuleControllerTest {
     /**
      * Test der createModule-Methode mit gültigen Eingaben.
      * @throws DataNotValidException Wird geworfen, wenn Eingaben ungültig sind
-     * @throws ModuleAlreadyExistsException Wird geworfen, wenn ein Modul mit dem Namen
      * bereits existiert
      */
     @Test
-    public void createModuleCaseOne() throws DataNotValidException, ModuleAlreadyExistsException {
+    public void createModuleCaseOne() throws DataNotValidException {
         //Testdaten erzeugen
         String inputName = "Software Praktikum";
         int inputECTS = 6;
@@ -70,11 +68,10 @@ public class ModuleControllerTest {
     /**
      * Test der createModule-Methode mit ungültigen Eingaben.
      * @throws DataNotValidException Wird geworfen, wenn Eingaben ungültig sind
-     * @throws ModuleAlreadyExistsException Wird geworfen, wenn ein Modul mit dem Namen
      * bereits existiert
      */
     @Test(expected = DataNotValidException.class)
-    public void createModuleCaseTwo() throws DataNotValidException, ModuleAlreadyExistsException {
+    public void createModuleCaseTwo() throws DataNotValidException {
         String inputName = "";
         int inputECTS = -1;
         LocalDate inputExamDate = null;
@@ -83,24 +80,6 @@ public class ModuleControllerTest {
         moduleController.createModule(inputName,inputECTS,inputExamDate);
     }
 
-    /**
-     * Test der createModule-Methode mit gültigen Eingaben aber einem bereits
-     * existierenden Modul mit den gewählten Namen.
-     * @throws DataNotValidException Wird geworfen, wenn Eingaben ungültig sind
-     * @throws ModuleAlreadyExistsException Wird geworfen, wenn ein Modul mit dem Namen
-     * bereits existiert
-     */
-    @Test(expected = ModuleAlreadyExistsException.class)
-    public void createModuleCaseThree() throws DataNotValidException, ModuleAlreadyExistsException {
-        String inputName = "Software Praktikum";
-        int inputECTS = 6;
-        LocalDate inputExamDate = LocalDate.of(2021,9,12);
-        //Test, das noch kein Modul existiert
-        assertTrue(studyPlanner.getModules().size() == 0);
-        moduleController.createModule(inputName,inputECTS,inputExamDate);
-        //Erstellung eines Moduls mit dem selben Namen um Fehlerbehandlung zu testen
-        moduleController.createModule(inputName,inputECTS,inputExamDate);
-    }
 
     /**
      * Test-JavaDoc

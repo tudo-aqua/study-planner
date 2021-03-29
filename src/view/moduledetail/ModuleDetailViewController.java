@@ -4,7 +4,6 @@ import controller.ModuleController;
 import controller.SemesterController;
 import controller.StudyPlannerController;
 import exceptions.DataNotValidException;
-import exceptions.ModuleAlreadyExistsException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -221,14 +220,6 @@ public class ModuleDetailViewController extends GridPane {
             alert.setHeaderText("Fehler bei Eingabe");
             alert.setContentText("Bitte überprüfen Sie ihre Eingabe.");
             alert.showAndWait();
-
-        } catch (ModuleAlreadyExistsException maee) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Modul existiert bereits");
-            alert.setHeaderText("Modul existiert bereits");
-            alert.setContentText("Ein Modul mit dem von ihnen gewählen Namen existiert bereits. Bitte wählen Sie einen eindeutigen Modulnamen.");
-            alert.showAndWait();
-
 
         }
 

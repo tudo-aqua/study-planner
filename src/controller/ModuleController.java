@@ -1,7 +1,6 @@
 package controller;
 
 import exceptions.DataNotValidException;
-import exceptions.ModuleAlreadyExistsException;
 import model.Module;
 import model.Semester;
 import model.StudyPlanner;
@@ -38,22 +37,16 @@ public class ModuleController {
 	 * @throws DataNotValidException Wird geworfen, wenn die Daten nicht valide sind, z.B. wenn der Name leer ist,
 	 * die Leistungspunkte negativ/gleich 0 sind oder das Prüfungsdatum keinen gültigen Wert repräsentiert.
 	 * @return Das neu erstelle Module-Objekt.
-	 * @throws ModuleAlreadyExistsException Wird geworfen, wenn es bereits ein Modul mit dem selben Namen gibt.
 	 */
-	public Module createModule(String name, int creditPoints,LocalDate examDate)throws DataNotValidException, ModuleAlreadyExistsException {
+	public Module createModule(String name, int creditPoints,LocalDate examDate)throws DataNotValidException {
 		//Überprüfung, ob Eingaben valide sind.
 		if (name == null || name.equals("") || creditPoints <= 0 || examDate == null)
 			throw new DataNotValidException();
-		//Überprüfen, ob es ein Modul mit diesem Namen bereits gibt
-		StudyPlanner studyPlanner = this.studyPlannerController.getStudyPlanner();
-		List<Module> allModules = studyPlanner.getModules();
-		for(Module module :allModules){
-			if(module.getName().equals(name))
-				throw new ModuleAlreadyExistsException();
-		}
 
 		//Neues Modul mit den übergebenen Parametern erzeugen und der Liste aller Module hinzufügen.
 		Module newModule = new Module(name,creditPoints, examDate);
+
+		StudyPlanner studyPlanner = this.studyPlannerController.getStudyPlanner();
 		studyPlanner.addModule(newModule);
 
 		//Statistiken aktualisieren
@@ -72,19 +65,13 @@ public class ModuleController {
 	 * @param examDate Datum der Modulprüfung.
 	 * @throws DataNotValidException Wird geworfen, wenn die Daten nicht valide sind, z.B. wenn der Name leer ist,
 	 * die Leistungspunkte negativ/gleich 0 sind oder das Prüfungsdatum keinen gültigen Wert repräsentiert.
-	 * @throws ModuleAlreadyExistsException Wird geworfen, wenn es bereits ein Modul mit dem selben Namen gibt.
 	 */
-	public void modifyModule(Module moduleToModify, String name, int creditPoints, LocalDate examDate)throws DataNotValidException, ModuleAlreadyExistsException {
+	public void modifyModule(Module moduleToModify, String name, int creditPoints, LocalDate examDate)throws DataNotValidException {
 		//Überprüfung, ob Eingaben valide sind.
 		if (name == null || name.equals("") || creditPoints <= 0 || examDate == null)
 			throw new DataNotValidException();
-		//Überprüfen, ob es ein Modul mit diesem Namen bereits gibt
-		List<Module> allModules = this.studyPlannerController.getStudyPlanner().getModules();
-		for(Module module :allModules){
-			if(moduleToModify != module && module.getName().equals(name))
-				throw new ModuleAlreadyExistsException();
-		}
-		//Setze neue Werte
+
+		//Überschreibe alte Werte mit neuen Werten
 		moduleToModify.setName(name);
 		moduleToModify.setCreditPoints(creditPoints);
 		moduleToModify.setExamDate(examDate);
