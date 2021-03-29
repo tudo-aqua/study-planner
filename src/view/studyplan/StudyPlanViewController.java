@@ -66,7 +66,7 @@ public class StudyPlanViewController extends GridPane {
     @FXML
     public void initialize() {
         labelAvgGrade.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().avgGradeProperty().asString("%.1f"));
-        labelCollectedECTS.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().collectedEctsProperty().asString("%d / "+studyPlannerController.getStudyPlanner().getCourseOfStudyEcts()+ " ECTS"));
+        labelCollectedECTS.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().collectedEctsProperty().asString("%d / "+studyPlannerController.getStudyPlanner().getCourseOfStudyEcts()+ " Leistungspunkte"));
         labelTitel.setText("Studienverlaufsplan - " + studyPlannerController.getStudyPlanner().getCourseOfStudyName());
         for(Semester semester: this.studyPlannerController.getStudyPlanner().getSemesters())
            hBoxSemesterContainer.getChildren().add(new SemesterViewController(studyPlannerController,semester));

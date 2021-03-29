@@ -31,18 +31,15 @@ public class ModuleCell extends ListCell<Module> {
             Label labelECTS = new Label();
 
             vBox.getChildren().add(labelECTS);
-            labelECTS.textProperty().bind(module.ectsProperty().asString("%d ECTS"));
+            labelECTS.textProperty().bind(module.ectsProperty().asString("%d Leistungspunkte"));
             if(module.getState()== State.PASSED_WITH_GRADE){
                 Label labelGrade = new Label();
                 labelGrade.textProperty().bind(module.gradeProperty().asString("Note %.1f"));
                 vBox.getChildren().add(labelGrade);
 
             }
-            this.setStyle("-fx-border-color: black");
-            this.setStyle("-fx-border-width:10px");
 
             HBox hBox = new HBox();
-
             ImageView imageView = new ImageView();
             imageView.setFitWidth(20);
             imageView.setFitHeight(20);
@@ -55,9 +52,6 @@ public class ModuleCell extends ListCell<Module> {
                 case PASSED_WITH_GRADE :imageView.setImage(new Image("/assets/checked.png"));break;
                 case PASSED_WITHOUT_GRADE:imageView.setImage(new Image("/assets/checked.png"));break;
             }
-
-
-
             setGraphic(vBox);
         }
     }

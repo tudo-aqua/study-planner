@@ -31,7 +31,7 @@
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </Label>
-      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Um StudyPlanner zu verwenden, tragen Sie bitte den Namen ihres Studienganges und die Anzahl der zu erreichenden ECTS-Punkte ein." textAlignment="CENTER" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Um StudyPlanner zu verwenden, tragen Sie bitte den Namen ihres Studienganges und die Anzahl der zu erreichenden Leistungspunkte ein." textAlignment="CENTER" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="5.0" right="5.0" />
          </GridPane.margin>
@@ -41,7 +41,7 @@
             <Insets left="5.0" />
          </GridPane.margin>
       </Label>
-      <Label maxWidth="1.7976931348623157E308" text="Anzahl der zu erreichenden ECTS-Punkte" GridPane.rowIndex="3">
+      <Label maxWidth="1.7976931348623157E308" text="Anzahl der zu erreichenden Leistungspunkte" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="5.0" />
          </GridPane.margin>
@@ -51,7 +51,7 @@
             <Insets right="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="textFieldECTS" alignment="CENTER" promptText="180 ECTS" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <TextField fx:id="textFieldECTS" alignment="CENTER" promptText="180" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets right="5.0" />
          </GridPane.margin>
