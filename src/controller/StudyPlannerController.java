@@ -50,10 +50,10 @@ public class StudyPlannerController {
 	 * Methode zum Erzeugen eines neuen leeren Studienplans.
 	 * @param courseOfStudyName Name des Studienganges für den Studienplan.
 	 * @param courseOfStudyCreditPoints Anzahl an Leistungspunkten, die für den Studiengang erreicht werden müssen.
-	 * @throws DataNotValidException Wird geworfen, wenn die Anzahl an Leistungspunkten nicht valide ist (kleiner oder gleich 0).
+	 * @throws DataNotValidException Wird geworfen, wenn die Anzahl an Leistungspunkten nicht valide ist (kleiner oder gleich 0) oder der Name des Studienganges leer ist.
 	 */
 	public void initializeStudyPlanner(String courseOfStudyName, int courseOfStudyCreditPoints)throws DataNotValidException {
-		if(courseOfStudyCreditPoints <0)
+		if(courseOfStudyCreditPoints <0 || courseOfStudyName == null || courseOfStudyName.equals(""))
 			throw new DataNotValidException();
 		this.studyPlanner = new StudyPlanner(courseOfStudyName,courseOfStudyCreditPoints);
 	}
