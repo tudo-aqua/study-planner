@@ -2,6 +2,7 @@ package view.moduledetail;
 
 import controller.ModuleController;
 import controller.SemesterController;
+import controller.StatisticsController;
 import controller.StudyPlannerController;
 import exceptions.DataNotValidException;
 import javafx.event.ActionEvent;
@@ -211,6 +212,8 @@ public class ModuleDetailViewController extends GridPane {
                 semesterController.moveModuleToSemester(moduleToModify,this.choiseBoxSemester.getValue());
 
             }
+            StatisticsController statisticsController = this.studyPlannerController.getStatisticsController();
+            statisticsController.updateStatistics();
             closeModuleDetailView();
 
 

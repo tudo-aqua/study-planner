@@ -1,6 +1,7 @@
 package view.semesterdetail;
 
 import controller.SemesterController;
+import controller.StatisticsController;
 import controller.StudyPlannerController;
 import exceptions.DataNotValidException;
 import javafx.beans.value.ObservableValue;
@@ -43,7 +44,7 @@ public class SemesterDetailViewController extends GridPane {
     @FXML
     private ChoiceBox<Semester> choiseBoxModifySemester;
 
-    private StudyPlannerController spc;
+    private StudyPlannerController studyPlannerController;
 
     private  HBox hBoxSemesterContainer;
 
@@ -52,7 +53,7 @@ public class SemesterDetailViewController extends GridPane {
 
 
     public SemesterDetailViewController(StudyPlannerController spc, boolean modifySemesters, HBox hBoxSemesterContainer){
-        this.spc = spc;
+        this.studyPlannerController = spc;
         this.hBoxSemesterContainer = hBoxSemesterContainer;
         this.modifySemesters = modifySemesters;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SemesterDetailView.fxml"));
@@ -86,7 +87,7 @@ public class SemesterDetailViewController extends GridPane {
         });
         if(modifySemesters){
             buttonSave.setText("Semester bearbeiten");
-            choiseBoxModifySemester.setItems(spc.getStudyPlanner().getSemesters());
+            choiseBoxModifySemester.setItems(studyPlannerController.getStudyPlanner().getSemesters());
             choiseBoxModifySemester.getSelectionModel().selectedItemProperty().addListener(
                     (ObservableValue<? extends Semester> observable, Semester oldValue, Semester newValue) ->{
                     textFieldSemesterName.setText(newValue.getName());
@@ -106,15 +107,15 @@ public class SemesterDetailViewController extends GridPane {
 
     @FXML
     void save(ActionEvent event) {
-        SemesterController sc = spc.getSemesterController();
+        SemesterController sc = studyPlannerController.getSemesterController();
         String inputSemesterName = textFieldSemesterName.getText();
         LocalDate inputStartDate = datePickerStartDate.getValue();
         LocalDate inputEndDate = datePickerEndDate.getValue();
         if(!modifySemesters){
             try {
                 sc.createSemester(inputSemesterName,inputStartDate,inputEndDate);
-                Semester semester = spc.getStudyPlanner().getSemesters().get(spc.getStudyPlanner().getSemesters().size()-1);
-                SemesterViewController semesterViewController = new SemesterViewController(spc,semester);
+                Semester semester = studyPlannerController.getStudyPlanner().getSemesters().get(studyPlannerController.getStudyPlanner().getSemesters().size()-1);
+                SemesterViewController semesterViewController = new SemesterViewController(studyPlannerController,semester);
                 hBoxSemesterContainer.getChildren().add(semesterViewController);
                 this.getScene().getWindow().hide();
             } catch (DataNotValidException e) {
@@ -128,8 +129,8 @@ public class SemesterDetailViewController extends GridPane {
         else {
             try {
                 Semester selectedSemester = choiseBoxModifySemester.getValue();
-                if(selectedSemester != null){
-                    sc.modifySemester(selectedSemester,inputSemesterName,inputStartDate,inputEndDate);
+                if (selectedSemester != null) {
+                    sc.modifySemester(selectedSemester, inputSemesterName, inputStartDate, inputEndDate);
                 }
                 this.getScene().getWindow().hide();
             } catch (DataNotValidException e) {
@@ -140,8 +141,6 @@ public class SemesterDetailViewController extends GridPane {
                 alert.showAndWait();
             }
         }
-
-
     }
 
 }

@@ -40,8 +40,6 @@ public class SemesterController {
 		//Neues Semester mit übergebenen Daten erzeugen
 		Semester newSemester = new Semester(name,startDate,endDate);
 		this.studyPlannerController.getStudyPlanner().addSemester(newSemester);
-		//Statistiken aktualisieren
-		this.studyPlannerController.getStatisticsController().updateStatistics();
 	}
 
 	/**
@@ -55,15 +53,14 @@ public class SemesterController {
 	 */
 	public void modifySemester(Semester semesterToModify, String name, LocalDate startDate, LocalDate endDate)throws DataNotValidException {
 		//Überprüfung, ob Eingaben valide sind.
-		if(name == null || name.equals("") || startDate == null || endDate == null)
+		if(name == null || name.equals("") || startDate == null || endDate == null || startDate.isAfter(endDate))
 			throw new DataNotValidException();
 		//Setze neue Werte
 		semesterToModify.setName(name);
 		semesterToModify.setStartDate(startDate);
 		semesterToModify.setEndDate(endDate);
 
-		//Statistiken aktualisieren
-		this.studyPlannerController.getStatisticsController().updateStatistics();
+
 	}
 
 	/**
@@ -78,8 +75,6 @@ public class SemesterController {
 		if(currentSemesterOfModule != null)
 			currentSemesterOfModule.removeModule(module);
 		targetSemester.addModule(module);
-		//Statistiken aktualisieren
-		this.studyPlannerController.getStatisticsController().updateStatistics();
 	}
 
 }

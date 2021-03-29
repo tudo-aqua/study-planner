@@ -49,8 +49,6 @@ public class ModuleController {
 		StudyPlanner studyPlanner = this.studyPlannerController.getStudyPlanner();
 		studyPlanner.addModule(newModule);
 
-		//Statistiken aktualisieren
-		this.studyPlannerController.getStatisticsController().updateStatistics();
 
 		return newModule;
 
@@ -76,8 +74,7 @@ public class ModuleController {
 		moduleToModify.setCreditPoints(creditPoints);
 		moduleToModify.setExamDate(examDate);
 
-		//Statistiken aktualisieren
-		this.studyPlannerController.getStatisticsController().updateStatistics();
+
 	}
 
 	/**
@@ -105,8 +102,7 @@ public class ModuleController {
 			throw new DataNotValidException();
 		moduleToModify.setState(state);
 		moduleToModify.setGrade(grade);
-		//Statistiken aktualisieren
-		this.studyPlannerController.getStatisticsController().updateStatistics();
+
 	}
 
 }
