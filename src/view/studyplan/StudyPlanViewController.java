@@ -8,6 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
@@ -17,6 +20,8 @@ import view.moduledetail.ModuleDetailViewController;
 import view.semesterdetail.SemesterDetailViewController;
 import view.semesterview.SemesterViewController;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
 public class StudyPlanViewController extends GridPane {
@@ -127,7 +132,12 @@ public class StudyPlanViewController extends GridPane {
 
     @FXML
     void help(ActionEvent event) {
+        try {
 
+            Desktop.getDesktop().open(new File("Produktbeschreibung_StudyPlanner.pdf"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
