@@ -41,7 +41,7 @@ public class StatisticsController {
 	 * Die Methode berechnet die Anzahl der erreichten Leistungspunkte aus allen bestandenen Modulen.
 	 * @return Die Anzahl der erreichten Leistungspunkte oder 0, wenn bisher keine Erreicht wurden.
 	 */
-	public int calculateCollectedCreditPointsOfFinishedModuls() {
+	public int calculateCollectedCreditPointsOfFinishedModules() {
 		int creditPoints = 0;
 		for(Semester semester:studyPlannerController.getStudyPlanner().getSemesters()){
 			for(Module module: semester.getModules()){
@@ -81,7 +81,7 @@ public class StatisticsController {
 		float avgGrade = this.calculateAverageGrade();
 		Statistics statistics = this.studyPlannerController.getStudyPlanner().getStatistics();
 		statistics.setAvgGrade(avgGrade);
-		int creditPoints = this.calculateCollectedCreditPointsOfFinishedModuls();
+		int creditPoints = this.calculateCollectedCreditPointsOfFinishedModules();
 		statistics.setCollectedCreditPoints(creditPoints);
 		for(Semester semester: this.studyPlannerController.getStudyPlanner().getSemesters()){
 			int creditPointsForSemester = this.calculateCreditPointsForSemester(semester);
