@@ -67,16 +67,6 @@ public class Semester implements Serializable {
 		this.modules.remove(module);
 	}
 
-	/**
-	 * Methode zum Überprüfen, ob ein Modul bereits dem Semester
-	 * zugeordnet ist.
-	 * @param module Das Modul, welches überprüft werden soll.
-	 * @return True, wenn das Modul bereits dem Semester zugeordet ist,
-	 * sonst false.
-	 */
-	public boolean isModuleInSemester(Module module) {
-		return this.modules.contains(module);
-	}
 
 	//Getter- und Setter-Methoden für die einzelnen Attribut-Werte und Getter-Methode für die Properties
 	//(autogeneriert mit Intellij)
