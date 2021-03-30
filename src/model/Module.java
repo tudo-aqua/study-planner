@@ -73,14 +73,6 @@ public class Module implements Serializable {
 	}
 
 	/**
-	 * Setter-Methode für den name-Parameter.
-	 * @param name Der Name des Moduls.
-	 */
-	public void setName(String name) {
-		this.name.set(name);
-	}
-
-	/**
 	 * Getter-Methode für den creditPoints-Parameter.
 	 * @return Die Leistungspunkte des Moduls.
 	 */
