@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 /**
  * Testklasse für die Controller-Klasse ModuleController.
  */
-public class ModuleControllerTest {
+public class ModuleControllerCreateModuleTest {
 
     /**
      * Referenz auf den StudyPlannerController der Testumgebung.
@@ -80,38 +80,88 @@ public class ModuleControllerTest {
     }
 
     /**
-     * Test der createModule-Methode mit ungültigen Eingaben.
-     * @throws DataNotValidException Wird geworfen, wenn Eingaben ungültig sind
-     * bereits existiert
+     * Test der createModule-Methode mit ungültigen Eingabe für Namen null.
+     * @throws DataNotValidException Wird geworfen, wenn Eingaben ungültig sind.
      */
     @Test(expected = DataNotValidException.class)
     public void createModuleCaseTwo() throws DataNotValidException {
+
+        //Testdaten erzeugen
+
+        int inputECTS = 6;
+        LocalDate inputExamDate = LocalDate.of(2021,7,27);
+        //Ungültige Eingaben definieren
+        String inputName = null;
+
+        moduleController.createModule(inputName,inputECTS,inputExamDate,exampleSemester);
+    }
+
+    /**
+     * Test der createModule-Methode mit ungültigen Eingabe für Namen leerer String.
+     * @throws DataNotValidException Wird geworfen, wenn Eingaben ungültig sind.
+     */
+    @Test(expected = DataNotValidException.class)
+    public void createModuleCaseThree() throws DataNotValidException {
+
+        //Testdaten erzeugen
+
+        int inputECTS = 6;
+        LocalDate inputExamDate = LocalDate.of(2021,7,27);
         //Ungültige Eingaben definieren
         String inputName = "";
-        int inputECTS = -1;
-        LocalDate inputExamDate = null;
+
         moduleController.createModule(inputName,inputECTS,inputExamDate,exampleSemester);
     }
 
 
     /**
-     * Test-JavaDoc
+     * Test der createModule-Methode mit ungültigen Eingabe für Leistungspunkte.
+     * @throws DataNotValidException Wird geworfen, wenn Eingaben ungültig sind.
      */
-    @Test
-    public void modifyModule() {
+    @Test(expected = DataNotValidException.class)
+    public void createModuleCaseFour() throws DataNotValidException {
+
+        //Testdaten erzeugen
+        String inputName = "Software Praktikum";
+        LocalDate inputExamDate = LocalDate.of(2021,7,27);
+        //Ungültige Eingaben definieren
+        int inputECTS = -6;
+
+        moduleController.createModule(inputName,inputECTS,inputExamDate,exampleSemester);
     }
 
     /**
-     * Test-JavaDoc
+     * Test der createModule-Methode mit ungültigen Eingabe für Datum.
+     * @throws DataNotValidException Wird geworfen, wenn Eingaben ungültig sind.
      */
-    @Test
-    public void deleteModule() {
+    @Test(expected = DataNotValidException.class)
+    public void createModuleCaseFive() throws DataNotValidException {
+
+        //Testdaten erzeugen
+        String inputName = "Software Praktikum";
+        int inputECTS = -6;
+
+        //Ungültige Eingaben definieren
+        LocalDate inputExamDate = null;
+
+        moduleController.createModule(inputName,inputECTS,inputExamDate,exampleSemester);
     }
 
+
     /**
-     * Test-JavaDoc
+     * Test der createModule-Methode mit ungültigen Eingabe für Semester.
+     * @throws DataNotValidException Wird geworfen, wenn Eingaben ungültig sind.
      */
-    @Test
-    public void setStateToModule() {
+    @Test(expected = DataNotValidException.class)
+    public void createModuleCaseSix() throws DataNotValidException {
+
+        //Testdaten erzeugen
+        String inputName = "Software Praktikum";
+        int inputECTS = -6;
+        LocalDate inputExamDate = LocalDate.of(2021,7,27);
+        //Ungültige Eingaben definieren
+        exampleSemester = null;
+
+        moduleController.createModule(inputName,inputECTS,inputExamDate,exampleSemester);
     }
 }
