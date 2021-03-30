@@ -39,30 +39,43 @@ public class Statistics {
 
     //Getter- und Setter-Methoden für die einzelnen Attribut-Werte und Getter-Methode für die Properties
     //(autogeneriert mit Intellij)
-    public float getAvgGrade() {
-        return avgGrade.get();
-    }
-
+    /**
+     * Getter für die avgGrade-Property.
+     * @return Die avgGrade-Property.
+     */
     public FloatProperty avgGradeProperty() {
         return avgGrade;
     }
 
+    /**
+     * Setter-Methode für den avgGrade-Parameter.
+     * @param avgGrade Die berechnete Durchschnittsnote.
+     */
     public void setAvgGrade(float avgGrade) {
         this.avgGrade.set(avgGrade);
     }
 
-    public int getCollectedCreditPoints() {
-        return collectedCreditPoints.get();
-    }
-
+    /**
+     * Getter für die collectedCreditPoints-Property.
+     * @return Die collectedCreditPoints-Property.
+     */
     public IntegerProperty collectedCreditPointsProperty() {
         return collectedCreditPoints;
     }
 
+    /**
+     * Setter-Methode für den collectedCreditPoints-Parameter.
+     * @param collectedCreditPoints Die Anzahl an erreichten Leistungspunkten.
+     */
     public void setCollectedCreditPoints(int collectedCreditPoints) {
         this.collectedCreditPoints.set(collectedCreditPoints);
     }
 
+    /**
+     * Setter-Methode für die zugewiesenen Leistungspunkte zu einem Semester.
+     * @param semester Das Semester, dem die Leistungspunkte zugewiesen werden.
+     * @param creditPoints Die Leistungspunkte.
+     */
     public void setCreditPointsForSemester(Semester semester, int creditPoints){
         if(creditPointsForSemester.get(semester) != null){
             creditPointsForSemester.get(semester).set(creditPoints);
@@ -73,6 +86,11 @@ public class Statistics {
 
     }
 
+    /**
+     * Getter für die creditPointsForSemester-Property für das übergebene Semester.
+     * @param semester Das Semester, für die die Property zurückgegeben werden soll.
+     * @return Die creditPointsForSemester-Property.
+     */
     public IntegerProperty creditPointsForSemesterProperty(Semester semester){
         return creditPointsForSemester.get(semester);
 
