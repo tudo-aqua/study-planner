@@ -70,56 +70,93 @@ public class Semester implements Serializable {
 
 	//Getter- und Setter-Methoden für die einzelnen Attribut-Werte und Getter-Methode für die Properties
 	//(autogeneriert mit Intellij)
+	/**
+	 * Getter für den name-Property.
+	 * @return Den Namen des Semesters.
+	 */
 	public String getName() {
 		return name.get();
 	}
 
+	/**
+	 * Getter für die name-Property.
+	 * @return Die name-Property.
+	 */
 	public StringProperty nameProperty() {
 		return name;
 	}
 
+	/**
+	 * Setter-Methode für den name-Parameter.
+	 * @param name Der Name des Semesters.
+	 */
 	public void setName(String name) {
 		this.name.set(name);
 	}
 
+	/**
+	 * Getter-Methode für den startDate-Parameter.
+	 * @return Den Startdatum des Semesters.
+	 */
 	public LocalDate getStartDate() {
 		return startDate.get();
 	}
 
+	/**
+	 * Getter für die startDate-Property.
+	 * @return Die startDate-Property.
+	 */
 	public ObjectProperty<LocalDate> startDateProperty() {
 		return startDate;
 	}
 
+	/**
+	 * Setter-Methode für den startDate-Parameter.
+	 * @param startDate Das Startdatum des Semesters.
+	 */
 	public void setStartDate(LocalDate startDate) {
 		this.startDate.set(startDate);
 	}
 
+	/**
+	 * Getter-Methode für den endDate-Parameter.
+	 * @return Den Enddatum des Semesters.
+	 */
 	public LocalDate getEndDate() {
 		return endDate.get();
 	}
 
+	/**
+	 * Getter für die endDate-Property.
+	 * @return Die endDate-Property.
+	 */
 	public ObjectProperty<LocalDate> endDateProperty() {
 		return endDate;
 	}
 
+	/**
+	 * Setter-Methode für den endDate-Parameter.
+	 * @param endDate Das Enddatum des Semesters.
+	 */
 	public void setEndDate(LocalDate endDate) {
 		this.endDate.set(endDate);
 	}
 
+	/**
+	 * Getter für den modules-Parameter.
+	 * @return Liste aller dem Semester zugeordneten Module.
+	 */
 	public ObservableList<Module> getModules() {
 		return modules.get();
 	}
 
-	public ListProperty<Module> modulesProperty() {
-		return modules;
-	}
-
-	public void setModules(ObservableList<Module> modules) {
-		this.modules.set(modules);
-	}
-
 
 	//Methoden zum Serialisieren des Objektes
+	/**
+	 * Die Methode speichert alle Daten der Klasse.
+	 * @param s Objekt, welches das Speichern der Daten übernimmt.
+	 * @throws IOException Wird geworfen, wenn das Speichern fehlschlägt.
+	 */
 	private void writeObject(ObjectOutputStream s) throws IOException {
 		s.writeUTF(name.getValueSafe());
 		s.writeObject(startDate.get());
@@ -137,6 +174,12 @@ public class Semester implements Serializable {
 
 	}
 
+	/**
+	 * Die Methode lädt alle Daten der Klasse.
+	 * @param s Objekt, welches das Laden der Daten übernimmt.
+	 * @throws IOException Wird geworfen, wenn das Speichern fehlschlägt.
+	 * @throws ClassNotFoundException Wird geworfen, wenn die zu ladende Klasse nicht im Model ist.
+	 */
 	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
 		name = new SimpleStringProperty(s.readUTF());
 		startDate = new SimpleObjectProperty<LocalDate>((LocalDate) s.readObject());
