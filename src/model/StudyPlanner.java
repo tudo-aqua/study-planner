@@ -96,69 +96,58 @@ public class StudyPlanner implements Serializable {
 		return null;
 	}
 
-	//Getter- und Setter-Methoden für die einzelnen Attribut-Werte und Getter-Methode für die Properties
+	//Getter-Methoden für die einzelnen Attribut-Werte und Getter-Methode für die Properties
 	//(autogeneriert mit Intellij)
+	/**
+	 * Getter für den courseOfStudyName-Parameter.
+	 * @return Den Namen des Studienganges.
+	 */
 	public String getCourseOfStudyName() {
 		return courseOfStudyName.get();
 	}
 
-	public StringProperty courseOfStudyNameProperty() {
-		return courseOfStudyName;
-	}
-
-	public void setCourseOfStudyName(String courseOfStudyName) {
-		this.courseOfStudyName.set(courseOfStudyName);
-	}
-
+	/**
+	 * Getter für den courseOfStudyCreditPoints-Parameter.
+	 * @return Die Anzahl der im Studiengang zu erreichenden Leistungspunkte.
+	 */
 	public int getCourseOfStudyCreditPoints() {
 		return courseOfStudyCreditPoints.get();
 	}
 
-	public IntegerProperty courseOfStudyCreditPointsProperty() {
-		return courseOfStudyCreditPoints;
-	}
-
-	public void setCourseOfStudyCreditPoints(int courseOfStudyCreditPoints) {
-		this.courseOfStudyCreditPoints.set(courseOfStudyCreditPoints);
-	}
-
+	/**
+	 * Getter für den semesters-Parameter.
+	 * @return Die Liste aller Semester.
+	 */
 	public ObservableList<Semester> getSemesters() {
 		return semesters.get();
 	}
 
-	public ListProperty<Semester> semestersProperty() {
-		return semesters;
-	}
-
-	public void setSemesters(ObservableList<Semester> semesters) {
-		this.semesters.set(semesters);
-	}
-
+	/**
+	 * Getter für den modules-Parameter.
+	 * @return Die Liste aller Module.
+	 */
 	public ObservableList<Module> getModules() {
 		return modules.get();
 	}
 
-	public ListProperty<Module> modulesProperty() {
-		return modules;
-	}
-
-	public void setModules(ObservableList<Module> modules) {
-		this.modules.set(modules);
-	}
-
+	/**
+	 * Getter für den statistics-Parameter.
+	 * @return Das Statistics-Objekt.
+	 */
 	public Statistics getStatistics() {
 		return statistics;
 	}
 
-	public void setStatistics(Statistics statistics) {
-		this.statistics = statistics;
-	}
 
 	//Methoden zum Serialisieren des Objektes
+	/**
+	 * Die Methode speichert alle Daten der Klasse.
+	 * @param s Objekt, welches das Speichern der Daten übernimmt.
+	 * @throws IOException Wird geworfen, wenn das Speichern fehlschlägt.
+	 */
 	private void writeObject(ObjectOutputStream s) throws IOException {
 		s.writeUTF(courseOfStudyName.getValueSafe());
 		s.writeInt(courseOfStudyCreditPoints.get());
-
 
 		if (semesters == null || semesters.size() == 0) {
 			s.writeInt(0);
@@ -169,8 +158,6 @@ public class StudyPlanner implements Serializable {
 		for(Semester semester:semesters){
 			s.writeObject(semester);
 		}
-
-
 		if (modules == null || modules.size() == 0) {
 			s.writeInt(0);
 		}
@@ -182,6 +169,12 @@ public class StudyPlanner implements Serializable {
 		}
 	}
 
+	/**
+	 * Die Methode lädt alle Daten der Klasse.
+	 * @param s Objekt, welches das Laden der Daten übernimmt.
+	 * @throws IOException Wird geworfen, wenn das Speichern fehlschlägt.
+	 * @throws ClassNotFoundException Wird geworfen, wenn die zu ladende Klasse nicht im Model ist.
+	 */
 	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
 		courseOfStudyName = new SimpleStringProperty(s.readUTF());
 		courseOfStudyCreditPoints = new SimpleIntegerProperty(s.readInt());
