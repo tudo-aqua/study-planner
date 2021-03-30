@@ -73,14 +73,14 @@ public class SemesterController {
 	 * Die Methode ordnet ein Modul einem Semester zu. Wenn es bereits einem anderen Semester zugeordet ist,
 	 * wird diese Zuordnung aufgelöst.
 	 * @param module Das zu verschiebene Modul.
-	 * @param targetSemester Das Zielsemester, dem das Modul zugeordet werden soll.
+	 * @param semester Das Zielsemester, dem das Modul zugeordet werden soll.
 	 */
-	public void moveModuleToSemester(Module module, Semester targetSemester) {
+	public void moveModuleToSemester(Module module, Semester semester) {
 		//Überprüfe, ob Modul bereits einem anderen Semester zugeordnet ist und entferne es gegebenenfalls
 		Semester currentSemesterOfModule = this.studyPlannerController.getStudyPlanner().getCurrentSemesterOfModule(module);
 		if(currentSemesterOfModule != null)
 			currentSemesterOfModule.removeModule(module);
-		targetSemester.addModule(module);
+		semester.addModule(module);
 	}
 
 }
