@@ -33,13 +33,14 @@ public class ModuleController {
 	 * @param name Der Name/Titel des Moduls.
 	 * @param creditPoints Die den Modul zugeordneten Leistungspunkte.
 	 * @param examDate Der Prüfungstermin des Moduls.
+	 * @param semester Das Semester, dem das Modul zugeordnet werden soll.
 	 * @return Das neu erstelle Module-Objekt.
 	 * @throws DataNotValidException Wird geworfen, wenn die Daten nicht valide sind, z.B. wenn der Name leer ist,
 	 * die Leistungspunkte negativ/gleich 0 sind oder das Prüfungsdatum keinen gültigen Wert repräsentiert.
 	 */
-	public Module createModule(String name, int creditPoints,LocalDate examDate)throws DataNotValidException {
+	public Module createModule(String name, int creditPoints,LocalDate examDate, Semester semester)throws DataNotValidException {
 		//Überprüfung, ob Eingaben valide sind.
-		if (name == null || name.equals("") || creditPoints <= 0 || examDate == null)
+		if (name == null || name.equals("") || creditPoints <= 0 || examDate == null || semester == null)
 			throw new DataNotValidException();
 
 		//Neues Modul mit den übergebenen Parametern erzeugen und der Liste aller Module hinzufügen.
@@ -47,6 +48,12 @@ public class ModuleController {
 
 		StudyPlanner studyPlanner = this.studyPlannerController.getStudyPlanner();
 		studyPlanner.addModule(newModule);
+
+		//Verschiebe das neu erstellte Modul in das entsprechende Semester
+		SemesterController semesterController = this.studyPlannerController.getSemesterController();
+		semesterController.moveModuleToSemester(newModule, semester);
+
+		//Aktualisiere die Statistiken
 		StatisticsController statisticsController = this.studyPlannerController.getStatisticsController();
 		statisticsController.updateStatistics();
 		return newModule;
@@ -56,22 +63,26 @@ public class ModuleController {
 	 * Die Methode bearbeitet ein bereits existierendes Modul, d.h. Name, Leistungspunkte und/oder das Datum der Prüfung können verändert werden.
 	 *
 	 * @param moduleToModify Das Modul, welches bearbeitet werden soll.
-	 * @param name Der neue Name des Moduls.
 	 * @param creditPoints Die neue Anzahl an Leistungspunkten.
 	 * @param examDate Datum der Modulprüfung.
+	 * @param semester Das Semester, in welches das Modul verschoben werden soll.
 	 * @throws DataNotValidException Wird geworfen, wenn die Daten nicht valide sind, z.B. wenn der Name leer ist,
 	 * die Leistungspunkte negativ/gleich 0 sind oder das Prüfungsdatum keinen gültigen Wert repräsentiert.
 	 */
-	public void modifyModule(Module moduleToModify, String name, int creditPoints, LocalDate examDate)throws DataNotValidException {
+	public void modifyModule(Module moduleToModify, int creditPoints, LocalDate examDate,Semester semester)throws DataNotValidException {
 		//Überprüfung, ob Eingaben valide sind.
-		if (name == null || name.equals("") || creditPoints <= 0 || examDate == null)
+		if (creditPoints <= 0 || examDate == null || semester == null)
 			throw new DataNotValidException();
 
 		//Überschreibe alte Werte mit neuen Werten
-		moduleToModify.setName(name);
 		moduleToModify.setCreditPoints(creditPoints);
 		moduleToModify.setExamDate(examDate);
 
+		//Verschiebe das neu erstellte Modul in das entsprechende Semester
+		SemesterController semesterController = this.studyPlannerController.getSemesterController();
+		semesterController.moveModuleToSemester(moduleToModify, semester);
+
+		//Aktualisiere die Statistiken
 		StatisticsController statisticsController = this.studyPlannerController.getStatisticsController();
 		statisticsController.updateStatistics();
 	}
