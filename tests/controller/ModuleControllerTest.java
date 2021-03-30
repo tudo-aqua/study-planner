@@ -2,6 +2,7 @@ package controller;
 
 import exceptions.DataNotValidException;
 import model.Module;
+import model.Semester;
 import model.StudyPlanner;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,15 +30,26 @@ public class ModuleControllerTest {
     private StudyPlanner studyPlanner;
 
     /**
+     * Referenz auf ein Beispielsemester.
+     */
+    private Semester exampleSemester;
+
+    /**
      * Methode zum initialisieren der Testumgebung mit einer vollständigen Model- und Controller-Schicht.
      * @throws Exception Wird geworfen, wenn es bei der Initialisierung einen Fehler gibt.
      */
     @Before
     public void setUp() throws Exception {
+        //Controller- und Model-Schicht erzeugen
         this.studyPlannerController = new StudyPlannerController();
         this.moduleController = studyPlannerController.getModuleController();
+        //Beispielstudiengang für alle Testfälle erzeugen
         this.studyPlannerController.initializeStudyPlanner("BA Informatik", 180);
         this.studyPlanner = studyPlannerController.getStudyPlanner();
+        //Beispielsemester für alle Testfälle erzeugen
+        exampleSemester = new Semester("Sommersemester 2021",
+                LocalDate.of(2021,4,1),LocalDate.of(2021,9,30));
+        studyPlanner.addSemester(exampleSemester);
     }
 
 
@@ -51,18 +63,20 @@ public class ModuleControllerTest {
         //Testdaten erzeugen
         String inputName = "Software Praktikum";
         int inputECTS = 6;
-        LocalDate inputExamDate = LocalDate.of(2021,9,12);
+        LocalDate inputExamDate = LocalDate.of(2021,7,27);
         //Test, das noch kein Modul existiert
-        assertTrue(studyPlanner.getModules().size() == 0);
+        assertEquals(0,studyPlanner.getModules().size());
         //Zu testende Methode mit Testdaten aufrufen
-        moduleController.createModule(inputName,inputECTS,inputExamDate,null);
+        moduleController.createModule(inputName,inputECTS,inputExamDate,exampleSemester);
         //Test, das nun ein Modul existiert
-        assertTrue(studyPlanner.getModules().size() == 1);
+        assertEquals(1,studyPlanner.getModules().size() );
         Module testModule = studyPlanner.getModules().get(0);
         //Test, ob alle Werte im neuen Modul mit den übergebenen übereinstimmen
         assertEquals(inputName,testModule.getName());
         assertEquals(inputECTS,testModule.getCreditPoints());
         assertEquals(inputExamDate, testModule.getExamDate());
+        //Test, ob Modul dem Examplesemester hinzugefügt wurde
+        assertTrue(exampleSemester.getModules().contains(testModule));
     }
 
     /**
@@ -76,7 +90,7 @@ public class ModuleControllerTest {
         String inputName = "";
         int inputECTS = -1;
         LocalDate inputExamDate = null;
-        moduleController.createModule(inputName,inputECTS,inputExamDate,null);
+        moduleController.createModule(inputName,inputECTS,inputExamDate,exampleSemester);
     }
 
 
