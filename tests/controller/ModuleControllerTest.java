@@ -55,7 +55,7 @@ public class ModuleControllerTest {
         //Test, das noch kein Modul existiert
         assertTrue(studyPlanner.getModules().size() == 0);
         //Zu testende Methode mit Testdaten aufrufen
-        moduleController.createModule(inputName,inputECTS,inputExamDate);
+        moduleController.createModule(inputName,inputECTS,inputExamDate,null);
         //Test, das nun ein Modul existiert
         assertTrue(studyPlanner.getModules().size() == 1);
         Module testModule = studyPlanner.getModules().get(0);
@@ -76,7 +76,7 @@ public class ModuleControllerTest {
         String inputName = "";
         int inputECTS = -1;
         LocalDate inputExamDate = null;
-        moduleController.createModule(inputName,inputECTS,inputExamDate);
+        moduleController.createModule(inputName,inputECTS,inputExamDate,null);
     }
 
 
