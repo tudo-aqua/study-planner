@@ -7,7 +7,6 @@ import model.StudyPlanner;
 import model.enums.State;
 
 import java.time.LocalDate;
-import java.util.List;
 
 /**
  * Die Klasse stellt Methoden für die Verwaltung von Modulen zur Verfügung.
@@ -34,9 +33,9 @@ public class ModuleController {
 	 * @param name Der Name/Titel des Moduls.
 	 * @param creditPoints Die den Modul zugeordneten Leistungspunkte.
 	 * @param examDate Der Prüfungstermin des Moduls.
+	 * @return Das neu erstelle Module-Objekt.
 	 * @throws DataNotValidException Wird geworfen, wenn die Daten nicht valide sind, z.B. wenn der Name leer ist,
 	 * die Leistungspunkte negativ/gleich 0 sind oder das Prüfungsdatum keinen gültigen Wert repräsentiert.
-	 * @return Das neu erstelle Module-Objekt.
 	 */
 	public Module createModule(String name, int creditPoints,LocalDate examDate)throws DataNotValidException {
 		//Überprüfung, ob Eingaben valide sind.
@@ -48,10 +47,9 @@ public class ModuleController {
 
 		StudyPlanner studyPlanner = this.studyPlannerController.getStudyPlanner();
 		studyPlanner.addModule(newModule);
-
-
+		StatisticsController statisticsController = this.studyPlannerController.getStatisticsController();
+		statisticsController.updateStatistics();
 		return newModule;
-
 	}
 
 	/**
@@ -74,7 +72,8 @@ public class ModuleController {
 		moduleToModify.setCreditPoints(creditPoints);
 		moduleToModify.setExamDate(examDate);
 
-
+		StatisticsController statisticsController = this.studyPlannerController.getStatisticsController();
+		statisticsController.updateStatistics();
 	}
 
 	/**
@@ -86,8 +85,8 @@ public class ModuleController {
 		if(currentSemester != null)
 			currentSemester.removeModule(module);
 		this.studyPlannerController.getStudyPlanner().removeModule(module);
-		//Statistiken aktualisieren
-		this.studyPlannerController.getStatisticsController().updateStatistics();
+		StatisticsController statisticsController = this.studyPlannerController.getStatisticsController();
+		statisticsController.updateStatistics();
 	}
 
 	/**
@@ -102,6 +101,8 @@ public class ModuleController {
 			throw new DataNotValidException();
 		moduleToModify.setState(state);
 		moduleToModify.setGrade(grade);
+		StatisticsController statisticsController = this.studyPlannerController.getStatisticsController();
+		statisticsController.updateStatistics();
 
 	}
 

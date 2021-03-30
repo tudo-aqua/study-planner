@@ -72,11 +72,10 @@ public class ModuleControllerTest {
      */
     @Test(expected = DataNotValidException.class)
     public void createModuleCaseTwo() throws DataNotValidException {
+        //Ungültige Eingaben definieren
         String inputName = "";
         int inputECTS = -1;
         LocalDate inputExamDate = null;
-        //Test, das noch kein Modul existiert
-        assertTrue(studyPlanner.getModules().size() == 0);
         moduleController.createModule(inputName,inputECTS,inputExamDate);
     }
 

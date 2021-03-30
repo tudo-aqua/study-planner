@@ -1,7 +1,6 @@
 package view.semesterdetail;
 
 import controller.SemesterController;
-import controller.StatisticsController;
 import controller.StudyPlannerController;
 import exceptions.DataNotValidException;
 import javafx.beans.value.ObservableValue;
@@ -113,9 +112,8 @@ public class SemesterDetailViewController extends GridPane {
         LocalDate inputEndDate = datePickerEndDate.getValue();
         if(!modifySemesters){
             try {
-                sc.createSemester(inputSemesterName,inputStartDate,inputEndDate);
-                Semester semester = studyPlannerController.getStudyPlanner().getSemesters().get(studyPlannerController.getStudyPlanner().getSemesters().size()-1);
-                SemesterViewController semesterViewController = new SemesterViewController(studyPlannerController,semester);
+                Semester newSemester = sc.createSemester(inputSemesterName,inputStartDate,inputEndDate);
+                SemesterViewController semesterViewController = new SemesterViewController(studyPlannerController,newSemester);
                 hBoxSemesterContainer.getChildren().add(semesterViewController);
                 this.getScene().getWindow().hide();
             } catch (DataNotValidException e) {

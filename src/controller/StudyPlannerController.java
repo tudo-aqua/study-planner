@@ -59,28 +59,53 @@ public class StudyPlannerController {
 	}
 
 	//Getter- und Setter-Methoden für den Zugriff auf das Model
+
+	/**
+	 * Getter-Methode für die Basisklasse des Models StudyPlanner.
+	 * @return Referenz auf den StudyPlanner.
+	 */
 	public StudyPlanner getStudyPlanner() {
 		return studyPlanner;
 	}
 
+	/**
+	 * Setter-Methode zum Setzen des Models.
+	 * @param studyPlanner Die Basisklasse des neuem Models.
+	 */
 	public void setStudyPlanner(StudyPlanner studyPlanner) {
 		this.studyPlanner = studyPlanner;
 	}
 
 
 	//Getter-Methoden für den Zugriff auf die anderen Controller
+	/**
+	 * Getter-Methode für den ModuleController.
+	 * @return Referenz auf den ModuleController.
+	 */
 	public ModuleController getModuleController() {
 		return moduleController;
 	}
 
-	public IOController getIoController() {
+	/**
+	 * Getter-Methode für den IOController.
+	 * @return Referenz auf den IOController.
+	 */
+	public IOController getIOController() {
 		return ioController;
 	}
 
+	/**
+	 * Getter-Methode für den SemesterController.
+	 * @return Referenz auf den SemesterController.
+	 */
 	public SemesterController getSemesterController() {
 		return semesterController;
 	}
 
+	/**
+	 * Getter-Methode für den StatisticsController.
+	 * @return Referenz auf den StatisticsController.
+	 */
 	public StatisticsController getStatisticsController() {
 		return statisticsController;
 	}

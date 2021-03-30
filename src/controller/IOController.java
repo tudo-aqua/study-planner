@@ -1,6 +1,5 @@
 package controller;
 
-import model.Statistics;
 import model.StudyPlanner;
 
 import java.io.*;
@@ -25,20 +24,17 @@ public class IOController {
 
 	/**
 	 * Die Methode speichert alle im Model gespeicherten Daten in der Datei data.sp.
+	 * @throws IOException Wird geworfen, wenn Laden es einen Fehler beim Laden gibt.
+	 * @throws ClassNotFoundException Wird geworfen, wenn eine geladene Klasse nicht im Model ist.
 	 */
-	public void loadData() {
-		try {
-			File file = new File("data.sp");
-			FileInputStream fis = new FileInputStream(file);
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			StudyPlanner studyPlanner = (StudyPlanner) ois.readObject();
-			studyPlannerController.setStudyPlanner(studyPlanner);
-			studyPlannerController.getStatisticsController().updateStatistics();
-			ois.close();
-		}
-		catch (IOException | ClassNotFoundException e ){
-			e.printStackTrace();
-		}
+	public void loadData() throws IOException, ClassNotFoundException {
+		File file = new File("data.sp");
+		FileInputStream fis = new FileInputStream(file);
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		StudyPlanner studyPlanner = (StudyPlanner) ois.readObject();
+		studyPlannerController.setStudyPlanner(studyPlanner);
+		studyPlannerController.getStatisticsController().updateStatistics();
+		ois.close();
 	}
 
 	/**

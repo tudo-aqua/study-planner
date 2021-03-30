@@ -29,10 +29,11 @@ public class SemesterController {
 	 * @param name Der Name des Semsters.
 	 * @param startDate Das Datum, an dem das Semester beginnt.
 	 * @param endDate Das Daum, an dem das Semester endet.
+	 * @return Das neu erstelle Semester-Objekt.
 	 * @throws DataNotValidException Wird geworfen, wenn der Name des Semesters leer ist oder wenn eines der Datums-Felder
 	 * einen ungültigen Wert repräsentiert.
 	 */
-	public void createSemester(String name, LocalDate startDate, LocalDate endDate)throws DataNotValidException {
+	public Semester createSemester(String name, LocalDate startDate, LocalDate endDate)throws DataNotValidException {
 		//Überprüfung, ob Eingaben valide sind.
 		if(name == null || name.equals("") || startDate == null || endDate == null || startDate.isAfter(endDate))
 			throw new DataNotValidException();
@@ -40,6 +41,9 @@ public class SemesterController {
 		//Neues Semester mit übergebenen Daten erzeugen
 		Semester newSemester = new Semester(name,startDate,endDate);
 		this.studyPlannerController.getStudyPlanner().addSemester(newSemester);
+		StatisticsController statisticsController = this.studyPlannerController.getStatisticsController();
+		statisticsController.updateStatistics();
+		return newSemester;
 	}
 
 	/**
@@ -59,6 +63,8 @@ public class SemesterController {
 		semesterToModify.setName(name);
 		semesterToModify.setStartDate(startDate);
 		semesterToModify.setEndDate(endDate);
+		StatisticsController statisticsController = this.studyPlannerController.getStatisticsController();
+		statisticsController.updateStatistics();
 
 
 	}

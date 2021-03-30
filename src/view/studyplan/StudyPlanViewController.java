@@ -142,7 +142,7 @@ public class StudyPlanViewController extends GridPane {
 
     @FXML
     void exit(ActionEvent event) {
-        this.studyPlannerController.getIoController().storeData();
+        this.studyPlannerController.getIOController().storeData();
         Platform.exit();
         System.exit(0);
     }

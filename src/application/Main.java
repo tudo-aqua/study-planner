@@ -8,6 +8,7 @@ import view.studyplan.StudyPlanViewController;
 import view.welcome.WelcomeViewController;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Main-Klasse des Programms mit der Startmethode.
@@ -27,15 +28,14 @@ public class Main extends Application {
             StudyPlannerController studyPlannerController = new StudyPlannerController();
             File f = new File("data.sp");
             Scene scene;
-            //Prüfen, ob bereits gespeicherte Daten vorhanden sind
-            if(f.exists() && !f.isDirectory()) {
+            try{
+
                 //Daten aus Datei laden und Standard-View anzeigen
-                studyPlannerController.getIoController().loadData();
+                studyPlannerController.getIOController().loadData();
                 scene = new Scene(new StudyPlanViewController(primaryStage,studyPlannerController));
 
-            }
-            else {
-                //Wenn keine Daten vorhanden sind, Willkommens-View anzeigen
+            }catch (IOException | ClassNotFoundException e) {
+                //Wenn keine Daten vorhanden sind oder Daten nicht gelesen werden können, Willkommens-View anzeigen
                 scene = new Scene(new WelcomeViewController(primaryStage, studyPlannerController));
             }
             //css-Datei für das Stylen der View laden
