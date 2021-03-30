@@ -21,6 +21,7 @@ doc:
         - ./docbadge.sh
         - ./testdocbadge.sh
         - ./junitbadge.sh
+        - ./coverage.sh
         - cp -r badges ../volume/studyplanner/
         - rm *.sh
 
