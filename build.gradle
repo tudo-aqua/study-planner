@@ -53,7 +53,7 @@ dependencies {
 
 eclipse {
     project {
-        name = 'Projekt 2'
+        name = 'StudyPlanner'
     }
 }
 
