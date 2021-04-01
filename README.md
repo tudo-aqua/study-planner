@@ -1,5 +1,5 @@
 <p>
-    <a href="https://sopra-ci.cs.tu-dortmund.de/studyplanner/studyplanner-shadow.zip"><img alt="Pipeline" src="https://sopra-gitlab.cs.tu-dortmund.de/beispielprojekt/studyplanner/badges/master/pipeline.svg" /></a>
+    <a href="https://sopra-ci.cs.tu-dortmund.de/studyplanner/StudyPlanner-shadow.zip"><img alt="Pipeline" src="https://sopra-gitlab.cs.tu-dortmund.de/beispielprojekt/studyplanner/badges/master/pipeline.svg" /></a>
     <a href="https://sopra-ci.cs.tu-dortmund.de/studyplanner/coverage/"><img alt="Coverage" src="https://sopra-ci.cs.tu-dortmund.de/studyplanner/coverage.svg" /></a>
 	<a href="https://sopra.cs.tu-dortmund.de/bin/pmd.py?XXY=21A&GROUPNUMBER=4&PROJECT=2"><img alt="Pmd" src="https://sopra-ci.cs.tu-dortmund.de/studyplanner/pmd.svg" /></a>
 	<a href="https://sopra-ci.cs.tu-dortmund.de/studyplanner/test/"><img alt="JUnit" src="https://sopra-ci.cs.tu-dortmund.de/studyplanner/junit.svg" /></a>
