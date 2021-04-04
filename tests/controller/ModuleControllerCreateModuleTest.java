@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import static org.junit.Assert.*;
 
 /**
- * Testklasse für die Controller-Klasse ModuleController.
+ * Testklasse für die Methode createModule der Controller-Klasse ModuleController.
  */
 public class ModuleControllerCreateModuleTest {
 
