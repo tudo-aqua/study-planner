@@ -55,8 +55,7 @@ public class ModuleControllerCreateModuleTest {
 
     /**
      * Test der createModule-Methode mit gültigen Eingaben.
-     * @throws DataNotValidException Wird geworfen, wenn Eingaben ungültig sind
-     * bereits existiert
+     * @throws DataNotValidException Wird geworfen, wenn Eingaben ungültig sind.
      */
     @Test
     public void createModuleCaseOne() throws DataNotValidException {

@@ -14,7 +14,7 @@ public class StateTest {
      * Test für stateFromId-Methode des State-Enums.
      */
     @Test
-    public void stateFromId() {
+    public void stateFromIdTest() {
         assertEquals(State.PASSED_WITH_GRADE,State.stateFromId(1));
         assertEquals(State.PASSED_WITHOUT_GRADE,State.stateFromId(2));
         assertEquals(State.NOT_PASSED,State.stateFromId(3));
@@ -27,7 +27,7 @@ public class StateTest {
      * Test für getId-Methode des State-Enums.
      */
     @Test
-    public void getId() {
+    public void getIdTest() {
         assertEquals(1,State.PASSED_WITH_GRADE.getId());
         assertEquals(2,State.PASSED_WITHOUT_GRADE.getId());
         assertEquals(3,State.NOT_PASSED.getId());
