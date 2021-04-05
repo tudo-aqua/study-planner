@@ -96,7 +96,7 @@ public class StudyPlanner implements Serializable {
 		return null;
 	}
 
-	//Getter-Methoden für die einzelnen Attribut-Werte und Getter-Methode für die Properties
+	//Getter-Methoden für die einzelnen Attribut-Werte
 	//(autogeneriert mit Intellij)
 	/**
 	 * Getter für den courseOfStudyName-Parameter.

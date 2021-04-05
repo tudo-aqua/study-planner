@@ -203,14 +203,11 @@ public class ModuleDetailViewController extends GridPane {
             if(this.moduleToModify == null){
                 Module newModule = moduleController.createModule(inputModuleName,inputCreditPoints,inputExamDate,inputSemester);
                 moduleController.setStateToModule(newModule,getSelectedState(),GradeConverter.sliderValueToGrade(sliderGradeValue.getValue()));
-                Semester selectedSemester = choiseBoxSemester.getValue();
-                studyPlannerController.getSemesterController().moveModuleToSemester(newModule, selectedSemester);
+
             }
             else{
                 moduleController.modifyModule(moduleToModify,inputCreditPoints,inputExamDate,inputSemester);
                 moduleController.setStateToModule(moduleToModify,getSelectedState(),GradeConverter.sliderValueToGrade(sliderGradeValue.getValue()));
-                SemesterController semesterController = studyPlannerController.getSemesterController();
-                semesterController.moveModuleToSemester(moduleToModify,inputSemester);
 
             }
 

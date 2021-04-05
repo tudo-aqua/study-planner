@@ -64,7 +64,8 @@ public class SemesterViewController extends GridPane {
         labelEndDate.textProperty().bindBidirectional(semester.endDateProperty(), new LocalDateConverter());
         labelCreditPointsForSemester.textProperty().bind(statistics.creditPointsForSemesterProperty(semester).asString("%d Leistungspunkte"));
         listViewModuls.setCellFactory(studentListView -> new ModuleCell());
-        listViewModuls.setItems(semester.getModules());
+
+        listViewModuls.itemsProperty().bind(semester.modulesProperty());
         listViewModuls.setOnMouseClicked(click -> {
 
             if (click.getClickCount() == 2) {

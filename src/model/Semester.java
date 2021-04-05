@@ -149,8 +149,13 @@ public class Semester implements Serializable {
 	public ObservableList<Module> getModules() {
 		return modules.get();
 	}
-
-
+	/**
+	 * Getter für die modules-Property.
+	 * @return Die modules-Property.
+	 */
+	public ListProperty<Module> modulesProperty() {
+		return modules;
+	}
 	//Methoden zum Serialisieren des Objektes
 	/**
 	 * Die Methode speichert alle Daten der Klasse.
