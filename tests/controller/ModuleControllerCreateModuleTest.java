@@ -63,19 +63,20 @@ public class ModuleControllerCreateModuleTest {
         String inputName = "Software Praktikum";
         int inputECTS = 6;
         LocalDate inputExamDate = LocalDate.of(2021,7,27);
-        //Test, das noch kein Modul existiert
+        //Test: Noch kein Modul existiert
         assertEquals(0,studyPlanner.getModules().size());
         //Zu testende Methode mit Testdaten aufrufen
-        moduleController.createModule(inputName,inputECTS,inputExamDate,exampleSemester);
-        //Test, das nun ein Modul existiert
-        assertEquals(1,studyPlanner.getModules().size() );
-        Module testModule = studyPlanner.getModules().get(0);
+        Module createdModule = moduleController.createModule(inputName,inputECTS,inputExamDate,exampleSemester);
+        //Test: Ein Modul existiert
+        assertEquals(1,studyPlanner.getModules().size());
+        assertEquals(createdModule,studyPlanner.getModules().get(0));
+
         //Test, ob alle Werte im neuen Modul mit den übergebenen übereinstimmen
-        assertEquals(inputName,testModule.getName());
-        assertEquals(inputECTS,testModule.getCreditPoints());
-        assertEquals(inputExamDate, testModule.getExamDate());
+        assertEquals(inputName,createdModule.getName());
+        assertEquals(inputECTS,createdModule.getCreditPoints());
+        assertEquals(inputExamDate, createdModule.getExamDate());
         //Test, ob Modul dem Examplesemester hinzugefügt wurde
-        assertTrue(exampleSemester.getModules().contains(testModule));
+        assertTrue(exampleSemester.getModules().contains(createdModule));
     }
 
     /**

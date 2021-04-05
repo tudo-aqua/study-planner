@@ -72,7 +72,7 @@ public class ModuleControllerSetStateToModuleTest {
         int inputGrade = 3;
         State intputState = State.PASSED_WITH_GRADE;
 
-        //Test, das die Note vor dem Test nicht drei ist
+        //Test: Die Note vor dem Test ist nicht 3.0
         assertNotEquals(3f,exampleModule.getGrade(),0.01);
         assertNotEquals(State.PASSED_WITH_GRADE,exampleModule.getState());
 
@@ -93,10 +93,6 @@ public class ModuleControllerSetStateToModuleTest {
 
         //Testdaten erzeugen
         int inputGrade = 6;
-
-        //Test, das die Note vor dem Test nicht drei ist
-        assertNotEquals(3f,exampleModule.getGrade(),0.01);
-        assertNotEquals(State.PASSED_WITH_GRADE,exampleModule.getState());
 
         //Zu testende Methode mit Testdaten aufrufen
         this.moduleController.setStateToModule(exampleModule,State.PASSED_WITH_GRADE,inputGrade);

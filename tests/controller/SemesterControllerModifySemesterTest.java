@@ -1,7 +1,6 @@
 package controller;
 
 import exceptions.DataNotValidException;
-import model.Module;
 import model.Semester;
 import model.StudyPlanner;
 import org.junit.Before;
@@ -9,11 +8,13 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
 /**
- * Testklasse für die Methode createSemester der Controller-Klasse SemesterController.
+ * Testklasse für die Methode modifySemester der Controller-Klasse SemesterController.
  */
-public class SemesterControllerCreateSemesterTest {
+public class SemesterControllerModifySemesterTest {
 
     /**
      * Referenz auf den StudyPlannerController der Testumgebung.
@@ -28,6 +29,10 @@ public class SemesterControllerCreateSemesterTest {
      */
     private StudyPlanner studyPlanner;
 
+    /**
+     * Referenz auf ein Beispielsemester.
+     */
+    private Semester exampleSemester;
 
     /**
      * Methode zum initialisieren der Testumgebung mit einer vollständigen Model- und Controller-Schicht.
@@ -42,92 +47,99 @@ public class SemesterControllerCreateSemesterTest {
         this.studyPlannerController.initializeStudyPlanner("BA Informatik", 180);
         this.studyPlanner = studyPlannerController.getStudyPlanner();
 
-
+        //Beispielsemester für alle Testfälle erzeugen mit falschen Daten erstellen
+        exampleSemester = new Semester("SoSe 2021",
+                LocalDate.of(2021,1,2),LocalDate.of(2020,9,30));
+        studyPlanner.addSemester(exampleSemester);
     }
 
     /**
-     * Test der createSemester-Methode mit gültigen Eingaben.
+     * Test der modifySemester-Methode mit gültigen Eingaben.
      * @throws DataNotValidException Wird geworfen, wenn Eingaben ungültig sind.
      */
     @Test
-    public void createSemesterCaseOne() throws DataNotValidException {
+    public void modifySemesterCaseOne() throws DataNotValidException {
         //Testdaten erzeugen
         String inputName = "Sommersemester 2021";
         LocalDate inputStartDate = LocalDate.of(2021,4,1);
         LocalDate inputEndDate = LocalDate.of(2021,9,30);
 
-        //Test: Noch kein Semester existiert
-        assertEquals(0,studyPlanner.getModules().size());
+        //Test: Alle Daten im Examplesemester sind ungleich der Eingabedaten
+        assertNotEquals(inputName,exampleSemester.getName());
+        assertNotEquals(inputStartDate,exampleSemester.getStartDate());
+        assertNotEquals(inputEndDate, exampleSemester.getEndDate());
+
         //Zu testende Methode mit Testdaten aufrufen
-        Semester createdSemester = semesterController.createSemester(inputName,inputStartDate,inputEndDate);
-        //Test: Nur ein Semester existiert
-        assertEquals(1,studyPlanner.getSemesters().size() );
-        assertEquals(createdSemester,studyPlanner.getSemesters().get(0));
+        semesterController.modifySemester(exampleSemester,inputName,inputStartDate,inputEndDate);
 
         //Test, ob alle Werte im neuen Semester mit den übergebenen übereinstimmen
-        assertEquals(inputName,createdSemester.getName());
-        assertEquals(inputStartDate,createdSemester.getStartDate());
-        assertEquals(inputEndDate, createdSemester.getEndDate());
+        assertEquals(inputName,exampleSemester.getName());
+        assertEquals(inputStartDate,exampleSemester.getStartDate());
+        assertEquals(inputEndDate, exampleSemester.getEndDate());
     }
 
     /**
-     * Test der createModule-Methode mit ungültigen Eingabe für Namen null.
+     * Test der modifySemester-Methode mit ungültiger Eingaben für name null.
      * @throws DataNotValidException Wird geworfen, wenn Eingaben ungültig sind.
      */
     @Test(expected = DataNotValidException.class)
-    public void createSemesterCaseTwo() throws DataNotValidException {
+    public void modifySemesterCaseTwo() throws DataNotValidException {
         //Testdaten erzeugen
         String inputName = null;
         LocalDate inputStartDate = LocalDate.of(2021,4,1);
         LocalDate inputEndDate = LocalDate.of(2021,9,30);
 
         //Zu testende Methode mit Testdaten aufrufen
-        semesterController.createSemester(inputName,inputStartDate,inputEndDate);
+        semesterController.modifySemester(exampleSemester,inputName,inputStartDate,inputEndDate);
     }
 
+
     /**
-     * Test der createModule-Methode mit ungültigen Eingabe für Namen leerer String.
+     * Test der modifySemester-Methode mit ungültiger Eingaben für name leerer String.
      * @throws DataNotValidException Wird geworfen, wenn Eingaben ungültig sind.
      */
     @Test(expected = DataNotValidException.class)
-    public void createSemesterCaseThree() throws DataNotValidException {
+    public void modifySemesterCaseThree() throws DataNotValidException {
         //Testdaten erzeugen
         String inputName = "";
         LocalDate inputStartDate = LocalDate.of(2021,4,1);
         LocalDate inputEndDate = LocalDate.of(2021,9,30);
 
         //Zu testende Methode mit Testdaten aufrufen
-        semesterController.createSemester(inputName,inputStartDate,inputEndDate);
+        semesterController.modifySemester(exampleSemester,inputName,inputStartDate,inputEndDate);
     }
 
+
     /**
-     * Test der createModule-Methode mit ungültigen Eingabe für Startdatum null.
+     * Test der modifySemester-Methode mit ungültiger Eingaben für Startdatum null.
      * @throws DataNotValidException Wird geworfen, wenn Eingaben ungültig sind.
      */
     @Test(expected = DataNotValidException.class)
-    public void createSemesterCaseFour() throws DataNotValidException {
+    public void modifySemesterCaseFour() throws DataNotValidException {
         //Testdaten erzeugen
         String inputName = "Sommersemester 2021";
         LocalDate inputStartDate = null;
         LocalDate inputEndDate = LocalDate.of(2021,9,30);
 
         //Zu testende Methode mit Testdaten aufrufen
-        semesterController.createSemester(inputName,inputStartDate,inputEndDate);
+        semesterController.modifySemester(exampleSemester,inputName,inputStartDate,inputEndDate);
     }
 
+
     /**
-     * Test der createModule-Methode mit ungültigen Eingabe für Enddatum null.
+     * Test der modifySemester-Methode mit ungültiger Eingaben für Enddatum null.
      * @throws DataNotValidException Wird geworfen, wenn Eingaben ungültig sind.
      */
     @Test(expected = DataNotValidException.class)
-    public void createSemesterCaseFive() throws DataNotValidException {
+    public void modifySemesterCaseFive() throws DataNotValidException {
         //Testdaten erzeugen
         String inputName = "Sommersemester 2021";
         LocalDate inputStartDate = LocalDate.of(2021,4,1);
         LocalDate inputEndDate = null;
 
         //Zu testende Methode mit Testdaten aufrufen
-        semesterController.createSemester(inputName,inputStartDate,inputEndDate);
+        semesterController.modifySemester(exampleSemester,inputName,inputStartDate,inputEndDate);
     }
+
 
 }
