@@ -7,9 +7,10 @@
 	<a href="https://sopra-ci.cs.tu-dortmund.de/studyplanner/checkstyle/test.html"><img alt="TestDocs" src="https://sopra-ci.cs.tu-dortmund.de/studyplanner/testdoc.svg" /></a>
 </p>
 
-# Projekt 2 im Sopra 21A
+# Beispielprojekt StudyPlanner
 
-In diesem Repository entsteht euer zweites Projekt im Sopra. Für Planung, Modellierung und generelle gruppeninterne Angelegenheiten, verwendet das Wiki des Projektes.
+Dieses Repository enthält den vollständigen Quellcode des Programms StudyPlanner sowie die dazugehörenden Tests.
+Ebenfalls sind die Produktbeschreibung und das Astah-Model enthalten.
 
 ## Dokumentation
 
