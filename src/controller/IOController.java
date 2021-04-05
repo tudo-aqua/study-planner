@@ -23,12 +23,14 @@ public class IOController {
 	}
 
 	/**
-	 * Die Methode speichert alle im Model gespeicherten Daten in der Datei data.sp.
+	 * Die Methode lädt aus der Datei mit dem übergebenen Namen alle Daten und erzeugt auf
+	 * dessen Basis ein neues Model.
+	 * @param fileName Name der Datei, aus der das Model geladen werden soll.
 	 * @throws IOException Wird geworfen, wenn Laden es einen Fehler beim Laden gibt.
 	 * @throws ClassNotFoundException Wird geworfen, wenn eine geladene Klasse nicht im Model ist.
 	 */
-	public void loadData() throws IOException, ClassNotFoundException {
-		File file = new File("data.sp");
+	public void loadData(String fileName) throws IOException, ClassNotFoundException {
+		File file = new File(fileName);
 		FileInputStream fis = new FileInputStream(file);
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		StudyPlanner studyPlanner = (StudyPlanner) ois.readObject();
@@ -38,21 +40,17 @@ public class IOController {
 	}
 
 	/**
-	 * Die Methode läd aus der Datei data.sp alle Daten und erzeugt auf
-	 * dessen Basis ein neues Model.
+	 * Die Methode speichert alle im Model gespeicherten Daten in der Datei mit dem übergebenen Namen.
+	 * @param fileName Name der Datei, in der das Model gespeichert werden soll.
+	 * @throws IOException Wird geworfen, wenn Speichern nicht möglich ist.
 	 */
-	public void storeData() {
-		try {
-			StudyPlanner studyPlanner = studyPlannerController.getStudyPlanner();
-			File file = new File("data.sp");
-			FileOutputStream fos = new FileOutputStream(file);
-			ObjectOutputStream oos = new ObjectOutputStream (fos);
-			oos.writeObject(studyPlanner);
-			oos.close();
-		}
-		catch(IOException ioe){
-			ioe.printStackTrace();
-		}
+	public void storeData(String fileName) throws IOException {
+		StudyPlanner studyPlanner = studyPlannerController.getStudyPlanner();
+		File file = new File(fileName);
+		FileOutputStream fos = new FileOutputStream(file);
+		ObjectOutputStream oos = new ObjectOutputStream (fos);
+		oos.writeObject(studyPlanner);
+		oos.close();
 	}
 
 }

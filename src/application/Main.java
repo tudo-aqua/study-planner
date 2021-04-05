@@ -26,12 +26,11 @@ public class Main extends Application {
 
             //Initialisierung der Controller- und der Model-Schicht
             StudyPlannerController studyPlannerController = new StudyPlannerController();
-            File f = new File("data.sp");
             Scene scene;
             try{
 
                 //Daten aus Datei laden und Standard-View anzeigen
-                studyPlannerController.getIOController().loadData();
+                studyPlannerController.getIOController().loadData("data.sp");
                 scene = new Scene(new StudyPlanViewController(primaryStage,studyPlannerController));
 
             }catch (IOException | ClassNotFoundException e) {

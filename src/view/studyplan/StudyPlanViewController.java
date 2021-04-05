@@ -142,7 +142,15 @@ public class StudyPlanViewController extends GridPane {
 
     @FXML
     void exit(ActionEvent event) {
-        this.studyPlannerController.getIOController().storeData();
+        try {
+            this.studyPlannerController.getIOController().storeData("data.sp");
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Fehler");
+            alert.setHeaderText("Fehler beim Speichern");
+            alert.setContentText("Fehler beim Speicher. Bitte versuchen Sie es erneut.");
+            alert.showAndWait();
+        }
         Platform.exit();
         System.exit(0);
     }

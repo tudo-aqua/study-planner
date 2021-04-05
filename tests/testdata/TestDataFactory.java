@@ -48,13 +48,12 @@ public class TestDataFactory {
 
 
         //Beispielsemester erzeugen
-        Semester exampleSemesterWiSe = new Semester("Wintersemester 2020/2021",
+        exampleSemesterWiSe = new Semester("Wintersemester 2020/2021",
                 LocalDate.of(2020,10,1),LocalDate.of(2021,3,31));
         exampleStudyPlanner.addSemester(exampleSemesterWiSe);
         exampleSemesterSuSe = new Semester("Sommersemester 2021",
                 LocalDate.of(2021,4,1),LocalDate.of(2021,9,30
                 ));
-
         exampleStudyPlanner.addSemester(exampleSemesterSuSe);
 
         //Modul DAP 1 mit Status bestanden erzeugen
