@@ -1,6 +1,6 @@
 package controller;
 
-import exceptions.DataNotValidException;
+
 import model.Module;
 import model.Semester;
 import model.StudyPlanner;

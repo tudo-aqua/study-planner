@@ -6,8 +6,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import view.studyplan.StudyPlanViewController;
 import view.welcome.WelcomeViewController;
-
-import java.io.File;
 import java.io.IOException;
 
 /**

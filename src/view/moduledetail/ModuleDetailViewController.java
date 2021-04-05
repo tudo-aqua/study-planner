@@ -2,7 +2,6 @@ package view.moduledetail;
 
 import controller.ModuleController;
 import controller.SemesterController;
-import controller.StatisticsController;
 import controller.StudyPlannerController;
 import exceptions.DataNotValidException;
 import javafx.event.ActionEvent;

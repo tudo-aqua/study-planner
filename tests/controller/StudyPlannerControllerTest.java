@@ -1,14 +1,13 @@
 package controller;
 
 import exceptions.DataNotValidException;
-import model.Semester;
 import model.StudyPlanner;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.time.LocalDate;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import static org.junit.Assert.*;
 /**
  * Testklasse für die Klasse StudyPlannerController.
  */
@@ -24,10 +23,9 @@ public class StudyPlannerControllerTest {
 
     /**
      * Methode zum initialisieren der Testumgebung mit einer vollständigen Model- und Controller-Schicht.
-     * @throws Exception Wird geworfen, wenn es bei der Initialisierung einen Fehler gibt.
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
         //Controller- und Model-Schicht erzeugen
         this.studyPlannerController = new StudyPlannerController();
 
