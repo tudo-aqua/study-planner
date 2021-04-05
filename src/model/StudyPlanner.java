@@ -149,21 +149,15 @@ public class StudyPlanner implements Serializable {
 		s.writeUTF(courseOfStudyName.getValueSafe());
 		s.writeInt(courseOfStudyCreditPoints.get());
 
-		if (semesters == null || semesters.size() == 0) {
-			s.writeInt(0);
-		}
-		else{
-			s.writeInt(semesters.size());
-		}
+
+		s.writeInt(semesters.size());
+
 		for(Semester semester:semesters){
 			s.writeObject(semester);
 		}
-		if (modules == null || modules.size() == 0) {
-			s.writeInt(0);
-		}
-		else{
-			s.writeInt(modules.size());
-		}
+
+		s.writeInt(modules.size());
+
 		for(Module module:modules){
 			s.writeObject(module);
 		}

@@ -162,12 +162,8 @@ public class Semester implements Serializable {
 		s.writeObject(startDate.get());
 		s.writeObject(endDate.get());
 
-		if (modules == null || modules.size() == 0) {
-			s.writeInt(0);
-		}
-		else{
-			s.writeInt(modules.size());
-		}
+		s.writeInt(modules.size());
+
 		for(Module module:modules){
 			s.writeObject(module);
 		}
