@@ -55,7 +55,7 @@ public class ModuleController {
 
 		//Aktualisiere die Statistiken
 		StatisticsController statisticsController = this.studyPlannerController.getStatisticsController();
-		statisticsController.updateStatistics();
+		statisticsController.calculateStatistics();
 		return newModule;
 	}
 
@@ -84,7 +84,7 @@ public class ModuleController {
 
 		//Aktualisiere die Statistiken
 		StatisticsController statisticsController = this.studyPlannerController.getStatisticsController();
-		statisticsController.updateStatistics();
+		statisticsController.calculateStatistics();
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class ModuleController {
 			currentSemester.removeModule(module);
 		this.studyPlannerController.getStudyPlanner().removeModule(module);
 		StatisticsController statisticsController = this.studyPlannerController.getStatisticsController();
-		statisticsController.updateStatistics();
+		statisticsController.calculateStatistics();
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class ModuleController {
 		moduleToModify.setState(state);
 		moduleToModify.setGrade(grade);
 		StatisticsController statisticsController = this.studyPlannerController.getStatisticsController();
-		statisticsController.updateStatistics();
+		statisticsController.calculateStatistics();
 
 	}
 

@@ -42,7 +42,7 @@ public class SemesterController {
 		Semester newSemester = new Semester(name,startDate,endDate);
 		this.studyPlannerController.getStudyPlanner().addSemester(newSemester);
 		StatisticsController statisticsController = this.studyPlannerController.getStatisticsController();
-		statisticsController.updateStatistics();
+		statisticsController.calculateStatistics();
 		return newSemester;
 	}
 
@@ -64,7 +64,7 @@ public class SemesterController {
 		semesterToModify.setStartDate(startDate);
 		semesterToModify.setEndDate(endDate);
 		StatisticsController statisticsController = this.studyPlannerController.getStatisticsController();
-		statisticsController.updateStatistics();
+		statisticsController.calculateStatistics();
 
 
 	}

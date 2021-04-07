@@ -35,7 +35,7 @@ public class IOController {
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		StudyPlanner studyPlanner = (StudyPlanner) ois.readObject();
 		studyPlannerController.setStudyPlanner(studyPlanner);
-		studyPlannerController.getStatisticsController().updateStatistics();
+		studyPlannerController.getStatisticsController().calculateStatistics();
 		ois.close();
 	}
 
