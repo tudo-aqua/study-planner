@@ -21,7 +21,6 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-
             //Initialisierung der Controller- und der Model-Schicht
             StudyPlannerController studyPlannerController = new StudyPlannerController();
             Scene scene;
