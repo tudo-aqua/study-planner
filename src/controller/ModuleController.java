@@ -34,7 +34,7 @@ public class ModuleController {
 	 * @param creditPoints Die den Modul zugeordneten Leistungspunkte.
 	 * @param examDate Der Prüfungstermin des Moduls.
 	 * @param semester Das Semester, dem das Modul zugeordnet werden soll.
-	 * @return Das neu erstellte Module-Objekt.
+	 * @return Das neu erstelle Module-Objekt.
 	 * @throws DataNotValidException Wird geworfen, wenn die Daten nicht valide sind, z.B. wenn der Name leer ist,
 	 * die Leistungspunkte negativ/gleich 0 sind oder das Prüfungsdatum keinen gültigen Wert repräsentiert.
 	 */
