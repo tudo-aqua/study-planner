@@ -36,7 +36,7 @@ public class StudyPlannerControllerTest {
      * Es wird getestet, ob alle Kontroller initialisiert wurden.
      */
     @Test
-    public void ConstructorTest() {
+    public void constructorTest() {
 
         assertNotNull(studyPlannerController.getModuleController());
         assertNotNull(studyPlannerController.getIOController());

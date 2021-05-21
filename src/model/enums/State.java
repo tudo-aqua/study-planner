@@ -28,23 +28,23 @@ public enum State implements Serializable {
 	 */
 	NO_RESULT(4);
 
-	private int id;
+	private int identifier;
 
 	/**
 	 * Privater Konstruktor zum Setzen der id.
-	 * @param id Die id des Zustandes.
+	 * @param identifier Die id des Zustandes.
 	 */
-	State(int id){
-		this.id = id;
+	State(int identifier){
+		this.identifier = identifier;
 	}
 
 	/**
-	 * Statische Methode zum Erzeugen eines Status auf Basis der id.
-	 * @param id Die id des Status.
-	 * @return Das Status-Enum mit der entsprechenden id.
+	 * Statische Methode zum Erzeugen eines Status auf Basis der identifier.
+	 * @param identifier Die identifier des Status.
+	 * @return Das Status-Enum mit der entsprechenden identifier.
 	 */
-	public static State stateFromId(int id){
-		switch (id){
+	public static State stateFromIdentifier(int identifier){
+		switch (identifier){
 			case 1: return State.PASSED_WITH_GRADE;
 			case 2: return State.PASSED_WITHOUT_GRADE;
 			case 3: return State.NOT_PASSED;
@@ -56,8 +56,8 @@ public enum State implements Serializable {
 	 * Getter-Methode für den id-Paramter.
 	 * @return Die id des Status.
 	 */
-	public int getId(){
-		return id;
+	public int getIdentifier(){
+		return identifier;
 	}
 
 }

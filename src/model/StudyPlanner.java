@@ -142,48 +142,48 @@ public class StudyPlanner implements Serializable {
 	//Methoden zum Serialisieren des Objektes
 	/**
 	 * Die Methode speichert alle Daten der Klasse.
-	 * @param s Objekt, welches das Speichern der Daten übernimmt.
+	 * @param objectOutputStream Objekt, welches das Speichern der Daten übernimmt.
 	 * @throws IOException Wird geworfen, wenn das Speichern fehlschlägt.
 	 */
-	private void writeObject(ObjectOutputStream s) throws IOException {
-		s.writeUTF(courseOfStudyName.getValueSafe());
-		s.writeInt(courseOfStudyCreditPoints.get());
+	private void writeObject(ObjectOutputStream objectOutputStream) throws IOException {
+		objectOutputStream.writeUTF(courseOfStudyName.getValueSafe());
+		objectOutputStream.writeInt(courseOfStudyCreditPoints.get());
 
 
-		s.writeInt(semesters.size());
+		objectOutputStream.writeInt(semesters.size());
 
 		for(Semester semester:semesters){
-			s.writeObject(semester);
+			objectOutputStream.writeObject(semester);
 		}
 
-		s.writeInt(modules.size());
+		objectOutputStream.writeInt(modules.size());
 
 		for(Module module:modules){
-			s.writeObject(module);
+			objectOutputStream.writeObject(module);
 		}
 	}
 
 	/**
 	 * Die Methode lädt alle Daten der Klasse.
-	 * @param s Objekt, welches das Laden der Daten übernimmt.
+	 * @param objectInputStream Objekt, welches das Laden der Daten übernimmt.
 	 * @throws IOException Wird geworfen, wenn das Speichern fehlschlägt.
 	 * @throws ClassNotFoundException Wird geworfen, wenn die zu ladende Klasse nicht im Model ist.
 	 */
-	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
-		courseOfStudyName = new SimpleStringProperty(s.readUTF());
-		courseOfStudyCreditPoints = new SimpleIntegerProperty(s.readInt());
+	private void readObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
+		courseOfStudyName = new SimpleStringProperty(objectInputStream.readUTF());
+		courseOfStudyCreditPoints = new SimpleIntegerProperty(objectInputStream.readInt());
 
 		semesters = new SimpleListProperty<>(FXCollections.observableArrayList());
-		int numberOfSemester = s.readInt();
+		int numberOfSemester = objectInputStream.readInt();
 		for(int i = 0;i<numberOfSemester;i++){
-			Semester semester = (Semester) s.readObject();
+			Semester semester = (Semester) objectInputStream.readObject();
 			semesters.add(semester);
 		}
 
 		modules = new SimpleListProperty<>(FXCollections.observableArrayList());
-		int numberOfModuls = s.readInt();
+		int numberOfModuls = objectInputStream.readInt();
 		for(int i = 0;i<numberOfModuls;i++){
-			Module module = (Module) s.readObject();
+			Module module = (Module) objectInputStream.readObject();
 			modules.add(module);
 		}
 		this.statistics = new Statistics();

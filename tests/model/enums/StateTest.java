@@ -14,11 +14,11 @@ public class StateTest {
      */
     @Test
     public void stateFromIdTest() {
-        assertEquals(State.PASSED_WITH_GRADE,State.stateFromId(1));
-        assertEquals(State.PASSED_WITHOUT_GRADE,State.stateFromId(2));
-        assertEquals(State.NOT_PASSED,State.stateFromId(3));
-        assertEquals(State.NO_RESULT,State.stateFromId(4));
-        assertEquals(State.NO_RESULT,State.stateFromId(42));
+        assertEquals(State.PASSED_WITH_GRADE,State.stateFromIdentifier(1));
+        assertEquals(State.PASSED_WITHOUT_GRADE,State.stateFromIdentifier(2));
+        assertEquals(State.NOT_PASSED,State.stateFromIdentifier(3));
+        assertEquals(State.NO_RESULT,State.stateFromIdentifier(4));
+        assertEquals(State.NO_RESULT,State.stateFromIdentifier(42));
     }
 
 
@@ -27,9 +27,9 @@ public class StateTest {
      */
     @Test
     public void getIdTest() {
-        assertEquals(1,State.PASSED_WITH_GRADE.getId());
-        assertEquals(2,State.PASSED_WITHOUT_GRADE.getId());
-        assertEquals(3,State.NOT_PASSED.getId());
-        assertEquals(4,State.NO_RESULT.getId());
+        assertEquals(1,State.PASSED_WITH_GRADE.getIdentifier());
+        assertEquals(2,State.PASSED_WITHOUT_GRADE.getIdentifier());
+        assertEquals(3,State.NOT_PASSED.getIdentifier());
+        assertEquals(4,State.NO_RESULT.getIdentifier());
     }
 }

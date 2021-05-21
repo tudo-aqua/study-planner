@@ -163,29 +163,29 @@ public class Module implements Serializable {
 	//Methoden zum Serialisieren des Objektes
 	/**
 	 * Die Methode speichert alle Daten der Klasse.
-	 * @param s Objekt, welches das Speichern der Daten übernimmt.
+	 * @param objectOutputStream Objekt, welches das Speichern der Daten übernimmt.
 	 * @throws IOException Wird geworfen, wenn das Speichern fehlschlägt.
 	 */
-	private void writeObject(ObjectOutputStream s) throws IOException {
-		s.writeUTF(name.getValueSafe());
-		s.writeInt(creditPoints.get());
-		s.writeObject(examDate.get());
-		s.writeFloat(grade.get());
-		s.writeInt(state.getId());
+	private void writeObject(ObjectOutputStream objectOutputStream) throws IOException {
+		objectOutputStream.writeUTF(name.getValueSafe());
+		objectOutputStream.writeInt(creditPoints.get());
+		objectOutputStream.writeObject(examDate.get());
+		objectOutputStream.writeFloat(grade.get());
+		objectOutputStream.writeInt(state.getIdentifier());
 	}
 
 	/**
 	 * Die Methode lädt alle Daten der Klasse.
-	 * @param s Objekt, welches das Laden der Daten übernimmt.
+	 * @param objectInputStream Objekt, welches das Laden der Daten übernimmt.
 	 * @throws IOException Wird geworfen, wenn das Speichern fehlschlägt.
 	 * @throws ClassNotFoundException Wird geworfen, wenn die zu ladende Klasse nicht im Model ist.
 	 */
-	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
-		name = new SimpleStringProperty(s.readUTF());
-		creditPoints = new SimpleIntegerProperty(s.readInt());
-		examDate = new SimpleObjectProperty<LocalDate>((LocalDate) s.readObject());
-		grade = new SimpleFloatProperty(s.readFloat());
-		state = State.stateFromId(s.readInt());
+	private void readObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
+		name = new SimpleStringProperty(objectInputStream.readUTF());
+		creditPoints = new SimpleIntegerProperty(objectInputStream.readInt());
+		examDate = new SimpleObjectProperty<LocalDate>((LocalDate) objectInputStream.readObject());
+		grade = new SimpleFloatProperty(objectInputStream.readFloat());
+		state = State.stateFromIdentifier(objectInputStream.readInt());
 	}
 
 }

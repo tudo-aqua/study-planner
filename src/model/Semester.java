@@ -159,36 +159,36 @@ public class Semester implements Serializable {
 	//Methoden zum Serialisieren des Objektes
 	/**
 	 * Die Methode speichert alle Daten der Klasse.
-	 * @param s Objekt, welches das Speichern der Daten übernimmt.
+	 * @param objectOutputStream Objekt, welches das Speichern der Daten übernimmt.
 	 * @throws IOException Wird geworfen, wenn das Speichern fehlschlägt.
 	 */
-	private void writeObject(ObjectOutputStream s) throws IOException {
-		s.writeUTF(name.getValueSafe());
-		s.writeObject(startDate.get());
-		s.writeObject(endDate.get());
+	private void writeObject(ObjectOutputStream objectOutputStream) throws IOException {
+		objectOutputStream.writeUTF(name.getValueSafe());
+		objectOutputStream.writeObject(startDate.get());
+		objectOutputStream.writeObject(endDate.get());
 
-		s.writeInt(modules.size());
+		objectOutputStream.writeInt(modules.size());
 
 		for(Module module:modules){
-			s.writeObject(module);
+			objectOutputStream.writeObject(module);
 		}
 
 	}
 
 	/**
 	 * Die Methode lädt alle Daten der Klasse.
-	 * @param s Objekt, welches das Laden der Daten übernimmt.
+	 * @param objectInputStream Objekt, welches das Laden der Daten übernimmt.
 	 * @throws IOException Wird geworfen, wenn das Speichern fehlschlägt.
 	 * @throws ClassNotFoundException Wird geworfen, wenn die zu ladende Klasse nicht im Model ist.
 	 */
-	private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
-		name = new SimpleStringProperty(s.readUTF());
-		startDate = new SimpleObjectProperty<LocalDate>((LocalDate) s.readObject());
-		endDate = new SimpleObjectProperty<LocalDate>((LocalDate)s.readObject());
+	private void readObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
+		name = new SimpleStringProperty(objectInputStream.readUTF());
+		startDate = new SimpleObjectProperty<LocalDate>((LocalDate) objectInputStream.readObject());
+		endDate = new SimpleObjectProperty<LocalDate>((LocalDate)objectInputStream.readObject());
 		modules = new SimpleListProperty<>(FXCollections.observableArrayList());
-		int size = s.readInt();
+		int size = objectInputStream.readInt();
 		for(int i = 0;i<size;i++){
-			Module module = (Module) s.readObject();
+			Module module = (Module) objectInputStream.readObject();
 			modules.add(module);
 		}
 	}

@@ -110,7 +110,6 @@ public class ModuleControllerModifyModuleTest {
     public void modifyModuleCaseThree() throws DataNotValidException {
         //Testdaten erzeugen
         int inputECTS = -6;
-        LocalDate inputExamDate = LocalDate.of(2021,7,27);
 
         //Zu testende Methode mit Testdaten aufrufen
         moduleController.modifyModule(exampleModule,inputECTS,null,exampleSemesterTwo);
