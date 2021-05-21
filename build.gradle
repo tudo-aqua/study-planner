@@ -8,6 +8,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version "5.2.0"
     id 'org.barfuin.gradle.jacocolog' version '1.1.1'
     id 'org.openjfx.javafxplugin' version '0.0.8'
+    id 'pmd'
 }
 
 repositories {
@@ -134,5 +135,14 @@ jacocoLogTestCoverage {
     }
 }
 
-
+pmd {
+    consoleOutput = true
+    toolVersion = "6.21.0"
+    ignoreFailures = true
+    pmdMain {
+        exclude 'application/**'
+        exclude 'view/**'
+    }
+    ruleSets = ["libs/pmd_ruleset_sopra.xml"]
+}
 mainClassName = 'application.Runner'
