@@ -60,7 +60,7 @@ The documentation of the unit tests code with Javadoc can be found [here](https:
 ## The finished product
 ![StudyPlanner_Overview_English](docs/images/StudyPlanner_Overview_English.png)
 
-## The whole process as an overview
+## The whole process as worked-out examples
 ### Example 1: Create Course
 ![Show_Statistics](docs/images/Example_Create_Course.png)
 ### Example 2: Show Statistics
