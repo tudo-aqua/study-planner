@@ -14,28 +14,28 @@ The program must store all entered data and load them when the program is launch
 
  
 ### Use Case Diagram
-![UseCase_Syntax](uploads/279ba4e2be22e323bdd886b9d6cbdf3c/UseCase_Syntax.png)
+![UseCase_Syntax](docs/images/UseCase_Syntax.png)
 
 ### Activity Diagrams
-- Activity Diagram 1: Create Course ![Requirements_Model_-_Activity_Diagram__Create_Course](uploads/74529c4ed2cfca5c3460690e3400c519/Requirements_Model_-_Activity_Diagram__Create_Course.png)
-- Activity Diagram 2: Show Statistics ![Requirements_Model_-_Activity_Diagram__Show_Statistics](uploads/6d0268245ac7a035dd8301b3b587c3d9/Requirements_Model_-_Activity_Diagram__Show_Statistics.png)
+- Activity Diagram 1: Create Course ![Requirements_Model_-_Activity_Diagram__Create_Course](docs/images/Requirements_Model_-_Activity_Diagram__Create_Course.png)
+- Activity Diagram 2: Show Statistics ![Requirements_Model_-_Activity_Diagram__Show_Statistics](docs/images/Requirements_Model_-_Activity_Diagram__Show_Statistics.png)
 
 ### Domain Model
-![Problembereichsmodell](uploads/daeadc68a5a5cd6cb2710fcffb2c461b/Problembereichsmodell.png)
+![Problembereichsmodell](docs/images/Problembereichsmodell.png)
 
 
 ## Analysis Model
  
 ### Structure Model
-![Strukturmodell](uploads/2c7805f2ace3298b17d1bff0f9ec0fff/Strukturmodell.png)
+![Strukturmodell](docs/images/Strukturmodell.png)
 
 ### Sequence Diagrams
-- Sequence Diagram 1: Create Course ![Analysis_Model_-_Sequence_Diagram__Create_Course](uploads/26184d2ee3fc1a664e026c94cc4f75dd/Analysis_Model_-_Sequence_Diagram__Create_Course.png)
-- Sequence Diagram 2: Show Statistics ![Analysis_Model_-_Sequence_Diagram__Show_Statistics](uploads/ba7d3af36a809bafa4b018ba1284d452/Analysis_Model_-_Sequence_Diagram__Show_Statistics.png)
+- Sequence Diagram 1: Create Course ![Analysis_Model_-_Sequence_Diagram__Create_Course](docs/images/Analysis_Model_-_Sequence_Diagram__Create_Course.png)
+- Sequence Diagram 2: Show Statistics ![Analysis_Model_-_Sequence_Diagram__Show_Statistics](docs/images/Analysis_Model_-_Sequence_Diagram__Show_Statistics.png)
 
 ### Product Description (only available in German)
 
-[Produktbeschreibung_StudyPlanner.pdf](uploads/0cf54a7bec62ccb25eb0172763b060c6/Produktbeschreibung_StudyPlanner.pdf)
+[Produktbeschreibung_StudyPlanner.pdf](docs/images/Produktbeschreibung_StudyPlanner.pdf)
  
 ## Design Model / Javadoc (only available in German)
 
@@ -58,8 +58,8 @@ The documentation of the unit tests code with Javadoc can be found [here](https:
 | Test result | ✓ |
  
 ## The finished product
-![StudyPlanner_Overview_English](uploads/48602aae2e45dd483c2d13e412083528/StudyPlanner_Overview_English.png)
+![StudyPlanner_Overview_English](docs/images/StudyPlanner_Overview_English.png)
 
-The program can be downloaded from the repository at branch **master**.
+The program can be downloaded from the repository at branch **main**.
 
-Repository Link: https://sopra-gitlab.cs.tu-dortmund.de/beispielprojekt/studyplanner.git
+Repository Link: https://github.com/tudo-aqua/study-planner.git
