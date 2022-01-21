@@ -51,7 +51,7 @@ The documentation of the unit tests code with Javadoc can be found [here](https:
 | Use Case  | Create Course |
 | ------ | ------ |
 | Commit-Hash | f27f695ae5a37399354f0af44d80d9bfe7201b54 |
-| Expected result | Nach der Durchführung soll ein neues Modell mit entsprechenden Daten im zugewiesenen Semester sein im Programm vorhanden sein|
+| Expected result | After creating a new course it exists a new course with the given input data|
 | Needed inputs | Name, creadit points, and date of the exam of the course and the semester in which the course will be visited|
 | Special cases | Invalid inputs like empty course name and credit points less than 1 are not possible. An error message is displayed in this case.
 | Errors | none | 
@@ -61,7 +61,10 @@ The documentation of the unit tests code with Javadoc can be found [here](https:
 ![StudyPlanner_Overview_English](docs/images/StudyPlanner_Overview_English.png)
 
 ## The whole process as an overview
-![Show_Statistics](docs/images/Beispiel_show_statistics.png)
+### Example 1: Create Course
+![Show_Statistics](docs/images/Example_Create_Course.png)
+### Example 2: Show Statistics
+![Show_Statistics](docs/images/Example_Show_Statistics.png)
 
 
 The program can be downloaded from the repository at branch **main**.
