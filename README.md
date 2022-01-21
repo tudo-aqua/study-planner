@@ -60,6 +60,10 @@ The documentation of the unit tests code with Javadoc can be found [here](https:
 ## The finished product
 ![StudyPlanner_Overview_English](docs/images/StudyPlanner_Overview_English.png)
 
+## The whole process as an overview
+![Show_Statistics](docs/images/Beispiel_show_statistics.png)
+
+
 The program can be downloaded from the repository at branch **main**.
 
 Repository Link: https://github.com/tudo-aqua/study-planner.git
