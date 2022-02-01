@@ -1,4 +1,4 @@
 /**
- * Enthält alle Teste der der Model-Schicht zuzuordnenden Elemente.
+ * Enthält alle Teste der der Entity-Schicht zuzuordnenden Elemente.
  */
 package entity;

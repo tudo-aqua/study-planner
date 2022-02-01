@@ -12,15 +12,15 @@ import java.time.LocalDate;
 import static org.junit.Assert.*;
 
 /**
- * Testklasse für die Methode deleteModule der Controller-Klasse ModuleController.
+ * Testklasse für die Methode deleteModule der Service-Klasse ModuleService.
  */
-public class ModuleControllerDeleteModuleTest {
+public class ModuleServiceDeleteModuleTest {
     /**
-     * Referenz auf den StudyPlannerController der Testumgebung.
+     * Referenz auf den StudyPlannerService der Testumgebung.
      */
     private StudyPlannerService studyPlannerService;
     /**
-     * Referenz auf den ModuleController der Testumgebung.
+     * Referenz auf den ModuleService der Testumgebung.
      */
     private ModuleService moduleService;
     /**
@@ -40,12 +40,12 @@ public class ModuleControllerDeleteModuleTest {
     private Module exampleModule;
 
     /**
-     * Methode zum initialisieren der Testumgebung mit einer vollständigen Model- und Controller-Schicht.
+     * Methode zum initialisieren der Testumgebung mit einer vollständigen Service- und Entity-Schicht.
      * @throws Exception Wird geworfen, wenn es bei der Initialisierung einen Fehler gibt.
      */
     @Before
     public void setUp() throws Exception {
-        //Controller- und Model-Schicht erzeugen
+        //Service- und Entity-Schicht erzeugen
         this.studyPlannerService = new StudyPlannerService();
         this.moduleService = studyPlannerService.getModuleService();
         //Beispielstudiengang für alle Testfälle erzeugen

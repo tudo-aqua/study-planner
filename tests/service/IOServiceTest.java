@@ -11,17 +11,17 @@ import java.io.IOException;
 import static org.junit.Assert.*;
 
 /**
- * Testklasse für die Controller-Klasse IOController.
+ * Testklasse für die Service-Klasse IOService.
  */
 public class IOServiceTest {
 
 
     /**
-     * Referenz auf den StudyPlannerController der Testumgebung.
+     * Referenz auf den StudyPlannerService der Testumgebung.
      */
     private StudyPlannerService studyPlannerService;
     /**
-     * Referenz auf den IOController der Testumgebung.
+     * Referenz auf den IOService der Testumgebung.
      */
     private IOService ioService;
 
@@ -36,7 +36,7 @@ public class IOServiceTest {
      */
     @Before
     public void setUp() {
-        //Controller- und Model-Schicht erzeugen
+        //Service- und Entity-Schicht erzeugen
         this.studyPlannerService = new StudyPlannerService();
         this.ioService = studyPlannerService.getIOService();
         //Beispielstudiengang für alle Testfälle erzeugen
@@ -57,7 +57,7 @@ public class IOServiceTest {
     public void loadSaveTest() throws IOException, ClassNotFoundException {
         //Testdaten speichern
         ioService.storeData("test.sp");
-        //Model in Programm löschen
+        //Daten in Programm löschen
         studyPlannerService.setStudyPlanner(null);
         //Daten neu laden
         ioService.loadData("test.sp");

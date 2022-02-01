@@ -12,16 +12,16 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 /**
- * Testklasse für die Methode modifySemester der Controller-Klasse SemesterController.
+ * Testklasse für die Methode modifySemester der Service-Klasse SemesterService.
  */
-public class SemesterControllerModifySemesterTest {
+public class SemesterServiceModifySemesterTest {
 
     /**
-     * Referenz auf den StudyPlannerController der Testumgebung.
+     * Referenz auf den StudyPlannerService der Testumgebung.
      */
     private StudyPlannerService studyPlannerService;
     /**
-     * Referenz auf den SemesterController der Testumgebung.
+     * Referenz auf den SemesterService der Testumgebung.
      */
     private SemesterService semesterService;
     /**
@@ -35,12 +35,12 @@ public class SemesterControllerModifySemesterTest {
     private Semester exampleSemester;
 
     /**
-     * Methode zum initialisieren der Testumgebung mit einer vollständigen Model- und Controller-Schicht.
+     * Methode zum initialisieren der Testumgebung mit einer vollständigen Service- und Entity-Schicht.
      * @throws Exception Wird geworfen, wenn es bei der Initialisierung einen Fehler gibt.
      */
     @Before
     public void setUp() throws Exception {
-        //Controller- und Model-Schicht erzeugen
+        //Service- und Entity-Schicht erzeugen
         this.studyPlannerService = new StudyPlannerService();
         this.semesterService = studyPlannerService.getSemesterService();
         //Beispielstudiengang für alle Testfälle erzeugen

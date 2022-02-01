@@ -9,24 +9,24 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
- * Testklasse für die Klasse StudyPlannerController.
+ * Testklasse für die Klasse StudyPlannerService.
  */
 
 public class StudyPlannerServiceTest {
 
     /**
-     * Referenz auf den StudyPlannerController der Testumgebung.
+     * Referenz auf den StudyPlannerService der Testumgebung.
      */
     private StudyPlannerService studyPlannerService;
 
 
 
     /**
-     * Methode zum initialisieren der Testumgebung mit einer vollständigen Model- und Controller-Schicht.
+     * Methode zum initialisieren der Testumgebung mit einer vollständigen Service- und Entity-Schicht.
      */
     @Before
     public void setUp(){
-        //Controller- und Model-Schicht erzeugen
+        //Service- und Entity-Schicht erzeugen
         this.studyPlannerService = new StudyPlannerService();
 
     }
