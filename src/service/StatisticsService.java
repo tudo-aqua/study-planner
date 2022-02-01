@@ -12,13 +12,13 @@ import entity.enums.State;
 public class StatisticsService {
 
 	/**
-	 * Referenz auf den zentralen Controller der Controller-Schicht.
+	 * Referenz auf den zentralen Service der Service-Schicht.
 	 */
 	private StudyPlannerService studyPlannerService;
 
 	/**
-	 * Konstruktor, der den StudyPlannerController setzt.
-	 * @param spc Referenzu auf den zentralen StudyPlannerController.
+	 * Konstruktor, der den StudyPlannerService setzt.
+	 * @param spc Referenz auf den zentralen StudyPlannerService.
 	 */
 	public StatisticsService(StudyPlannerService spc) {
 		this.studyPlannerService = spc;
