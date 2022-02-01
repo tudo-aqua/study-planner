@@ -37,13 +37,6 @@ The program must store all entered data and load them when the program is launch
 
 [Produktbeschreibung_StudyPlanner.pdf](docs/images/Produktbeschreibung_StudyPlanner.pdf)
  
-## Design Model / Javadoc (only available in German)
-
-The documentation of the program code with Javadoc can be found [here](https://sopra-ci.cs.tu-dortmund.de/studyplanner/javadoc/).
-
- 
-## Unit Tests / Test Documentation (only available in German)
-The documentation of the unit tests code with Javadoc can be found [here](https://sopra-ci.cs.tu-dortmund.de/studyplanner/testjavadoc/).
 
 ## Product test (Partial)
 
