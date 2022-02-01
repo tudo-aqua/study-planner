@@ -1,9 +1,9 @@
 package testdata;
 
-import model.Module;
-import model.Semester;
-import model.StudyPlanner;
-import model.enums.State;
+import entity.Module;
+import entity.Semester;
+import entity.StudyPlanner;
+import entity.enums.State;
 
 import java.time.LocalDate;
 

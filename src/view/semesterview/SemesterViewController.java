@@ -1,5 +1,5 @@
 package view.semesterview;
-import controller.StudyPlannerController;
+import service.StudyPlannerService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,9 +8,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Module;
-import model.Semester;
-import model.Statistics;
+import entity.Module;
+import entity.Semester;
+import entity.Statistics;
 import view.moduledetail.ModuleDetailViewController;
 
 import java.io.IOException;
@@ -33,13 +33,13 @@ public class SemesterViewController extends GridPane {
 
     private Stage primaryStage;
 
-    private StudyPlannerController studyPlannerController;
+    private StudyPlannerService studyPlannerService;
 
     private Semester semester;
 
-    public SemesterViewController(StudyPlannerController spc, Semester semester){
+    public SemesterViewController(StudyPlannerService spc, Semester semester){
         this.semester = semester;
-        this.studyPlannerController = spc;
+        this.studyPlannerService = spc;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SemesterView.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -56,7 +56,7 @@ public class SemesterViewController extends GridPane {
 
     @FXML
     public void initialize() {
-        Statistics statistics = this.studyPlannerController.getStudyPlanner().getStatistics();
+        Statistics statistics = this.studyPlannerService.getStudyPlanner().getStatistics();
         labelName.textProperty().bind(semester.nameProperty());
         labelStartDate.textProperty().bindBidirectional(semester.startDateProperty(), new LocalDateConverter());
 
@@ -73,7 +73,7 @@ public class SemesterViewController extends GridPane {
                 Module selectedItem = listViewModuls.getSelectionModel().getSelectedItem();
                 if(selectedItem != null){
                     Stage stage = new Stage();
-                    Scene modifySemesterScene = new Scene(new ModuleDetailViewController(studyPlannerController,selectedItem));
+                    Scene modifySemesterScene = new Scene(new ModuleDetailViewController(studyPlannerService,selectedItem));
                     stage.initModality(Modality.APPLICATION_MODAL);
                     stage.setResizable(false);
                     stage.initOwner(primaryStage);

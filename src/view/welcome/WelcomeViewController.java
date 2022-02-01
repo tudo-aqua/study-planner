@@ -1,6 +1,6 @@
 package view.welcome;
 
-import controller.StudyPlannerController;
+import service.StudyPlannerService;
 import exceptions.DataNotValidException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -32,10 +32,10 @@ public class WelcomeViewController extends GridPane {
 
     private Stage primaryStage;
 
-    private StudyPlannerController studyPlannerController;
-    public WelcomeViewController(Stage primaryStage, StudyPlannerController spc){
+    private StudyPlannerService studyPlannerService;
+    public WelcomeViewController(Stage primaryStage, StudyPlannerService spc){
 
-        this.studyPlannerController = spc;
+        this.studyPlannerService = spc;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("WelcomeView.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -54,8 +54,8 @@ public class WelcomeViewController extends GridPane {
         try {
             String inputCourseOfStudy = textFieldCourseOfStudy.getText();
             int creditPoints = Integer.parseInt(textFieldCreditPoints.getText());
-            studyPlannerController.initializeStudyPlanner(inputCourseOfStudy,creditPoints);
-            Scene studyPlanScene = new Scene(new StudyPlanViewController(primaryStage,studyPlannerController));
+            studyPlannerService.initializeStudyPlanner(inputCourseOfStudy,creditPoints);
+            Scene studyPlanScene = new Scene(new StudyPlanViewController(primaryStage, studyPlannerService));
             this.primaryStage.setScene(studyPlanScene);
         } catch (DataNotValidException | NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

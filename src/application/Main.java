@@ -1,6 +1,6 @@
 package application;
 
-import controller.StudyPlannerController;
+import service.StudyPlannerService;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -22,17 +22,17 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         try {
             //Initialisierung der Controller- und der Model-Schicht
-            StudyPlannerController studyPlannerController = new StudyPlannerController();
+            StudyPlannerService studyPlannerService = new StudyPlannerService();
             Scene scene;
             try{
 
                 //Daten aus Datei laden und Standard-View anzeigen
-                studyPlannerController.getIOController().loadData("data.sp");
-                scene = new Scene(new StudyPlanViewController(primaryStage,studyPlannerController));
+                studyPlannerService.getIOService().loadData("data.sp");
+                scene = new Scene(new StudyPlanViewController(primaryStage, studyPlannerService));
 
             }catch (IOException | ClassNotFoundException e) {
                 //Wenn keine Daten vorhanden sind oder Daten nicht gelesen werden können, Willkommens-View anzeigen
-                scene = new Scene(new WelcomeViewController(primaryStage, studyPlannerController));
+                scene = new Scene(new WelcomeViewController(primaryStage, studyPlannerService));
             }
             //css-Datei für das Stylen der View laden
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

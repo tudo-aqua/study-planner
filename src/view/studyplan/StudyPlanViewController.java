@@ -1,7 +1,7 @@
 package view.studyplan;
 
 
-import controller.StudyPlannerController;
+import service.StudyPlannerService;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Semester;
+import entity.Semester;
 import view.moduledetail.ModuleDetailViewController;
 import view.semesterdetail.SemesterDetailViewController;
 import view.semesterview.SemesterViewController;
@@ -52,10 +52,10 @@ public class StudyPlanViewController extends GridPane {
 
     private Stage primaryStage;
 
-    private StudyPlannerController studyPlannerController;
+    private StudyPlannerService studyPlannerService;
 
-    public StudyPlanViewController(Stage primaryStage, StudyPlannerController spc){
-        this.studyPlannerController = spc;
+    public StudyPlanViewController(Stage primaryStage, StudyPlannerService spc){
+        this.studyPlannerService = spc;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("StudyPlanView.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -70,13 +70,13 @@ public class StudyPlanViewController extends GridPane {
 
     @FXML
     public void initialize() {
-        labelAvgGrade.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().avgGradeProperty().asString("%.1f"));
-        labelCollectedCreditPoints.textProperty().bind(studyPlannerController.getStudyPlanner().getStatistics().collectedCreditPointsProperty().asString("%d / "+studyPlannerController.getStudyPlanner().getCourseOfStudyCreditPoints()+ " Leistungspunkte"));
-        labelTitel.setText("Studienverlaufsplan - " + studyPlannerController.getStudyPlanner().getCourseOfStudyName());
-        for(Semester semester: this.studyPlannerController.getStudyPlanner().getSemesters())
-           hBoxSemesterContainer.getChildren().add(new SemesterViewController(studyPlannerController,semester));
+        labelAvgGrade.textProperty().bind(studyPlannerService.getStudyPlanner().getStatistics().avgGradeProperty().asString("%.1f"));
+        labelCollectedCreditPoints.textProperty().bind(studyPlannerService.getStudyPlanner().getStatistics().collectedCreditPointsProperty().asString("%d / "+ studyPlannerService.getStudyPlanner().getCourseOfStudyCreditPoints()+ " Leistungspunkte"));
+        labelTitel.setText("Studienverlaufsplan - " + studyPlannerService.getStudyPlanner().getCourseOfStudyName());
+        for(Semester semester: this.studyPlannerService.getStudyPlanner().getSemesters())
+           hBoxSemesterContainer.getChildren().add(new SemesterViewController(studyPlannerService,semester));
 
-        progressBar.progressProperty().bind(this.studyPlannerController.getStudyPlanner().getStatistics().collectedCreditPointsProperty().divide((double) studyPlannerController.getStudyPlanner().getCourseOfStudyCreditPoints()));
+        progressBar.progressProperty().bind(this.studyPlannerService.getStudyPlanner().getStatistics().collectedCreditPointsProperty().divide((double) studyPlannerService.getStudyPlanner().getCourseOfStudyCreditPoints()));
         Tooltip tooltip = new Tooltip();
         tooltip.setText(
                 "Neues Modul erstellen"
@@ -88,7 +88,7 @@ public class StudyPlanViewController extends GridPane {
     @FXML
     void addModule(ActionEvent event) {
 
-        if(studyPlannerController.getStudyPlanner().getSemesters().isEmpty()){
+        if(studyPlannerService.getStudyPlanner().getSemesters().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Hinweis");
             alert.setHeaderText("Semester erstellen");
@@ -97,7 +97,7 @@ public class StudyPlanViewController extends GridPane {
         }
         else{
             Stage stage = new Stage();
-            Scene newSemesterScene = new Scene(new ModuleDetailViewController(studyPlannerController));
+            Scene newSemesterScene = new Scene(new ModuleDetailViewController(studyPlannerService));
             stage.setResizable(false);
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(primaryStage);
@@ -110,7 +110,7 @@ public class StudyPlanViewController extends GridPane {
     @FXML
     void addSemester(ActionEvent event) {
         Stage stage = new Stage();
-        Scene newSemesterScene = new Scene(new SemesterDetailViewController(studyPlannerController,false, hBoxSemesterContainer));
+        Scene newSemesterScene = new Scene(new SemesterDetailViewController(studyPlannerService,false, hBoxSemesterContainer));
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(primaryStage);
         stage.setScene(newSemesterScene);
@@ -120,7 +120,7 @@ public class StudyPlanViewController extends GridPane {
     @FXML
     void modifySemester(ActionEvent event) {
         Stage stage = new Stage();
-        Scene modifySemesterScene = new Scene(new SemesterDetailViewController(studyPlannerController,true, null));
+        Scene modifySemesterScene = new Scene(new SemesterDetailViewController(studyPlannerService,true, null));
         stage.initModality(Modality.WINDOW_MODAL);
         stage.setResizable(false);
         stage.initOwner(primaryStage);
@@ -143,7 +143,7 @@ public class StudyPlanViewController extends GridPane {
     @FXML
     void exit(ActionEvent event) {
         try {
-            this.studyPlannerController.getIOController().storeData("data.sp");
+            this.studyPlannerService.getIOService().storeData("data.sp");
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Fehler");

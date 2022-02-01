@@ -7,8 +7,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import model.Module;
-import model.enums.State;
+import entity.Module;
+import entity.enums.State;
 
 public class ModuleCell extends ListCell<Module> {
 

@@ -1,8 +1,7 @@
 package view.moduledetail;
 
-import controller.ModuleController;
-import controller.SemesterController;
-import controller.StudyPlannerController;
+import service.ModuleService;
+import service.StudyPlannerService;
 import exceptions.DataNotValidException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,10 +10,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import model.Module;
-import model.Semester;
-import model.StudyPlanner;
-import model.enums.State;
+import entity.Module;
+import entity.Semester;
+import entity.StudyPlanner;
+import entity.enums.State;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -74,15 +73,15 @@ public class ModuleDetailViewController extends GridPane {
     private ToggleGroup toggleGroupStatus;
 
 
-    private StudyPlannerController studyPlannerController;
+    private StudyPlannerService studyPlannerService;
 
     private Module moduleToModify;
 
-    public ModuleDetailViewController(StudyPlannerController spc){
+    public ModuleDetailViewController(StudyPlannerService spc){
         this();
-        this.studyPlannerController = spc;
-        this.choiseBoxSemester.setItems(studyPlannerController.getStudyPlanner().getSemesters());
-        this.choiseBoxSemester.setValue(studyPlannerController.getStudyPlanner().getSemesters().get(0));
+        this.studyPlannerService = spc;
+        this.choiseBoxSemester.setItems(studyPlannerService.getStudyPlanner().getSemesters());
+        this.choiseBoxSemester.setValue(studyPlannerService.getStudyPlanner().getSemesters().get(0));
         labelGradeValue.setText("");
         buttonSave.setText("Modul erstellen");
         buttonDelete.setVisible(false);
@@ -103,9 +102,9 @@ public class ModuleDetailViewController extends GridPane {
 
     }
 
-    public ModuleDetailViewController(StudyPlannerController spc, Module moduleToModify){
+    public ModuleDetailViewController(StudyPlannerService spc, Module moduleToModify){
         this();
-        this.studyPlannerController = spc;
+        this.studyPlannerService = spc;
         this.moduleToModify = moduleToModify;
         this.buttonSave.setText("Modul bearbeiten");
         this.textFieldModuleName.setText(moduleToModify.getName());
@@ -113,8 +112,8 @@ public class ModuleDetailViewController extends GridPane {
         this.textFieldModuleName.setEditable(false);
 
         this.datePickerExamDate.setValue(moduleToModify.getExamDate());
-        this.choiseBoxSemester.setItems(studyPlannerController.getStudyPlanner().getSemesters());
-        StudyPlanner studyPlanner = studyPlannerController.getStudyPlanner();
+        this.choiseBoxSemester.setItems(studyPlannerService.getStudyPlanner().getSemesters());
+        StudyPlanner studyPlanner = studyPlannerService.getStudyPlanner();
         Semester  currentSemester = studyPlanner.getCurrentSemesterOfModule(moduleToModify);
         this.choiseBoxSemester.setValue(currentSemester);
         choiseBoxSemester.setConverter(new StringConverter<Semester>() {
@@ -182,7 +181,7 @@ public class ModuleDetailViewController extends GridPane {
      */
     @FXML
     void delete(ActionEvent event) {
-        studyPlannerController.getModuleController().deleteModule(moduleToModify);
+        studyPlannerService.getModuleService().deleteModule(moduleToModify);
         closeModuleDetailView();
     }
 
@@ -198,16 +197,16 @@ public class ModuleDetailViewController extends GridPane {
             int inputCreditPoints = Integer.parseInt(textFieldCreditPoints.getText());
             LocalDate inputExamDate = datePickerExamDate.getValue();
             Semester inputSemester = this.choiseBoxSemester.getValue();
-            ModuleController moduleController = studyPlannerController.getModuleController();
+            ModuleService moduleService = studyPlannerService.getModuleService();
             //Fallunterscheidung, ob ein neues Modul erstellt werden soll oder ein bestehendes bearbeitet wird
             if(this.moduleToModify == null){
-                Module newModule = moduleController.createModule(inputModuleName,inputCreditPoints,inputExamDate,inputSemester);
-                moduleController.setStateToModule(newModule,getSelectedState(),GradeConverter.sliderValueToGrade(sliderGradeValue.getValue()));
+                Module newModule = moduleService.createModule(inputModuleName,inputCreditPoints,inputExamDate,inputSemester);
+                moduleService.setStateToModule(newModule,getSelectedState(),GradeConverter.sliderValueToGrade(sliderGradeValue.getValue()));
 
             }
             else{
-                moduleController.modifyModule(moduleToModify,inputCreditPoints,inputExamDate,inputSemester);
-                moduleController.setStateToModule(moduleToModify,getSelectedState(),GradeConverter.sliderValueToGrade(sliderGradeValue.getValue()));
+                moduleService.modifyModule(moduleToModify,inputCreditPoints,inputExamDate,inputSemester);
+                moduleService.setStateToModule(moduleToModify,getSelectedState(),GradeConverter.sliderValueToGrade(sliderGradeValue.getValue()));
 
             }
 
